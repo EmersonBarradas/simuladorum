@@ -1,0 +1,2 @@
+# simuladorum
+Simulador de Negocios
