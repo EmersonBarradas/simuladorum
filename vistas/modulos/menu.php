@@ -34,6 +34,15 @@
             </li>
             <li class="nav-header">SIMULACIÓN</li>
             <li class="nav-item">
+                <a href="../vistas/entorno.php" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>
+                    Entorno
+                    <span class="badge badge-info right"></span>
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="../vistas/bitacora.php" class="nav-link">
                 <i class="nav-icon fas fa-blog"></i>
                 <p>
@@ -51,7 +60,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../vistas/almacenmp.php" class="nav-link">
+                <a href="../vistas/amp.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
                     Almacén MP

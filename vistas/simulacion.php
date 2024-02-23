@@ -34,18 +34,41 @@ include "../controladores/enlaces.php";
         </div>
         <!-- /.content-header -->
         <div class="container" style="padding-top: 25px;">
-            <div class="row mb-2 align-items-end">
-                <div class="col-sm-12 col-md-12">
-                    <p class="text-center">Contenido de la columna</p>
-                </div>
-            </div>
 
-            <div class="row justify-content-center" style="padding: 40px 40px; ">
-                <div class="col-sm-1 col-md-1">
-                    <a class="btn btn-primary" href="#" role="button">Botón</a>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Datos de la Simulación</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form action="inicio.php" method="post">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="txt-idsimulacion">ID Simulación</label>
+                                    <input type="input" class="form-control" id="txt-idsimulacion" placeholder="ID Simulación">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechainicio">Fecha Inicio</label>
+                                    <input type="date" class="form-control" id="fechainicio" placeholder="Fecha de inicio">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Descripción</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" id="txt-descrip" ></textarea>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Crear Simulación</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-    
+
+            </div>  
         </div>
     </div>
     <!-- /.content-wrapper -->

@@ -21,12 +21,12 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">BITÁCORA</h1>
+                <h1 class="m-0 text-dark">SIMULACIÓN</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Bitácora</a></li>
-                <li class="breadcrumb-item active">General</li>
+                <li class="breadcrumb-item"><a href="#">Tiendas</a></li>
+                <li class="breadcrumb-item active">Tiendas</li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -34,7 +34,17 @@ include "../controladores/enlaces.php";
         </div>
         <!-- /.content-header -->
         <div class="container" style="padding-top: 25px;">
+            <div class="row mb-2 align-items-end">
+                <div class="col-sm-12 col-md-12">
+                    <p class="text-center">Contenido de la columna</p>
+                </div>
+            </div>
 
+            <div class="row justify-content-center" style="padding: 40px 40px; ">
+                <div class="col-sm-1 col-md-1">
+                    <a class="btn btn-primary" href="#" role="button">Botón</a>
+                </div>
+            </div>
     
         </div>
     </div>
