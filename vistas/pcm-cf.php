@@ -9,6 +9,7 @@ include "../controladores/enlaces.php";
 
     <?php
 
+        include "modulos/pcm-cf.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     

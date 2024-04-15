@@ -8,7 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
+        include "modulos/tiendas-mov-r.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     

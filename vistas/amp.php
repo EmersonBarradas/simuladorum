@@ -8,7 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
+        include "modulos/amp.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -29,11 +29,15 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">AMP</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding: 25px 20px 50px 20px;">
+        <div class="container" style="padding: 0px 20px 50px 20px;">
             <!-- Cabecera Tabla Leche Cruda -->
             <div class="row justify-content-left">
                 <div class="col-md-12">
@@ -49,121 +53,98 @@ include "../controladores/enlaces.php";
                 </div>
                 <div class="col-md-3">
                     <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto">Empresa</label>
-                        <input type="text" class="form-control" id="text" placeholder="Empresa" value="">
+                        <label for="txtEmpresa">Empresa</label>
+                        <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtEmpresa; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-capmax">Capacidad Máxima LC</label>
-                        <input type="number" class="form-control" id="num-capmax" placeholder="" value="0.00">
+                        <label for="txtCant_capmax_lc">Capacidad Máxima LC</label>
+                        <input type="text" class="form-control" name="txtCant_capmax_lc" placeholder="" value="<?php echo $txtCant_capmax_lc; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-existencia">Existencia LC</label>
-                        <input type="number" class="form-control" id="num-existencia" placeholder="" value="0.00">
+                        <label for="txtCant_existencia_lc">Existencia LC</label>
+                        <input type="text" class="form-control"  name="txtCant_existencia_lc" placeholder="" value="<?php echo $txtCant_existencia_lc; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-capdisp">Capacidad Disponible LC</label>
-                        <input type="number" class="form-control" id="num-capdisp" placeholder="" value="0.00">
+                        <label for="txtCant_capdisp_lc">Capacidad Disponible LC</label>
+                        <input type="text" class="form-control" name="txtCant_capdisp_lc" placeholder="" value="<?php echo $txtCant_capdisp_lc; ?>">
                     </div>
                 </div>
 
             </div>
-            <!-- Tabla Leche Cruda -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"><b>Movimientos Almacén de Leche Cruda (LC)</b></h3>
+            <?php if ($cant_amp_mov<=0){ ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <h4><< NO HAY MOVIMIENTOS DE ALMACÉN >></h4>
+                    </div>
 
-                        <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="buscar">
+                </div>
+            <?php } else{?>
+                <!-- Tabla Leche Cruda -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Movimientos Almacén de Leche Cruda (LC)</b></h3>
 
-                            <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="buscar">
+
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
                             </div>
                         </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>Ciclo</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Entradas</th>
+                                <th>Salidas</th>
+                                <th>Total ($)</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <?php foreach($listado_amp_mov as $amp_mov) { ?>
+                                    <tr>
+                                        <td><?php echo $amp_mov['ciclo']; ?></td>
+                                        <td><?php echo $amp_mov['fecha']; ?></td>
+                                        <td><?php echo $amp_mov['tipo_mov_lc']; ?></td>
+                                        <td><?php echo $amp_mov['cant_entrada_lc']; ?></td>
+                                        <td><?php echo $amp_mov['cant_salida_lc']; ?></td>
+                                        <td><?php echo $amp_mov['cant_total_lc']; ?></td>
+                                        <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                            </table>
                         </div>
+                        <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 300px;">
-                        <table class="table table-head-fixed text-nowrap">
-                        <thead>
-                            <tr>
-                            <th>Ciclo</th>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Entradas</th>
-                            <th>Salidas</th>
-                            <th>Total ($)</th>
-                            <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>E</td>
-                                <td>200</td>
-                                <td>0</td>
-                                <td>1500,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>E</td>
-                                <td>200</td>
-                                <td>0</td>
-                                <td>1500,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
-            </div>
+            <?php } ?>
+
             <!-- Separador -->
             <div class="row" style="padding: 25px 0 25px 0;">
                 <div class="col-md-12">
                     <hr style="color: #0056b2;" />
                 </div>
             </div>
+
             <!-- Cabecera Tabla Aditivo -->
             <div class="row justify-content-left">
                 <div class="col-md-12">
@@ -182,117 +163,91 @@ include "../controladores/enlaces.php";
                 </div>
 
                 <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
+                    <div class="txtEmpresa" style="padding-top: 20px;">
                         <label for="texto">Empresa</label>
-                        <input type="text" class="form-control" id="text" placeholder="Empresa" value="">
+                        <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtEmpresa; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-capmax">Capacidad Máxima LC</label>
-                        <input type="number" class="form-control" id="num-capmax" placeholder="" value="0.00">
+                        <label for="txtCant_capmax_ad">Capacidad Máxima LC</label>
+                        <input type="text" class="form-control" name="txtCant_capmax_ad" placeholder="" value="<?php echo $txtCant_capmax_ad; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-existencia">Existencia LC</label>
-                        <input type="number" class="form-control" id="num-existencia" placeholder="" value="0.00">
+                        <label for="txtCant_existencia_ad">Existencia LC</label>
+                        <input type="text" class="form-control"  name="txtCant_existencia_ad" placeholder="" value="<?php echo $txtCant_existencia_ad; ?>">
                     </div>
                 </div>
                 <div class="col-md-3" style="padding-top: 20px;">
                     <div class="form-group">
-                        <label for="num-capdisp">Capacidad Disponible LC</label>
-                        <input type="number" class="form-control" id="num-capdisp" placeholder="" value="0.00">
+                        <label for="txtCant_capdisp_ad">Capacidad Disponible LC</label>
+                        <input type="text" class="form-control" name="txtCant_capdisp_ad" placeholder="" value="<?php echo $txtCant_capdisp_ad; ?>">
                     </div>
                 </div>
 
             </div>
+            <?php if ($cant_amp_mov<=0){ ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <h4><< NO HAY MOVIMIENTOS DE ALMACÉN >></h4>
+                    </div>
 
-            <!-- Tabla Aditivo -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"><b>Movimientos Almacén de Aditivos (AD)</b></h3>
+                </div>
+            <?php } else{?>
+                <!-- Tabla Aditivo -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Movimientos Almacén de Aditivos (AD)</b></h3>
 
-                        <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="buscar">
+                            <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="buscar">
 
-                            <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
                             </div>
                         </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>Ciclo</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Entradas</th>
+                                <th>Salidas</th>
+                                <th>Total ($)</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listado_amp_mov as $amp_mov) { ?>
+                                <tr>
+                                    <td><?php echo $amp_mov['ciclo']; ?></td>
+                                    <td><?php echo $amp_mov['fecha']; ?></td>
+                                    <td><?php echo $amp_mov['tipo_mov_ad']; ?></td>
+                                    <td><?php echo $amp_mov['cant_entrada_ad']; ?></td>
+                                    <td><?php echo $amp_mov['cant_salida_ad']; ?></td>
+                                    <td><?php echo $amp_mov['cant_total_ad']; ?></td>
+                                    <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                            </table>
                         </div>
+                        <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 300px;">
-                        <table class="table table-head-fixed text-nowrap">
-                        <thead>
-                            <tr>
-                            <th>Ciclo</th>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Entradas</th>
-                            <th>Salidas</th>
-                            <th>Total ($)</th>
-                            <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>E</td>
-                                <td>200</td>
-                                <td>0</td>
-                                <td>1500,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>E</td>
-                                <td>200</td>
-                                <td>0</td>
-                                <td>1500,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>11-1-2014</td>
-                                <td>S</td>
-                                <td>0</td>
-                                <td>100</td>
-                                <td>750,00</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
     <!-- /.content-wrapper -->

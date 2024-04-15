@@ -29,6 +29,10 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Subasta</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>

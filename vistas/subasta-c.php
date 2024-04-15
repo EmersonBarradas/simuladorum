@@ -8,7 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
+        include "modulos/subasta-c.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -21,7 +21,7 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">SUBASTA</h1>
+                <h1 class="m-0 text-dark">SUBASTA | <?php echo $accion?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -33,110 +33,180 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding: 25px 0 50px 0;">
-            <div class="row justify-content-center">
-                
-                <form class="row justify-content-center" action="inicio.php" method="post">
 
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="num-ciclo">Ciclo</label>
-                            <input type="number" class="form-control" id="num-ciclo" placeholder="Ciclo" value="0">
-                        </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="text-empresa">Empresa</label>
-                            <select class="form-control" id="text-empresa">
-                                <option>Empresa ACME</option>
-                                <option>Empresa 2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Leche Cruda (LC)</h3>
+        <!-- Contendor de datos -->
+        <div class="container" style="padding: 25px 12px 50px 12px;">
+            <?php if ($procesar=="ok") {  ?> 
+            <form action="subasta-c.php" method="post">
+                <div class="row justify-content-center">
+                        <?php  if ($mensaje_usuario!=""){ ?>
+                            <div class="col-12 ">
+                                <?php if($error_accion==1){ ?>
+                                    <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
+                                <?php }else{ ?>
+                                    <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                                <?php } ?>    
                             </div>
-                            <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="num-preciolc">Precio LC</label>
-                                        <input type="number" class="form-control" id="num-preciolc" placeholder="" value="0.00">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fechapedidolc">Fecha Pedido LC</label>
-                                        <input type="date" class="form-control" id="fechapedidolc" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fecharecepcionlc">Fecha Recepción</label>
-                                        <input type="date" class="form-control" id="fecharecepcionlc" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txt-nrocontratolc">Número de Contrato LC</label>
-                                        <input type="text" class="form-control" id="txt-nrocontratolc" placeholder="Número de contrato">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="num-cantlc">Cantidad LC</label>
-                                        <input type="number" class="form-control" id="num-cantlc" placeholder="" value="0.00">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="num-montototallc">Monto Total $ LC</label>
-                                        <input type="number" class="form-control" id="num-montototallc" placeholder="" value="0.00">
-                                    </div>
+                        <?php } ?>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtEmpresa">Empresa</label>
+                                <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtNombreEmpresa ?>">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Aditivo AD</h3>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtCiclo">Ciclo</label>
+                                <input type="text" class="form-control"  placeholder="" name="txtCiclo" value="<?php echo $txtCiclo; ?>">
                             </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="num-precioad">Precio AD</label>
-                                        <input type="number" class="form-control" id="num-precioad" placeholder="" value="0.00">
+                        </div>
+
+                        <?php if ($txtProducto=="LC"){ ?>
+                            <div class="col-md-8">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Leche Cruda (LC)</h3>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="fechapedidoad">Fecha Pedido AD</label>
-                                        <input type="date" class="form-control" id="fechapedidoad" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fecharecepcionad">Fecha Recepción AD</label>
-                                        <input type="date" class="form-control" id="fecharecepcionad" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txt-nrocontratoad">Número de Contrato AD</label>
-                                        <input type="text" class="form-control" id="txt-nrocontratoad" placeholder="Número de contrato">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="num-cantad">Cantidad AD</label>
-                                        <input type="number" class="form-control" id="num-cantad" placeholder="" value="0.00">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="num-montototalad">Monto Total $ AD</label>
-                                        <input type="number" class="form-control" id="num-montototalad" placeholder="" value="0.00">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                               <div class="form-group">
+                                                <label for="txtMonto_precio_lc">Precio LC</label>
+                                                <input type="text" class="form-control" name="txtMonto_precio_lc" placeholder="" value="<?php echo $txtMonto_precio_lc; ?>">
+                                            </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtFecha_ped">Fecha Pedido LC</label>
+                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtFecha_recep">Fecha Recepción</label>
+                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtCant_contratos_lc">Número de Contrato LC</label>
+                                                    <input type="text" class="form-control" name="txtCant_contratos_lc" value="<?php echo $txtCant_contratos_lc; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtCant_litros_lc">Cantidad Litros LC</label>
+                                                    <input type="text" class="form-control" name="txtCant_litros_lc" placeholder="" value="0.00" value="<?php echo $txtCant_litros_lc ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Monto_total_usb_lc">Monto Total $ LC</label>
+                                                    <input type="text" class="form-control" name="txtMonto_total_usb_lc" placeholder="" value="0.00" value="<?php echo $txtMonto_total_usb_lc ?>">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="txtProducto" value="LC">
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- /.card-body -->
-                        </div>
-                    </div>
+                            </div>
+                        <?php }?>
 
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
-                        <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-check"></i> &nbsp; Aceptar</a>
-                        <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-pencil-alt"></i> &nbsp; Editar</a>
-                        <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-trash-alt"></i> &nbsp; Eliminar</a>
-                        <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-window-close"></i> &nbsp; Cancelar</a>
+                        <?php if ($txtProducto=="AD"){ ?>
+                            <div class="col-md-8">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Aditivo AD</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                        <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                               <div class="form-group">
+                                                <label for="txtMonto_precio_ad">Precio AD</label>
+                                                <input type="text" class="form-control" name="txtMonto_precio_ad" placeholder="" value="<?php echo $txtMonto_precio_ad; ?>">
+                                            </div> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtFecha_ped">Fecha Pedido AD</label>
+                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtFecha_recep">Fecha Recepción</label>
+                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtCant_contratos_ad">Número de Contrato AD</label>
+                                                    <input type="text" class="form-control" name="txtCant_contratos_ad" value="<?php echo $txtCant_contratos_ad; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtCant_litros_ad">Cantidad Litros AD</label>
+                                                    <input type="text" class="form-control" name="txtCant_litros_ad" placeholder="" value="0.00" value="<?php echo $txtCant_litros_ad ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Monto_total_usb_ad">Monto Total $ AD</label>
+                                                    <input type="text" class="form-control" name="txtMonto_total_usb_ad" placeholder="" value="0.00" value="<?php echo $txtMonto_total_usb_lc ?>">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="txtProducto" value="AD">
+                                        </div>
+
+                                        </div>
+                                        <!-- /.card-body -->
+                                </div>
+                            </div>
+                        <?php }?>
+
+                        <div class="col-md-12">
+                            <div class="row justify-content-center">
+                                <div class="col-m6">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Aceptar">
+                                    <!-- <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Editar">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Eliminar">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"> -->
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div> 
+            </form>
+            <?php }else{ ?>
+
+                <?php  if ($mensaje_usuario!=""){ ?>
+                    <div class="col-12 ">
+                        <?php if($error_accion==1){ ?>
+                            <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
+                        <?php }else{ ?>
+                            <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                        <?php } ?>    
+                    </div>
+                <?php } ?>
+
+                <form action="subasta.php" method="post">
+                    <div class="row justify-content-center">
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                        </div>
+                        <!-- /.col -->
                     </div>
                 </form>
 
-            </div> 
+            <?php } ?>
         </div>
+        <!-- /Fin de Contenedor de datos -->
     </div>
     <!-- /.content-wrapper -->
     

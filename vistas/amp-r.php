@@ -9,6 +9,7 @@ include "../controladores/enlaces.php";
 
     <?php
 
+        include "modulos/amp-r.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -29,11 +30,16 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Registro</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding: 25px 20px 50px 20px;">
+        <!-- inicio DIV de contenido -->
+        <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
                 
                 <form class="row justify-content-center" action="inicio.php" method="post">
@@ -125,6 +131,7 @@ include "../controladores/enlaces.php";
 
             </div> 
         </div>
+        <!-- /. Fin DIV de contenido -->
     </div>
     <!-- /.content-wrapper -->
     

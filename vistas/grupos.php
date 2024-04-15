@@ -29,11 +29,15 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Tiendas</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding-top: 25px;">
+        <div class="container" style="padding-top: 0px;">
             <div class="row mb-2 align-items-end">
                 <div class="col-sm-12 col-md-12">
                     <p class="text-center">Contenido de la columna</p>

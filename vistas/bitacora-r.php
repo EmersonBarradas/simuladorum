@@ -9,6 +9,7 @@ include "../controladores/enlaces.php";
 
     <?php
 
+        include "modulos/bitacora-r.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -29,56 +30,124 @@ include "../controladores/enlaces.php";
                     <li class="breadcrumb-item active">General</li>
                     </ol>
                 </div><!-- /.col -->
+                <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
 
-        <div class="container" style="padding-top: 25px;">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Registro Bitácora</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form action="inicio.php" method="post">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="fechapago">Fecha Pago</label>
-                                    <input type="date" class="form-control" id="fechapago" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="num-multa">Multa</label>
-                                    <input type="number" class="form-control" id="num-multa" placeholder="" value="0.00">
-                                </div>
-                                <div class="form-group">
-                                    <label for="text-empresa">Empresa</label>
-                                    <select class="form-control" id="text-empresa">
-                                        <option>Empresa ACME</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Observaciones</span>
-                                    </div>
-                                    <textarea class="form-control" aria-label="With textarea" id="text-observaciones" ></textarea>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-window-close"></i> &nbsp; Cancelar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <!-- Contenedor Principal -->
 
-            </div>  
-        </div>
+        <div class="container" style="padding-top: 0px;">
         
+            <?php if ($procesar=="ok") {  ?>
+                <div class="row justify-content-center">
 
+                    <?php  if ($mensaje_usuario!=""){ ?>
+                        <div class="col-md-12 ">
+                        <?php if($error_accion>1){ ?>
+                            <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                        <?php }?> 
+                        </div>
+                    <?php } ?>
+
+
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Registro Bitácora</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form action="bitacora-r.php" method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="txtCiclo">Ciclo</label>
+                                        <select class="form-control" name="txtCiclo">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="txtIdEmpresa">Empresa</label>
+                                        <select class="form-control" name="txtEmpresa">
+                                        <?php foreach ($listaempresa as $empresa){ ?>
+                                            <option value="<?php echo $empresa['nro']; ?>"><?php echo $empresa['nombre']; ?></option>
+                                        <?php } ?>
+                                        </select>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="txtFecha">Fecha</label>
+                                        <input type="date" class="form-control" placeholder="" name="txtFecha" value="<?php echo $txtFecha; ?>">
+                                    </div>                              
+                                    <div class="form-group">
+                                        <label for="txtMontoMulta">Multa ($)</label>
+                                        <input type="number" step="0.01" class="form-control" placeholder="" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtFechaPago">Fecha Pago</label>
+                                        <input type="date" class="form-control" placeholder="" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Observaciones</span>
+                                        </div>
+                                        <textarea class="form-control" aria-label="With textarea" name="txtObservacion"> <?php echo $txtObservacion; ?> </textarea>
+                                    </div> 
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> 
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"> 
+                                    <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-window-close"></i> &nbsp; Cancelar</button>
+                                    -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>  
+            <?php }else{ ?>
+                <div class="row justify-content-center">
+                <?php  if ($mensaje_usuario!=""){ ?>
+                    <div class="col-md-12 ">
+                        <?php if($error_accion==1){ ?>
+                            <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
+                        <?php }else{ ?>
+                            <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                        <?php } ?>    
+                    </div>
+                <?php } ?>
+
+                <form action="bitacora-r.php" method="post">
+                    <div class="col-md-12">
+                        <input type="hidden" name="txtCiclo" value="<?php $txtCiclo; ?>">
+                        <input type="hidden" name="txtEmpresa" value="<?php $txtEmpresa; ?>">
+                        <input type="hidden" name="txtFecha" value="<?php $txtFecha; ?>">
+                        <input type="hidden" name="txtMontoMulta" value="<?php $txtMontoMulta; ?>">
+                        <input type="hidden" name="txtFechaPago" value="<?php $txtFechaPago; ?>">
+                        <input type="hidden" name="txtObservacion" value="<?php $txtObservacion; ?>">
+                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                    </div>
+                </form>
+                </div>
+            <?php } ?>
+
+        </div>
     </div>
     <!-- /.content-wrapper -->
     

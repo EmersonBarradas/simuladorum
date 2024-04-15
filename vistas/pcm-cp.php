@@ -9,6 +9,7 @@ include "../controladores/enlaces.php";
 
     <?php
 
+        include "modulos/pcm-cp.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -29,6 +30,7 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Costo de Producción</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
             <div class="col-md-12">
                 <hr style="color: #0056b2;" />
             </div>

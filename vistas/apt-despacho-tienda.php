@@ -8,7 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
+        include "modulos/apt-despacho-tienda.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -30,6 +30,10 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">APT Despacho Tienda</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>

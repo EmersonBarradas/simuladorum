@@ -9,6 +9,7 @@ include "../controladores/enlaces.php";
 
     <?php
 
+        include "modulos/pcm-c.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -29,11 +30,15 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">PCM Producir</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding: 25px 20px 50px 20px;">
+        <div class="container" style="padding: 0px 20px 50px 20px;">
 
             <div class="row justify-content-left" style="padding: 0px 0px 30px 0px;">
                 <div class="col-md-12">

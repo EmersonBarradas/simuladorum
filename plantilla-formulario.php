@@ -83,6 +83,27 @@
                             <textarea class="form-control" aria-label="With textarea" id="cajatexto" ></textarea>
                         </div>
                     </div>
+                    
+                    <!-- Ciclo -->
+                    <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="txtCiclo">Ciclo</label>
+                                <select class="form-control" name="txtCiclo">
+                                    <option value="1" <?php if($txtCiclo=="1") { echo "Selected"; } ?> >1</option>
+                                    <option value="2" <?php if($txtCiclo=="2") { echo "Selected"; } ?> >2</option>
+                                    <option value="3" <?php if($txtCiclo=="3") { echo "Selected"; } ?> >3</option>
+                                    <option value="4" <?php if($txtCiclo=="4") { echo "Selected"; } ?> >4</option>
+                                    <option value="5" <?php if($txtCiclo=="5") { echo "Selected"; } ?> >5</option>
+                                    <option value="6" <?php if($txtCiclo=="6") { echo "Selected"; } ?> >6</option>
+                                    <option value="7" <?php if($txtCiclo=="7") { echo "Selected"; } ?> >7</option>
+                                    <option value="8" <?php if($txtCiclo=="8") { echo "Selected"; } ?> >8</option>
+                                    <option value="9" <?php if($txtCiclo=="9") { echo "Selected"; } ?> >9</option>
+                                    <option value="10" <?php if($txtCiclo=="10") { echo "Selected"; } ?> >10</option>
+                                    <option value="11" <?php if($txtCiclo=="11") { echo "Selected"; } ?> >11</option>
+                                    <option value="12" <?php if($txtCiclo=="12") { echo "Selected"; } ?> >12</option>
+                                </select>
+                            </div> 
+                        </div>
             </form>
 
             <!-- Formulario de Clave de acceso --> 

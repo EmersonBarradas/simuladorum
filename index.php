@@ -19,54 +19,45 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#">Simulador de <b>NEGOCIOS</b></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Inicia sesión para comenzar</p>
 
-      <form action="vistas/inicio.php" method="post">
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+      <!-- /.content-header -->
+        <div class="container" style="padding-top: 100px;">
+            <div class="row mb-2 align-items-end">
+                <div class="col-sm-12 col-md-6">
+                <img src="vistas/img/logo-universidad.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
+                </div>
+                <div class="col-sm-12 col-md-5 justify-content-center">
+                    <div>
+                        <p class="text-justify">
+                        "Los mejores líderes son los que que anteponen sus equipos a todo lo demás, los que crean un ambiente de trabajo en el que la gente se siente importante y oporta ideas y opiniones. Invierte en tu gente antes de invertir en tu negocio."
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-right">
+                        <strong>Michael Mahoney , CEO Boston Scientific</strong>
+                        </p>
+                    </div>
+                </div>  
             </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Recuerdame
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
 
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
+            <div class="row justify-content-center" style="padding-top: 50px;">
+                <div class="col-sm-12 col-md-10 ">
+                <p class="text-justify">
+                    En nombre de la <a href="https://www.unimet.edu.ve/">Universidad Metropolitana</a>, le damos la bienvenida a nuestro proceso de enseñanza de simulacion de negocios, donde ustedes serán los responsables de llevar las riendas del negocio, tomando algunos roles importantes dentro de la organización.
+                </p>
+                <p class="text-justify">
+                    Liderazgo, visión de negocio, adaptación al cambio, creatividad , capacidad para tomar riesgos y la confianza en tu equipo, serán competencias que tendrás que poner en práctica para alcanzar los mejores resultados.
+                </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" style="padding: 40px 40px; ">
+                <div class="col-sm-2 col-md-2">
+                    <a class="btn btn-primary" href="iniciar-sesion.php" role="button">Comenzar</a>
+                </div>
+            </div>
+    
+        </div>
 
 <!-- jQuery -->
 <script src="vistas/plugins/jquery/jquery.min.js"></script>

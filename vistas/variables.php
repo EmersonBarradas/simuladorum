@@ -8,10 +8,9 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
+        include "modulos/variables.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
-    
     ?>  
 
     <!-- Content Wrapper. Contains page content -->

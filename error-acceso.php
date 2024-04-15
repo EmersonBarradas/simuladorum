@@ -34,7 +34,7 @@
         </div>
         <div class="row justify-content-center" style="padding-top:50px;">
                 <div class="col-sm-2 col-md-1">
-                    <a class="btn btn-secondary" href="index.php" role="button">Intentar</a>
+                    <a class="btn btn-secondary" href="iniciar-sesion.php" role="button">Intentar</a>
                 </div>
             </div>
     </div>

@@ -1,17 +1,14 @@
 <?php
-
-include "../controladores/enlaces.php";
-
+    include "../controladores/enlaces.php";
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <?php
-
+        include "modulos/inicio.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
-    
     ?>  
 
     <!-- Content Wrapper. Contains page content -->
@@ -29,11 +26,15 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Presentación</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding-top: 25px;">
+        <div class="container" style="padding-top: 0px;">
             <div class="row mb-2 align-items-end">
                 <div class="col-sm-12 col-md-6">
                 <img src="img/logo-universidad.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
@@ -62,13 +63,13 @@ include "../controladores/enlaces.php";
                 </p>
                 </div>
             </div>
-
+            <!-- Botón Comenzar 
             <div class="row justify-content-center" style="padding: 40px 40px; ">
                 <div class="col-sm-2 col-md-2">
                     <a class="btn btn-primary" href="subasta.php" role="button">Comenzar</a>
                 </div>
             </div>
-    
+            -->
         </div>
     </div>
     <!-- /.content-wrapper -->

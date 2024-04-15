@@ -1,17 +1,14 @@
 <?php
-
-include "../controladores/enlaces.php";
-
+    include "../controladores/enlaces.php";
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <?php
-
+        include "modulos/simulacion.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
-    
     ?>  
 
     <!-- Content Wrapper. Contains page content -->
@@ -29,6 +26,10 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">Tiendas</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
@@ -36,36 +37,66 @@ include "../controladores/enlaces.php";
         <div class="container" style="padding-top: 25px;">
 
             <div class="row justify-content-center">
+                <!-- Íconos Generales -->
+                
+                <div class="col-md-12" style="padding: 0px 0px 20px 10px;">
+                    <?php if($cantRegistros<1) { ?>
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                    <?php } ?>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
+                </div>
+                <?php  if ($mensaje_usuario!=""){ ?>
+                    <div class="col-12 ">
+                        <?php if($error_accion>1){ ?>
+                            <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                        <?php }else {?> 
+                            <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
+                        <?php }?> 
+                    </div>
+                <?php } ?>
                 <div class="col-md-6">
+                    <!-- Tarjeta -->
                     <div class="card card-primary">
+                        <!-- Cabecera de tarjeta -->
                         <div class="card-header">
-                            <h3 class="card-title">Datos de la Simulación</h3>
+                            <h3 class="card-title">Simulación Activa</h3>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form action="inicio.php" method="post">
+                        <!-- / cabecera de tarjeta -->
+                        <!-- Inicio formulario -->
+                        <form action="simulacion.php" method="post">
                             <div class="card-body">
+                                <input type="hidden" name="txtNro" value="<?php echo $txtNro; ?>">
                                 <div class="form-group">
-                                    <label for="txt-idsimulacion">ID Simulación</label>
-                                    <input type="input" class="form-control" id="txt-idsimulacion" placeholder="ID Simulación">
+                                    <label for="txtId">ID Simulación</label>
+                                    <input type="input" class="form-control" placeholder="ID Simulación" name="txtId" value="<?php echo $txtId; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="fechainicio">Fecha Inicio</label>
-                                    <input type="date" class="form-control" id="fechainicio" placeholder="Fecha de inicio">
+                                    <label for="txtFechaInicio">Fecha Inicio</label>
+                                    <input type="date" class="form-control" placeholder="Fecha de inicio" name="txtFechaInicio" value="<?php echo $txtFechaInicio; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtEstatus">Estatus</label>
+                                    <input type="input" class="form-control" placeholder="Estatus de la Simulación" name="txtEstatus" value="<?php echo $txtEstatus; ?>">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Descripción</span>
                                     </div>
-                                    <textarea class="form-control" aria-label="With textarea" id="txt-descrip" ></textarea>
+                                    <textarea class="form-control" aria-label="With textarea" name="txtDescripcion" > <?php echo $txtDescripcion; ?> </textarea>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
+
                             <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Crear Simulación</button>
+                                <?php if($cantRegistros>=1) { ?>
+                                    <input type="submit" class="btn btn-primary btn-block" value="Finalizar" name="btn_accion">
+                                <?php } ?>
                             </div>
+
                         </form>
+                        <!-- / Fin Formulario -->
                     </div>
+                    <!-- /. Fin de tarjeta -->
                 </div>
 
             </div>  

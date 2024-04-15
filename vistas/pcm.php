@@ -1,17 +1,14 @@
 <?php
-
-include "../controladores/enlaces.php";
-
+    include "../controladores/enlaces.php";
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <?php
-
+        include "modulos/pcm.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
-    
     ?>  
 
     <!-- Content Wrapper. Contains page content -->
@@ -21,7 +18,7 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Pasterurizado, Cuajado, Moldeado (PCM)</h1>
+                <h1 class="m-0 text-dark">Pasteurizado, Cuajado y Moldeado (PCM)</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,64 +26,58 @@ include "../controladores/enlaces.php";
                 <li class="breadcrumb-item active">PCM</li>
                 </ol>
             </div><!-- /.col -->
+            <!-- Separador -->
+            <div class="col-md-12">
+                <hr style="color: #0056b2;" />
+            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <div class="container" style="padding: 25px 20px 50px 20px;">
-            <!-- Cabecera Tabla Leche Cruda -->
-            <div class="row justify-content-left">
-                <div class="col-md-12">
-                    <h3>Productos</h3>
-                </div>
-                <div class="col-md-12">
-                    <span> <i class="fas fa-cheese" style="padding: 0 10px 0 0;"></i>Queso Duro</span> 
-                    <span> <i class="fas fa-cheese" style="padding: 0 10px 0 20px;"></i>Queso Mozarella</span>
-                    <span> <i class="fas fa-cheese" style="padding: 0 10px 0 20px;"></i>Queso Gouda</span>
-                    <span> <i class="fas fa-cheese" style="padding: 0 10px 0 20px;"></i>Queso Dietético</span>
-                </div>
+            <!-- Contendor de datos -->
+            <div class="container" style="padding: 0px 20px 50px 20px;">
 
-                <!-- Íconos Generales -->
-                <div class="col-md-2" style="padding-top: 10px;">
-                    <a href="pcm-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
-                </div>
+                <!-- Opciones Generales -->
+                <div class="row justify-content-left" style="padding: 0px 0px 20px 0px;">
+                    <div class="col-md-2" style="padding: 0px 0px 20px 0px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Duro</span></div>
+                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Mozarella</span></div>
+                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Gouda</span></div>
+                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Dietético</span></div>
+                    <div class="col-md-4" style="padding: 0px 0px 20px 0px"></div>
+                    
+                    <div class="col-md-6" >
+                        <a href="pcm-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
+                        <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
+                    </div>
 
-                <div class="col-md-2" style="padding-top: 10px;">
-                    <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
-                </div>
-                <div class="col-md-8 style="padding-top: 10px;">
+                    <div class="col-md-6">
 
-                </div>
-                <!-- Variables Globales -->
-                <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto">Empresa</label>
-                        <input type="text" class="form-control" id="text" placeholder="Empresa" value="">
                     </div>
-                </div>
-                <!-- Desactivados
-                <div class="col-md-3" style="padding-top: 20px;">
-                    <div class="form-group">
-                        <label for="num-capmax">Capacidad Máxima LC</label>
-                        <input type="number" class="form-control" id="num-capmax" placeholder="" value="0.00">
+
+                    <div class="col-md-4" style="padding-top: 20px;">
+                        <div class="form-group">
+                            <label for="txtEmpresa">Empresa</label>
+                            <select class="form-control" name="txtEmpresa">
+                                <?php foreach ($listado_empresa as $empresa) { ?>
+                                <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
+
+                    <?php if ($SubastaMovimientos=="NO") {?>
+                        <div class="col-md-12" style="padding-top: 20px;">
+                            <div class="">
+                                <h4 class="text-center text-danger"> <?php echo $Mensaje_Mov;?> </h4>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="col-md-3" style="padding-top: 20px;">
-                    <div class="form-group">
-                        <label for="num-existencia">Existencia LC</label>
-                        <input type="number" class="form-control" id="num-existencia" placeholder="" value="0.00">
-                    </div>
-                </div>
-                <div class="col-md-3" style="padding-top: 20px;">
-                    <div class="form-group">
-                        <label for="num-capdisp">Capacidad Disponible LC</label>
-                        <input type="number" class="form-control" id="num-capdisp" placeholder="" value="0.00">
-                    </div>
-                </div>
-                -->
-            </div>
-            <!-- Tabla de movimientos -->
+                <!-- / Fin de opciones Generales -->
+
+            <?php if ($SubastaMovimientos=="SI") {?>
+            <!-- Tabla Leche Cruda -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -113,90 +104,51 @@ include "../controladores/enlaces.php";
                                 <th>Fecha Prod</th>
                                 <th>Entrada LC</th>
                                 <th>Entrada AD</th>
-                                <th>Queso Producido </th>
+                                <th>Queso Producido (Kilos) </th>
                                 <th>Producto</th>
                                 <th>Costo Producción MP</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E</td>
-                                <td>11-1-2014</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td>0,0</td>
-                                <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
+                            <?php foreach ($listado_PCM as $PCM) { ?>
+                                <tr>
+                                    <td> <?php echo $PCM['ciclo']; ?></td>
+                                    <td> <?php echo $PCM['tipo']; ?></td>
+                                    <td> <?php echo $PCM['fecha']; ?></td>
+                                    <td> <?php echo $PCM['cant_lc']; ?></td>
+                                    <td> <?php echo $PCM['cant_ad']; ?></td>
+                                    <td> <?php echo $PCM['cant_queso']; ?></td>
+                                    <td> <?php echo $PCM['tipo_queso']; ?></td>
+                                    <td> <?php echo $PCM['monto_cto_prod_mp']; ?></td>
+                                    <td>
+                                        <form action="subasta-c.php" method="post">
+                                            <input type="hidden" name="txtNro" value="<?php echo $PCM['nro'];?>">
+                                            <input type="hidden" name="txtId" value="<?php echo $PCM['id'];?>">
+                                            <input type="hidden" name="txtNro_empresa" value="<?php echo $PCM['nro_empresa'];?>">
+                                            <input type="hidden" name="txtCiclo" value="<?php echo $PCM['ciclo'];?>">                        
+                                            <input type="hidden" name="txtTipo" value="<?php echo $PCM['tipo'];?>">                        
+                                            <input type="hidden" name="txtFecha" value="<?php echo $PCM['fecha'];?>">
+                                            <input type="hidden" name="txtCant_lc" value="<?php echo $PCM['cant_lc'];?>">
+                                            <input type="hidden" name="txtCant_ad" value="<?php echo $PCM['cant_ad'];?>">
+                                            <input type="hidden" name="txtCant_queso" value="<?php echo $PCM['cant_queso'];?>">
+                                            <input type="hidden" name="txtNro_queso" value="<?php echo $PCM['nro_queso'];?>">
+                                            <input type="hidden" name="txtTipo_queso" value="<?php echo $PCM['tipo_queso'];?>">
+                                            <input type="hidden" name="txtMonto_cto_prod_mp" value="<?php echo $PCM['monto_cto_prod_mp'];?>">
+                                            <input type="hidden" name="txtEstatus" value="<?php echo $PCM['estatus'];?>">
+                                            <input type="hidden" name="txtUsuario_reg" value="<?php echo $PCM['usuario_reg'];?>">
+
+                                            <input class="btn btn-primary" type="submit" name="btn_accion" value="C">
+                                            <!-- <input class="btn btn-primary" type="submit" name="btn_accion" value="E" readonly> -->
+                                            <input class="btn btn-primary" type="submit" name="btn_accion" value="X">
+                                            <!-- <a href="#"><i class="fas fa-file"></i></a>&nbsp;
+                                            <a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;
+                                            <a href="#"><i class="fas fa-trash-alt"></i></a> -->
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            <?php } ?>
                         </tbody>
                         </table>
                     </div>
@@ -205,13 +157,9 @@ include "../controladores/enlaces.php";
                     <!-- /.card -->
                 </div>
             </div>
-            <!-- Separador -->
-            <div class="row" style="padding: 25px 0 25px 0;">
-                <div class="col-md-12">
-                    <hr style="color: #0056b2;" />
-                </div>
+            <?php } ?>
             </div>
-        </div>
+            <!-- /. fin contenedor de datos -->
     </div>
     <!-- /.content-wrapper -->
     

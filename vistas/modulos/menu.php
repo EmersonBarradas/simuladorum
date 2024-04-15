@@ -1,3 +1,6 @@
+<?php 
+    $usuariosesion=$_SESSION['usuario'];
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
@@ -14,7 +17,7 @@
           <img src="../vistas/img/ico-usuario-gris.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nombre Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuariosesion['nombre']; ?> </a>
         </div>
       </div>
 
@@ -34,15 +37,6 @@
             </li>
             <li class="nav-header">SIMULACIÓN</li>
             <li class="nav-item">
-                <a href="../vistas/entorno.php" class="nav-link">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>
-                    Entorno
-                    <span class="badge badge-info right"></span>
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="../vistas/bitacora.php" class="nav-link">
                 <i class="nav-icon fas fa-blog"></i>
                 <p>
@@ -51,6 +45,16 @@
                 </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="../vistas/entorno.php" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>
+                    Entorno
+                    <span class="badge badge-info right"></span>
+                </p>
+                </a>
+            </li>
+            
             <li class="nav-item">
                 <a href="../vistas/subasta.php" class="nav-link">
                 <i class="nav-icon fas fa-cart-plus"></i>
@@ -63,15 +67,31 @@
                 <a href="../vistas/amp.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    Almacén MP
+                    Almacén MP [AMP]
                 </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../vistas/produccion.php"  class="nav-link">
+                <a href="../vistas/amp-cto.php" class="nav-link">
+                <i class="nav-icon fas fa-store-alt"></i>
+                <p>
+                    Almacén Costo [AMP-CTO]
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/pcm.php"  class="nav-link">
                 <i class="nav-icon fas fa-industry"></i>
                 <p>
-                    Producción
+                    Producción [PCM]
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/pcm-mod.php"  class="nav-link">
+                <i class="nav-icon fas fa-industry"></i>
+                <p>
+                    Modelado [PCM-MOD]
                 </p>
                 </a>
             </li>
@@ -107,8 +127,32 @@
                 </p>
                 </a>
             </li>  
+            <li class="nav-item">
+                <a href="../vistas/publicidad.php"class="nav-link">
+                <i class="nav-icon fas fa-calculator"></i>
+                <p>
+                    Publicidad
+                </p>
+                </a>
+            </li>  
             
             <li class="nav-header">CONFIGURACIÓN</li>
+            <?php 
+               if ($usuariosesion['tipo']=="A"){ ?>
+
+                <li class="nav-item">
+                    <a href="../vistas/usuarios.php"  class="nav-link">
+                    <i class="nav-icon far fa-solid fa-user"></i>
+                    <p>
+                        Usuarios
+                        <span class="badge badge-info right"></span>
+                    </p>
+                    </a>
+                </li>
+                <?php
+               };
+            ?>
+            <!--
             <li class="nav-item">
                 <a href="../vistas/usuarios.php"  class="nav-link">
                 <i class="nav-icon far fa-solid fa-user"></i>
@@ -118,6 +162,23 @@
                 </p>
                 </a>
             </li>
+            -->
+            <?php 
+               if ($usuariosesion['tipo']=="A"){ ?>
+
+                <li class="nav-item">
+                    <a href="../vistas/simulacion.php" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Simulación
+                        <span class="badge badge-info right"></span>
+                    </p>
+                    </a>
+                </li>
+                <?php
+               };
+            ?>
+            <!--
             <li class="nav-item">
                 <a href="../vistas/simulacion.php" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
@@ -127,6 +188,8 @@
                 </p>
                 </a>
             </li>
+            -->
+            <!--
             <li class="nav-item">
                 <a href="../vistas/grupos.php" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>  
@@ -136,6 +199,7 @@
                 </p>
                 </a>
             </li>
+            -->
             <li class="nav-item">
                 <a href="../vistas/calendario.php"  class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
