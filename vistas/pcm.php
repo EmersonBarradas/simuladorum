@@ -122,7 +122,7 @@
                                     <td> <?php echo $PCM['tipo_queso']; ?></td>
                                     <td> <?php echo $PCM['monto_cto_prod_mp']; ?></td>
                                     <td>
-                                        <form action="subasta-c.php" method="post">
+                                        <form action="" method="">
                                             <input type="hidden" name="txtNro" value="<?php echo $PCM['nro'];?>">
                                             <input type="hidden" name="txtId" value="<?php echo $PCM['id'];?>">
                                             <input type="hidden" name="txtNro_empresa" value="<?php echo $PCM['nro_empresa'];?>">
@@ -132,7 +132,6 @@
                                             <input type="hidden" name="txtCant_lc" value="<?php echo $PCM['cant_lc'];?>">
                                             <input type="hidden" name="txtCant_ad" value="<?php echo $PCM['cant_ad'];?>">
                                             <input type="hidden" name="txtCant_queso" value="<?php echo $PCM['cant_queso'];?>">
-                                            <input type="hidden" name="txtNro_queso" value="<?php echo $PCM['nro_queso'];?>">
                                             <input type="hidden" name="txtTipo_queso" value="<?php echo $PCM['tipo_queso'];?>">
                                             <input type="hidden" name="txtMonto_cto_prod_mp" value="<?php echo $PCM['monto_cto_prod_mp'];?>">
                                             <input type="hidden" name="txtEstatus" value="<?php echo $PCM['estatus'];?>">

@@ -37,7 +37,7 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <!-- Inicio del contenedor de datos -->
+    <!-- Inicio del contenedor de datos -->
         <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
                 <?php if ($procesar=="ok") {  ?>
@@ -59,7 +59,7 @@ include "../controladores/enlaces.php";
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>
 
-                        <div class="col-md-8 style="padding-top: 10px;">
+                        <div class="col-md-8" style="padding-top: 10px;">
 
                         </div>
                     <!-- /. Fin de Íconos Generales -->
@@ -192,9 +192,15 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <form action="pcm-mod-operador-r.php" method="post">
                                     <div class="row justify-content-center">
-                                        <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                        </div>
+                                        <?php if($btnOperador="SI"){ ?>
+                                            <div class="col-md-2">    
+                                                <a href="pcm-mod-operador-r.php" type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
+                                            </div>
+                                        <?php }else { ?>
+                                            <div class="col-md-2">
+                                                <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </form>
                             </div>

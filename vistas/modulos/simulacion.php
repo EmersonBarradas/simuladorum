@@ -1,39 +1,50 @@
 <?php
   include('../controladores/global/sesiones.php');
   include('../controladores/global/conexion.php');
+  include('../controladores/global/constantes.php');
 
-  $mensaje_usuario="";
-  $procesar="ok";
-  $error_accion=0;
 
-  $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
-  $sentencia->execute();
-  $listasimulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+  //Datos del Usuario
+    $usuariosesion=($_SESSION['usuario']);
+    $txtUsuario=$usuariosesion['nro'];
+    $txtIdUsuario=$usuariosesion['id'];
+    $txtUsuarioTipo=$usuariosesion['tipo'];
+  
+  // Variables de Acción
+    $procesar="ok"; //Muestra Vista normal
+    $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+    $mensaje_usuario=""; // Vacío en inicalización
+    $calcular="NO";
 
-  $cantRegistros=$sentencia->rowCount();
-  //print_r($cantRegistros);
-  //print_r($listasimulacion);
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $listasimulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+  
+    $cantRegistros=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
 
-  if($cantRegistros>=1){
+    if($cantRegistros>=1){
+      //echo "<script> alert('Es mayor a uno...'); </script>";
 
-    //echo "<script> alert('Es mayor a uno...'); </script>";
+      foreach ($listasimulacion as $simulacion){  
+        $txtNro=($simulacion['nro']);
+        $txtId=($simulacion['id']);
+        $txtFechaInicio=($simulacion['fecha_inicio']);
+        $txtEstatus=($simulacion['estatus']);
+        $txtDescripcion=($simulacion['descripcion']);
+      }
 
-    foreach ($listasimulacion as $simulacion){  
-      $txtNro=($simulacion['nro']);
-      $txtId=($simulacion['id']);
-      $txtFechaInicio=($simulacion['fecha_inicio']);
-      $txtEstatus=($simulacion['estatus']);
-      $txtDescripcion=($simulacion['descripcion']);
+    }else{
+      // echo "<script> alert('Es menor a uno...'); </script>";
+      $txtNro=0;
+      $txtId="";
+      $txtFechaInicio="";
+      $txtEstatus="";
+      $txtDescripcion="";
     }
-
-  }else{
-    // echo "<script> alert('Es menor a uno...'); </script>";
-    $txtNro=0;
-    $txtId="";
-    $txtFechaInicio="";
-    $txtEstatus="";
-    $txtDescripcion="";
-  }
+  // ------------------------------------------------------------------------------------
   
 
   if(isset($_POST["btn_accion"])){

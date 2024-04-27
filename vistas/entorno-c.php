@@ -35,8 +35,8 @@ include "../controladores/enlaces.php";
         </div>
         <!-- /.content-header -->
 
-        <!-- Contendor Principal -->
-        <div class="container" style="">
+        <!-- Contendor de Datos -->
+        <div class="container" >
             <?php if ($procesar=="ok") {  ?>
 
                 <div class="row justify-content-center">
@@ -65,13 +65,13 @@ include "../controladores/enlaces.php";
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtId">ID</label>
-                                                <input type="text"  class="form-control" name="txtId" value="<?PHP echo $txtId; ?>" placeholder="" <?php if ($accion=="Modificar") { echo "required"; }  ?>>
+                                                <input type="text"  class="form-control" name="txtId" value="<?PHP echo $txtId; ?>" placeholder="" <?php if ($accion=="Modificar") { echo "required"; }  ?> <?php if ($accion=="Consultar") { echo "readonly"; }  ?> >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtNombre">Nombre</label>
-                                                <input type="text"  class="form-control" name="txtNombre" value="<?PHP echo $txtNombre; ?>" placeholder="" <?php if ($accion=="Modificar") { echo "required"; }  ?> >
+                                                <input type="text"  class="form-control" name="txtNombre" value="<?PHP echo $txtNombre; ?>" placeholder="" <?php if ($accion=="Modificar") { echo "required"; }  ?>  <?php if ($accion=="Consultar") { echo "readonly"; }  ?>  >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -83,25 +83,25 @@ include "../controladores/enlaces.php";
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtFrecha_creacion">Fecha de creación</label>
-                                                <input type="text"  class="form-control" name="txtFrecha_creacion" value="<?PHP echo $txtFecha_Creacion; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; }?>>
+                                                <input type="text"  class="form-control" name="txtFrecha_creacion" value="<?PHP echo $txtFecha_Creacion; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; }?>  <?php if ($accion=="Consultar") { echo "readonly"; }  ?> >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtMonto_Presupuesto"> Monto Presupuesto </label>
-                                                <input type="text" class="form-control" name="txtPresupuesto" value=" <?PHP echo $txtMonto_Presupuesto; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; }?>>
+                                                <input type="text" class="form-control" name="txtPresupuesto" value=" <?PHP echo $txtMonto_Presupuesto; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; }?>  <?php if ($accion=="Consultar") { echo "readonly"; }  ?> >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtMonto_Saldo_Actual"> Monto Saldo Actual </label>
-                                                <input type="text" class="form-control" name="txtMonto_Saldo_Actual" value=" <?PHP echo $txtMonto_Saldo_Actual; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; } ?>>
+                                                <input type="text" class="form-control" name="txtMonto_Saldo_Actual" value=" <?PHP echo $txtMonto_Saldo_Actual; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; } ?>  <?php if ($accion=="Consultar") { echo "readonly"; }  ?> >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="txtMonto_Saldo_Actual"> Monto Multas </label>
-                                                <input type="text" class="form-control" name="txtMonto_Saldo_Actual" value=" <?PHP echo $txtMonto_Saldo_Actual; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; } ?>>
+                                                <label for="txtMonto_Multas"> Monto Multas </label>
+                                                <input type="text" class="form-control" name="txtMonto_Multas" value=" <?PHP echo $txtMonto_Multas; ?>" placeholder="" <?php if ($accion=="Modificar"){ echo "readonly"; } ?>  <?php if ($accion=="Consultar") { echo "readonly"; }  ?> >
                                             </div>
                                         </div>
                                     </div>         
@@ -139,24 +139,32 @@ include "../controladores/enlaces.php";
 
                 <?php  if ($mensaje_usuario!=""){ ?>
                     <div class="col-12 ">
-                        <?php if($error_accion==1){ ?>
-                            <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
-                        <?php }else{ ?>
-                            <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
-                        <?php } ?>    
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <?php if($error_accion==1){ ?>
+                                    <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
+                                <?php }else{ ?>
+                                    <h3 class="text-center text-danger"><?php echo $mensaje_usuario; ?></h3>
+                                <?php } ?>  
+                            </div>
+
+                        </div>
+                          
                     </div>
                 <?php } ?>
 
                 <form action="entorno-c.php" method="post">
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="hidden" name="txtNro" value="<?php $txtNro; ?>">
-                            <input type="hidden" name="txtId" value="<?php $txtId; ?>">
-                            <input type="hidden" name="txtnNmbre" value="<?php $txtNombre; ?>">
+                    <div class="col-12">
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                                <input type="hidden" name="txtNro" value="<?php $txtNro; ?>">
+                                <input type="hidden" name="txtId" value="<?php $txtId; ?>">
+                                <input type="hidden" name="txtnNmbre" value="<?php $txtNombre; ?>">
 
-                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
                     </div>
                 </form>
             

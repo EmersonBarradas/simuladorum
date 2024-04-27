@@ -190,7 +190,7 @@ include "../controladores/enlaces.php";
                                     <td> <?php echo $Amp_cto['ciclo']; ?></td>
                                     <td> <?php echo $Amp_cto['tipo_mov_ad']; ?></td>
                                     <td> <?php echo $Amp_cto['fecha']; ?></td>
-                                    <td> <?php echo $Amp_cto['cant_lc']; ?></td>
+                                    <td> <?php echo $Amp_cto['cant_ad']; ?></td>
                                     <td> <?php echo $Amp_cto['monto_cto_ltr_ad']; ?></td>
                                     <td> <?php echo $Amp_cto['monto_cto_total_ad']; ?></td>
                                     <td> <?php echo $Amp_cto['cant_acum_ad']; ?></td>

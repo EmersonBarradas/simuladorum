@@ -6,7 +6,7 @@
 <div class="wrapper">
 
     <?php
-        include "modulos/simulacion.php";
+        include "modulos/simulacion-final.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     ?>  

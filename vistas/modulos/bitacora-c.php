@@ -6,6 +6,7 @@
     $usuariosesion=($_SESSION['usuario']);
     $txtUsuario=$usuariosesion['nro'];
     $txtIdUsuario=$usuariosesion['id'];
+    $txtUsuarioTipo=$usuariosesion['tipo'];
     //----------------------------------------
 
     // Variables de Acción
@@ -13,10 +14,28 @@
     $error_accion=0; // Valor 0 si todo va normal
     $mensaje_usuario=""; // Vacío en inicalización
 
-    // Señección de Empresas
-    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
-    $sentencia->execute();
-    $listaempresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    // Selección de Empresa / Entorno
+    if ($txtUsuarioTipo=="A") {
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
+      $sentencia->execute();
+      $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+      $cant_entorno=$sentencia->rowCount();
+      //echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
+      //print_r($cant_entorno);
+
+    }else{
+      // Selección de empresa del usuario -------------------------------------------------------------------------
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
+      $sentencia->execute();
+      $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_empresa=$sentencia->rowCount(); 
+
+      foreach($listado_empresa as $empresa){
+          $txtNro_empresa=$empresa['nro'];
+          $txtNombre_empresa=$empresa['nombre'];
+      }
+    }
 
     // Variables de Datos
     $txtId=" ";
@@ -35,8 +54,8 @@
     $txtNro=($_POST["txtNro"]);
     $txtId="Sin Id";
     $txtFecha=($_POST["txtFecha"]);
-    $txtEmpresa=($_POST["txtEmpresa"]); 
-    $txtIdEmpresa=($_POST["txtIdEmpresa"]);
+    $txtNro_empresa=($_POST["txtNro_empresa"]); 
+    //print_r($txtNro_empresa);
     $txtObservacion=($_POST["txtObservacion"]);
     $txtMontoMulta=($_POST["txtMontoMulta"]);
     $txtFechaPago=($_POST["txtFechaPago"]);
@@ -67,13 +86,12 @@
             // echo "<script> alert('Quieres Guardar Operación...'); </script>";
             // header('Location:usuarios.php');
 
-            $sentencia=$pdo->prepare("INSERT INTO bitacora (nro,id,fecha,empresa,id_empresa,observacion,monto_multa,fecha_pago,estatus,fecha_reg,usuario_reg,estatus_reg,ciclo)  
-            VALUES (NULL, :id, :fecha, :empresa, :id_empresa, :observacion, :monto_multa, :fecha_pago, :estatus, :fecha_reg, :usuario_reg, :estatus_reg, :ciclo)");
+            $sentencia=$pdo->prepare("INSERT INTO bitacora (nro,id,fecha,nro_empresa,observacion,monto_multa,fecha_pago,estatus,fecha_reg,usuario_reg,estatus_reg,ciclo)  
+            VALUES (NULL, :id, :fecha, :nro_empresa, :observacion, :monto_multa, :fecha_pago, :estatus, :fecha_reg, :usuario_reg, :estatus_reg, :ciclo)");
 
             $sentencia->bindParam(':id',$txtId,PDO::PARAM_STR);
             $sentencia->bindParam(':fecha',$txtFecha);
-            $sentencia->bindParam(':empresa',$txtEmpresa,PDO::PARAM_INT);
-            $sentencia->bindParam(':id_empresa',$txtIdEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':nro_empresa',$txtNro_empresa,PDO::PARAM_INT);
             $sentencia->bindParam(':observacion',$txtObservacion,PDO::PARAM_STR);
             $sentencia->bindParam(':monto_multa',$txtMontoMulta,PDO::PARAM_STR);
             $sentencia->bindParam(':fecha_pago',$txtFechaPago,PDO::PARAM_STR);
@@ -124,7 +142,7 @@
             
             $sentencia=$pdo->prepare("UPDATE bitacora SET 
             ciclo=:ciclo,
-            empresa=:empresa,
+            nro_empresa=:nro_empresa,
             fecha=:fecha,
             monto_multa=:monto_multa,
             fecha_pago=:fecha_pago,
@@ -134,7 +152,7 @@
                 
             $sentencia->bindParam(':nro',$txtNro,PDO::PARAM_STR);
             $sentencia->bindParam(':ciclo',$txtCiclo,PDO::PARAM_STR);
-            $sentencia->bindParam(':empresa',$txtEmpresa,PDO::PARAM_INT);
+            $sentencia->bindParam(':nro_empresa',$txtNro_empresa,PDO::PARAM_INT);
             $sentencia->bindParam(':fecha',$txtFecha);
             $sentencia->bindParam(':monto_multa',$txtMontoMulta,PDO::PARAM_STR);
             $sentencia->bindParam(':fecha_pago',$txtFechaPago,PDO::PARAM_STR);

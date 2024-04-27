@@ -40,7 +40,6 @@ include "../controladores/enlaces.php";
         <!-- /.content-header -->
 
         <!-- Contenedor Principal -->
-
         <div class="container" style="padding-top: 0px;">
         
             <?php if ($procesar=="ok") {  ?>
@@ -55,7 +54,7 @@ include "../controladores/enlaces.php";
                     <?php } ?>
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Registro Bitácora</h3>
@@ -64,53 +63,72 @@ include "../controladores/enlaces.php";
                             <!-- form start -->
                             <form action="bitacora-r.php" method="post">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="txtCiclo">Ciclo</label>
-                                        <select class="form-control" name="txtCiclo">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                        </select>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label for="txtIdEmpresa">Empresa</label>
-                                        <select class="form-control" name="txtEmpresa">
-                                        <?php foreach ($listaempresa as $empresa){ ?>
-                                            <option value="<?php echo $empresa['nro']; ?>"><?php echo $empresa['nombre']; ?></option>
-                                        <?php } ?>
-                                        </select>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label for="txtFecha">Fecha</label>
-                                        <input type="date" class="form-control" placeholder="" name="txtFecha" value="<?php echo $txtFecha; ?>">
-                                    </div>                              
-                                    <div class="form-group">
-                                        <label for="txtMontoMulta">Multa ($)</label>
-                                        <input type="number" step="0.01" class="form-control" placeholder="" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtFechaPago">Fecha Pago</label>
-                                        <input type="date" class="form-control" placeholder="" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
-                                    </div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Observaciones</span>
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-4">
+                                            <!-- Div Empresa -->
+                                            <div class="form-group">
+                                                <label for="txtNro_empresa">Empresa</label>
+                                                <select class="form-control" name="txtNro_empresa">
+                                                <?php foreach ($listado_empresa as $empresa){ ?>
+                                                    <option value="<?php echo $empresa['nro']; ?>"><?php echo $empresa['nombre']; ?></option>
+                                                <?php } ?>
+                                                </select>
+                                            </div> 
                                         </div>
-                                        <textarea class="form-control" aria-label="With textarea" name="txtObservacion"> <?php echo $txtObservacion; ?> </textarea>
-                                    </div> 
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label for="txtCiclo">Ciclo</label>
+                                                <select class="form-control" name="txtCiclo">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="txtFecha">Fecha</label>
+                                                <input type="date" class="form-control" placeholder="" name="txtFecha" value="<?php echo $txtFecha; ?>">
+                                            </div>
+                                        </div>                                     
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="txtMontoMulta">Multa ($)</label>
+                                                <input type="number" step="0.01" class="form-control" placeholder="" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="txtFechaPago">Fecha de Pago</label>
+                                                <input type="date" class="form-control" placeholder="" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">Observaciones</span>
+                                                </div>
+                                                <textarea class="form-control" aria-label="With textarea" name="txtObservacion"> <?php echo $txtObservacion; ?> </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                     
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> 
+                                    <?php if ($txtUsuarioTipo=="A") {?>
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar">
+                                    <?php } ?> 
                                     <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"> 
                                     <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-window-close"></i> &nbsp; Cancelar</button>
@@ -136,7 +154,7 @@ include "../controladores/enlaces.php";
                 <form action="bitacora-r.php" method="post">
                     <div class="col-md-12">
                         <input type="hidden" name="txtCiclo" value="<?php $txtCiclo; ?>">
-                        <input type="hidden" name="txtEmpresa" value="<?php $txtEmpresa; ?>">
+                        <input type="hidden" name="txtNro_empresa" value="<?php $txtNro_empresa; ?>">
                         <input type="hidden" name="txtFecha" value="<?php $txtFecha; ?>">
                         <input type="hidden" name="txtMontoMulta" value="<?php $txtMontoMulta; ?>">
                         <input type="hidden" name="txtFechaPago" value="<?php $txtFechaPago; ?>">
@@ -148,6 +166,7 @@ include "../controladores/enlaces.php";
             <?php } ?>
 
         </div>
+        <!-- /. Fin de Contenedor Principal -->
     </div>
     <!-- /.content-wrapper -->
     

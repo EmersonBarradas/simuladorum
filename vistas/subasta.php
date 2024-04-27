@@ -88,7 +88,7 @@ include "../controladores/enlaces.php";
             <!-- Tabla Leche Cruda -->
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title"><b>Listado de Leche Cruda (LC)</b></h3>
 
@@ -166,7 +166,7 @@ include "../controladores/enlaces.php";
             <!-- Tabla Aditivo -->
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title"><b>Listado Aditivo (AD)</b></h3>
 

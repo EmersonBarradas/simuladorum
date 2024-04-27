@@ -75,7 +75,7 @@
                 <a href="../vistas/amp-cto.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    Almacén Costo [AMP-CTO]
+                    Costos [AMP]
                 </p>
                 </a>
             </li>
@@ -96,10 +96,34 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../vistas/almacenpt.php" class="nav-link">
+                <a href="../vistas/apt.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    Almacén PT
+                    Almacén PT [APT]
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/apt-cto.php" class="nav-link">
+                <i class="nav-icon fas fa-store-alt"></i>
+                <p>
+                    Costos Almacén [APT]
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/apt-despacho-tienda.php" class="nav-link">
+                <i class="nav-icon fas fa-store-alt"></i>
+                <p>
+                    APT-Despacho Tiendas
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/despacho.php" class="nav-link">
+                <i class="nav-icon fas fa-store"></i>
+                <p>
+                    Despacho
                 </p>
                 </a>
             </li>
@@ -107,7 +131,7 @@
                 <a href="../vistas/tiendas.php" class="nav-link">
                 <i class="nav-icon fas fa-store"></i>
                 <p>
-                    Distribución / Tiendas
+                    Tiendas
                 </p>
                 </a>
             </li>
@@ -115,15 +139,7 @@
                 <a href="../vistas/ventas.php" class="nav-link">
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>
-                    Ventas
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="../vistas/administracion.php"class="nav-link">
-                <i class="nav-icon fas fa-calculator"></i>
-                <p>
-                    Administración
+                    Reporte de Ventas
                 </p>
                 </a>
             </li>  
@@ -134,7 +150,24 @@
                     Publicidad
                 </p>
                 </a>
-            </li>  
+            </li>
+            
+            <li class="nav-item">
+                <a href="../vistas/pcm-cf.php"class="nav-link">
+                <i class="nav-icon fas fa-calculator"></i>
+                <p>
+                    Cto. Fabricación [PCM-CF]
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../vistas/pcm-cp.php"class="nav-link">
+                <i class="nav-icon fas fa-calculator"></i>
+                <p>
+                    Cto. Producción [PCM.CP]
+                </p>
+                </a>
+            </li>
             
             <li class="nav-header">CONFIGURACIÓN</li>
             <?php 
@@ -178,6 +211,17 @@
                 <?php
                };
             ?>
+
+                <li class="nav-item">
+                    <a href="../vistas/simulacion-final.php" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Finalizar Simulación
+                        <span class="badge badge-info right"></span>
+                    </p>
+                    </a>
+                </li>
+
             <!--
             <li class="nav-item">
                 <a href="../vistas/simulacion.php" class="nav-link">

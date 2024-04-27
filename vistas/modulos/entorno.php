@@ -15,6 +15,17 @@
     $mensaje_entorno=""; // mensaje cuando entorno está vacío
     $entorno="SI"; 
 
+    
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+// ------------------------------------------------------------------------------------
+
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
         $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
@@ -23,7 +34,17 @@
 
         $cant_entorno=$sentencia->rowCount();
         // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-        print_r($cant_entorno);
+        //print_r($cant_entorno);
+
+        if ($cant_entorno<=0){
+            $entorno="NO";
+            $mensaje_entorno="NO HAY EMPRESAS ACTIVAS PARA LA SIMULACIÓN";
+        }else{
+            foreach ($listado_entorno as $empresa){
+                $txtNombre=$empresa['nombre'];
+                //print_r($txtNombre);
+            }
+        }
 
     }else{
         $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
@@ -41,7 +62,7 @@
         }else{
             foreach ($listado_entorno as $empresa){
                 $txtNombre=$empresa['nombre'];
-                print_r($txtNombre);
+                // print_r($txtNombre);
             }
         }
         // echo "<script> alert('El usuario es PARTICIPANTE...'); </script>";
@@ -60,12 +81,11 @@
   //print_r($txtFecha_reg);
 
   
-  //Recepción de Post
+//Recepción de Post  --------------------------------------------------------------------------------------
   if(isset($_POST["btn_accion"])){
 
     $accion=($_POST["btn_accion"]);
     
-
     //Variables de Datos
     $txtNro=0;
     $txtId="";
@@ -121,13 +141,13 @@
       case "Cancelar";
           // echo "<script> alert('Quieres cancelar Operación...'); </script>";
           $procesar="ok";
-          header('Location:entorno.php');
+          header('Location:inicio.php');
       break;
 
       case "Aceptar";
           // echo "<script> alert('Quieres Aceptar Operación...'); </script>";
           $procesar="ok";
-          header('Location:entorno.php');
+          header('Location:inicio.php');
       break;
 
       case "Actualizar";
@@ -182,6 +202,8 @@
       break;
     }
   }
+// . Fin recepción de Post  --------------------------------------------------------------------------------------
+
 
 
 ?>

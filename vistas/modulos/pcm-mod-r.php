@@ -86,6 +86,11 @@
     $txtEmoji1=($_POST["txtEmoji1"]);
     $txtEmoji2=($_POST["txtEmoji2"]);
 
+    $txtEstatus="A";
+    $txtFecha_reg=date("Y/m/d");
+    $txtUsuario_reg=$txtUsuario;
+    $txtEstatus_reg="A";
+
     // -----------------------------------------------------------------
 
     switch($accion){
@@ -104,7 +109,7 @@
             $txtMonto_total_jornada=(40*$txtMonto_pago_hora)+(($txtCant_total_horas_trab-40)*$txtMonto_pago_adicional);
           }
 
-          //Calcular el % trabajado
+        //Calcular el % trabajado
           $txtCant_porcentaje_trab=($txtCant_total_horas_trab*100)/40;
 
           if ($txtCant_porcentaje_trab>124) {
@@ -134,6 +139,7 @@
               }
             }  
           }
+
           
           if ($txtCant_total_horas_trab>20) {
             $txtEmoji2=":()";
@@ -236,7 +242,7 @@
       case "Aceptar";
           // echo "<script> alert('Quieres Aceptar Operación...'); </script>";
           $procesar="ok";
-          header('Location:pcm-mod-operador.php');
+          header('Location:pcm-mod.php');
       break;
 
       case "Actualizar";

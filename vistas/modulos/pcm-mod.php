@@ -14,6 +14,7 @@
   $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
   $mensaje_usuario=""; // Vacío en inicalización
   $calcular="NO";
+  $btnOperador="SI";
 
 // Selección de Empresa / Entorno y operador
   if ($txtUsuarioTipo=="A") {
@@ -30,31 +31,49 @@
     $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
     $sentencia->execute();
     $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    $cant_empresa=$sentencia->rowCount(); 
-
-    foreach($listado_empresa as $empresa){
+    $cant_empresa=$sentencia->rowCount();
+    
+    if($cant_empresa>=1){
+      foreach($listado_empresa as $empresa){
         $txtNro_empresa=$empresa['nro'];
         $txtNombre_empresa=$empresa['nombre'];
+      }
+
+      // Selección Operador de empresa del usuario -------------------------------------------------------------------------
+      $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_operador` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+      $sentencia->execute();
+      $listado_operador=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_listado_operador=$sentencia->rowCount();
+
+      if($cant_listado_operador>=1){
+
+        foreach($listado_operador as $operador){
+          $txtNro_operador=$operador['nro'];
+          $txtNombre_operador=$operador['nombre'];
+        }
+
+        // Selección de movimientos por usuario y empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa  ORDER BY ciclo ");
+        $sentencia->execute();
+        $listado_pcm_mod=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // print_r($txtNombre_empresa);
+        // print_r("</br>");
+        // print_r($txtNro_empresa);
+        // print_r("</br>");
+
+      }else{
+        $procesar="NO"; //Muestra Vista normal
+        $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+        $mensaje_usuario="No Hay Operador registrado para la empresa"; // Vacío en inicalización
+        $btnOperador="SI";
+      }
+
+    }else{
+      $procesar="NO"; //Muestra Vista normal
+      $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+      $mensaje_usuario="No Hay empresa registrada"; // Vacío en inicalización
     }
-
-    // Selección Operador de empresa del usuario -------------------------------------------------------------------------
-    $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_operador` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
-    $sentencia->execute();
-    $listado_operador=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    foreach($listado_operador as $operador){
-      $txtNro_operador=$operador['nro'];
-      $txtNombre_operador=$operador['nombre'];
-    }
-
-    // Selección de movimientos por usuario y empresa
-    $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa  ORDER BY ciclo ");
-    $sentencia->execute();
-    $listado_pcm_mod=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-    // print_r($txtNombre_empresa);
-    // print_r("</br>");
-    // print_r($txtNro_empresa);
-    // print_r("</br>");
   }
 //----------------------------------------------------------------------------------------------
 

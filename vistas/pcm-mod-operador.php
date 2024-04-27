@@ -128,7 +128,7 @@ include "../controladores/enlaces.php";
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="txtCant_total_horas_trab">Total Horas Trabajadas</label>
-                                    <input type="number" class="form-control" name="" placeholder="txtCant_total_horas_trab" value="<?php echo $txtCant_total_horas_trab; ?>" readonly>
+                                    <input type="number" class="form-control" name="txtCant_total_horas_trab    " placeholder="" value="<?php echo $txtCant_total_horas_trab; ?>" readonly>
                                 </div>
                             </div>
                         </div>
@@ -217,9 +217,15 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <form action="pcm-mod-operador-r.php" method="post">
                                     <div class="row justify-content-center">
-                                        <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                        </div>
+                                        <?php if($btnOperador="SI"){ ?>
+                                            <div class="col-md-2">    
+                                                <a href="pcm-mod-operador-r.php" type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
+                                            </div>
+                                        <?php }else { ?>
+                                            <div class="col-md-2">
+                                                <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </form>
                             </div>

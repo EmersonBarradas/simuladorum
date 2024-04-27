@@ -55,83 +55,95 @@ include "../controladores/enlaces.php";
                     <?php } ?>
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Registro Bitácora</h3>
+                                <h3 class="card-title">Gestión Bitácora</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form action="bitacora-c.php" method="post">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="txtNro">Número único de identificación</label>
-                                        <input type="number" class="form-control" placeholder="" value="<?php echo $txtNro; ?>" name="txtNro" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtCiclo">Ciclo</label>
-                                        <?php if($accion=="E"){ ?>
-                                            <select class="form-control" name="txtCiclo">
-                                                <option value="1" <?php if($txtCiclo=="1"){ echo "Selected"; } ?>>1</option>
-                                                <option value="2" <?php if($txtCiclo=="2"){ echo "Selected"; } ?>>2</option>
-                                                <option value="3" <?php if($txtCiclo=="3"){ echo "Selected"; } ?> >3</option>
-                                                <option value="4" <?php if($txtCiclo=="4"){ echo "Selected"; } ?>>4</option>
-                                                <option value="5" <?php if($txtCiclo=="5"){ echo "Selected"; } ?>>5</option>
-                                                <option value="6" <?php if($txtCiclo=="6"){ echo "Selected"; } ?>>6</option>
-                                                <option value="7" <?php if($txtCiclo=="7"){ echo "Selected"; } ?>>7</option>
-                                                <option value="8" <?php if($txtCiclo=="8"){ echo "Selected"; } ?>>8</option>
-                                                <option value="9" <?php if($txtCiclo=="9"){ echo "Selected"; } ?>>9</option>
-                                                <option value="10" <?php if($txtCiclo=="10"){ echo "Selected"; } ?>>10</option>
-                                                <option value="11" <?php if($txtCiclo=="11"){ echo "Selected"; } ?>>11</option>
-                                                <option value="12" <?php if($txtCiclo=="12"){ echo "Selected"; } ?>>12</option>
-                                            </select>
-                                        <?php }else{ ?>
-                                            <input type="text" class="form-control" name="txtCiclo" value="<?php echo $txtCiclo; ?>">
-                                        <?php } ?>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label for="txtIdEmpresa">Empresa</label>
-                                        <?php if($accion=="E"){ ?>
-                                            <select class="form-control" name="txtEmpresa">
-                                            <?php foreach ($listaempresa as $empresa){ ?>
-                                                <option value="<?php echo $empresa['nro']; ?>" <?php if($txtEmpresa==$empresa['nro']){ echo "Selected"; } ?>><?php echo $empresa['nombre']; ?></option>
-                                            <?php } ?>
-                                            </select>
-                                        <?php }else{ ?>
-                                            <input type="text" class="form-control" name="txtEmpresa" value="<?php echo $txtEmpresa; ?>">
-                                        <?php } ?>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label for="txtFecha">Fecha</label>
-                                        <?php if($accion=="E"){ ?>
-                                            <input type="date" class="form-control" placeholder="" name="txtFecha" value="<?php echo $txtFecha; ?>">
-                                        <?php }else{ ?>
-                                            <input type="text" class="form-control" name="txtFecha" value="<?php echo $txtFecha; ?>">
-                                        <?php } ?>
-                                    </div>                              
-                                    <div class="form-group">
-                                        <label for="txtMontoMulta">Multa ($)</label>
-                                        <?php if($accion=="E"){ ?>
-                                            <input type="number" step="0.01" class="form-control" placeholder="" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
-                                        <?php }else{ ?>
-                                            <input type="text" class="form-control" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
-                                        <?php } ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtFechaPago">Fecha Pago</label>
-                                        <?php if($accion=="E"){ ?>
-                                            <input type="date" class="form-control" placeholder="" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
-                                        <?php }else{ ?>
-                                            <input type="text" class="form-control" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
-                                        <?php } ?>
-                                    </div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Observaciones</span>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label for="txtNro">Nro ID</label>
+                                                <input type="number" class="form-control" placeholder="" value="<?php echo $txtNro; ?>" name="txtNro" readonly>
+                                            </div>
                                         </div>
-                                        <textarea class="form-control" aria-label="With textarea" name="txtObservacion"> <?php echo $txtObservacion; ?> </textarea>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                    <label for="txtCiclo">Ciclo</label>
+                                                    <?php if($accion=="E"){ ?>
+                                                        <select class="form-control" name="txtCiclo">
+                                                            <option value="1" <?php if($txtCiclo=="1"){ echo "Selected"; } ?>>1</option>
+                                                            <option value="2" <?php if($txtCiclo=="2"){ echo "Selected"; } ?>>2</option>
+                                                            <option value="3" <?php if($txtCiclo=="3"){ echo "Selected"; } ?> >3</option>
+                                                            <option value="4" <?php if($txtCiclo=="4"){ echo "Selected"; } ?>>4</option>
+                                                            <option value="5" <?php if($txtCiclo=="5"){ echo "Selected"; } ?>>5</option>
+                                                            <option value="6" <?php if($txtCiclo=="6"){ echo "Selected"; } ?>>6</option>
+                                                            <option value="7" <?php if($txtCiclo=="7"){ echo "Selected"; } ?>>7</option>
+                                                            <option value="8" <?php if($txtCiclo=="8"){ echo "Selected"; } ?>>8</option>
+                                                            <option value="9" <?php if($txtCiclo=="9"){ echo "Selected"; } ?>>9</option>
+                                                            <option value="10" <?php if($txtCiclo=="10"){ echo "Selected"; } ?>>10</option>
+                                                            <option value="11" <?php if($txtCiclo=="11"){ echo "Selected"; } ?>>11</option>
+                                                            <option value="12" <?php if($txtCiclo=="12"){ echo "Selected"; } ?>>12</option>
+                                                        </select>
+                                                    <?php }else{ ?>
+                                                        <input type="text" class="form-control" name="txtCiclo" value="<?php echo $txtCiclo; ?>">
+                                                    <?php } ?>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                            <label for="txtNro_empresa">Empresa</label>
+                                                <select class="form-control" name="txtNro_empresa">
+                                                <?php foreach ($listado_empresa as $empresa){ ?>
+                                                    <option value="<?php echo $empresa['nro']; ?>" <?php if($txtNro_empresa==$empresa['nro']){ echo "Selected"; } ?>><?php echo $empresa['nombre']; ?></option>
+                                                <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="txtFecha">Fecha</label>
+                                                <?php if($accion=="E"){ ?>
+                                                    <input type="date" class="form-control" placeholder="" name="txtFecha" value="<?php echo $txtFecha; ?>">
+                                                <?php }else{ ?>
+                                                    <input type="text" class="form-control" name="txtFecha" value="<?php echo $txtFecha; ?>">
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                            <label for="txtMontoMulta">Multa ($)</label>
+                                            <?php if($accion=="E"){ ?>
+                                                <input type="number" step="0.01" class="form-control" placeholder="" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
+                                            <?php }else{ ?>
+                                                <input type="text" class="form-control" name="txtMontoMulta" value="<?php echo $txtMontoMulta; ?>">
+                                            <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                            <label for="txtFechaPago">Fecha Pago</label>
+                                            <?php if($accion=="E"){ ?>
+                                                <input type="date" class="form-control" placeholder="" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
+                                            <?php }else{ ?>
+                                                <input type="text" class="form-control" name="txtFechaPago" value="<?php echo $txtFechaPago; ?>">
+                                            <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Observaciones</span>
+                                                </div>
+                                                <textarea class="form-control" aria-label="With textarea" name="txtObservacion"> <?php echo $txtObservacion; ?> </textarea>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input type="hidden" name="txtIdEmpresa" value="<?php $txtIdEmpresa; ?>">
+                                                                        
                                     <input type="hidden" name="txtEstatus" value="<?php $txtEstatus; ?>">
                                     <input type="hidden" name="txtFecha_reg" value="<?php $txtFecha_reg; ?>">
                                     <input type="hidden" name="txtUsuario_reg" value="<?php $txtUsuario_reg; ?>">
@@ -139,13 +151,19 @@ include "../controladores/enlaces.php";
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <?php if($accion=="E"){ ?>
-                                        <input type="submit" class="btn btn-success btn-block" name="btn_accion" value="Actualizar">
-                                    <?php } ?>
-                                    <?php if($accion=="X"){ ?>    
-                                        <input type="submit" class="btn btn-danger btn-block" name="btn_accion" value="Eliminar">
-                                    <?php } ?>
-                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Cancelar">
+                                    <div class="col-md-12">
+                                        <div class="row justify-content-left">
+                                            <div class="col-md-4">
+                                                <?php if($accion=="E"){ ?>
+                                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Actualizar">
+                                                <?php } ?>
+                                                <?php if($accion=="X"){ ?>    
+                                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Eliminar">
+                                                <?php } ?>
+                                                <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -167,11 +185,10 @@ include "../controladores/enlaces.php";
                 <form action="bitacora-c.php" method="post">
                     <div class="col-md-12">
                         <input type="hidden" name="txtCiclo" value="<?php $txtCiclo; ?>">
-                        <input type="hidden" name="txtEmpresa" value="<?php $txtEmpresa; ?>">
+                        <input type="hidden" name="txtNro_empresa" value="<?php $txtNro_empresa; ?>">
                         <input type="hidden" name="txtFecha" value="<?php $txtFecha; ?>">
                         <input type="hidden" name="txtMontoMulta" value="<?php $txtMontoMulta; ?>">
                         <input type="hidden" name="txtFechaPago" value="<?php $txtFechaPago; ?>">
-                        <input type="hidden" name="txtIdEmpresa" value="<?php $txtIdEmpresa; ?>">
                         <input type="hidden" name="txtEstatus" value="<?php $txtEstatus; ?>">
                         <input type="hidden" name="txtFecha_reg" value="<?php $txtFecha_reg; ?>">
                         <input type="hidden" name="txtUsuario_reg" value="<?php $txtUsuario_reg; ?>">

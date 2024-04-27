@@ -20,10 +20,11 @@
 
     if ($accion=="Actualizar") {
         $txtNro=($_POST["txtNro"]);
+        $txtNro_empresa_activa=($_POST["txtEmpresa"]);
     }else{
         $txtNro=($_POST["txtEmpresa"]);
     }
-    
+
     switch($accion){
 
         case "Guardar";
@@ -69,6 +70,23 @@
                     // ------------------------------------------------------- |
         
                 }
+
+                // Sumar Multas ----------------------------------------------------------------------------
+                
+                $sentencia=$pdo->prepare("SELECT sum(monto_multa) FROM `bitacora` WHERE estatus='A' AND nro_empresa=$txtNro");
+                $sentencia->execute();
+                $suma_multas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+                print_r($suma_multas);
+
+                $cant_registros=$sentencia->rowCount();
+
+                if ($cant_registros>=1){
+                    foreach($suma_multas as $multas){
+                        $txtMonto_Multas=$multas['sum(monto_multa)'];
+                    }
+                }
+                
+                // ----------------------------------------------------------------------------------------
 
                 $sentenciaSQL=$pdo->prepare("SELECT `nombre` FROM tblusuarios WHERE nro=:nro");
                 $sentenciaSQL->bindParam("nro",$txtUsuarioe,PDO::PARAM_STR);
@@ -135,7 +153,21 @@
                     $sentenciaSQL->bindParam("nro",$txtUsuarioe,PDO::PARAM_STR);
                     $sentenciaSQL->execute();
                     $txtNombreUsuario=$sentenciaSQL->fetch(PDO::FETCH_ASSOC);
-                    print_r($txtNombreUsuario);
+                    //print_r($txtNombreUsuario);
+
+                    // Sumar Multas ----------------------------------------------------------------------------
+                    $sentencia=$pdo->prepare("SELECT sum(monto_multa) FROM `bitacora` WHERE estatus='A' AND nro_empresa=$txtNro");
+                    $sentencia->execute();
+                    $suma_multas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+                    //print_r($suma_multas);
+
+                    $cant_registros=$sentencia->rowCount();
+
+                    if ($cant_registros>=1){
+                        foreach($suma_multas as $multas){
+                            $txtMonto_Multas=$multas['sum(monto_multa)'];
+                        }
+                    }
             
                 }
                 $procesar="ok";
@@ -181,37 +213,59 @@
             //$sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
             //$sentencia->execute();
             
-            $txtEstatus="F";
-            $txtEstatus_reg="E";
+            // Verificar si la empresa tiene movimientos ----------------------------------------------------
+            $sentenciaSQL=$pdo->prepare("SELECT * FROM empresa WHERE estatus='A' AND nro=:nro");
+            $sentenciaSQL->bindParam('nro',$txtNro,PDO::PARAM_STR);
+            $sentenciaSQL->execute();
+            $MovimientosEmpresa=$sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+            //print_r($txtNombreUsuario);
 
-            // Elimina empresa
-            $sentencia=$pdo->prepare("UPDATE empresa SET 
-            estatus=:estatus,
-            estatus_reg=:estatus_reg WHERE
-            nro=:nro");
-                    
-            $sentencia->bindParam(':nro',$txtNro,PDO::PARAM_STR);
-            $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
-            $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
-            $sentencia->execute();
-            //-----------------------------------------------------------------------
+            $cant_MovimientosEmpresa=$sentenciaSQL->rowCount();
 
-            // Elimina AMP
-            $sentencia=$pdo->prepare("UPDATE amp SET 
-            estatus=:estatus,
-            estatus_reg=:estatus_reg WHERE
-            nro_empresa=:nro");
-                    
-            $sentencia->bindParam(':nro',$txtNro,PDO::PARAM_STR);
-            $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
-            $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
-            $sentencia->execute();
+            if ($cant_MovimientosEmpresa>=1){
+                echo "<script> alert('Empresa tiene movimientos...'); </script>";
+                $procesar="listo";
+                $error_accion=2;
+                $mensaje_usuario="NO SE PUEDE ELIMINAR. Empresa inició el proceso...";
+            }else{
+                echo "<script> alert('Empresa NO tiene movimientos...'); </script>";
+                $txtEstatus="F";
+                $txtEstatus_reg="E";
+
+                // Elimina empresa
+                $sentencia=$pdo->prepare("UPDATE empresa SET 
+                estatus=:estatus,
+                estatus_reg=:estatus_reg WHERE
+                nro=:nro");
+                        
+                $sentencia->bindParam(':nro',$txtNro,PDO::PARAM_STR);
+                $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
+                $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
+                $sentencia->execute();
+                //-----------------------------------------------------------------------
+
+                // Elimina AMP
+                $sentencia=$pdo->prepare("UPDATE amp SET 
+                estatus=:estatus,
+                estatus_reg=:estatus_reg WHERE
+                nro_empresa=:nro");
+                        
+                $sentencia->bindParam(':nro',$txtNro,PDO::PARAM_STR);
+                $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
+                $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
+                $sentencia->execute();
+
+                $procesar="listo";
+                $error_accion=2;
+                $mensaje_usuario="Registro Eliminado Satisfactoriamente...";
+            }
+            
+            // ----------------------------------------------------------------------------------------------
+            
 
 
 
-            $procesar="listo";
-            $error_accion=2;
-            $mensaje_usuario="Registro Eliminado Satisfactoriamente...";
+            
         break;
     }
   }

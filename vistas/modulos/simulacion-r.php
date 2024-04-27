@@ -1,10 +1,20 @@
 <?php
   include('../controladores/global/sesiones.php');
   include('../controladores/global/conexion.php');
+  include('../controladores/global/constantes.php');
 
-  $usuariosesion=$_SESSION['usuario'];
-  $procesar="ok";
-  $mensaje_usuario="";
+
+    //Datos del Usuario
+    $usuariosesion=($_SESSION['usuario']);
+    $txtUsuario=$usuariosesion['nro'];
+    $txtIdUsuario=$usuariosesion['id'];
+    $txtUsuarioTipo=$usuariosesion['tipo'];
+  
+    // Variables de Acción
+    $procesar="ok"; //Muestra Vista normal
+    $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+    $mensaje_usuario=""; // Vacío en inicalización
+    $calcular="NO";
 
   if(isset($_POST["btn_accion"])){
 
@@ -37,6 +47,7 @@
 
           $procesar="Listo";
           $mensaje_usuario="Simulación Creada Satisfactoriamente";
+          $error_accion=1;
 
       break;
 
@@ -52,49 +63,6 @@
           header('Location:simulacion.php');
       break;
 
-      case "Actualizar";
-          // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
-          // if ($password1==$password2){
-          // 
-          // $sentencia=$pdo->prepare("UPDATE Tblusuarios SET 
-          // clave=:clave,
-          // nombre=:nombre WHERE
-          // nro=:nro");
-              
-          // $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-          // $sentencia->bindParam(':nombre',$nombre,PDO::PARAM_STR);
-          // $sentencia->bindParam(':clave',$password1,PDO::PARAM_STR);
-          // $sentencia->execute();
-
-          // echo "<script> alert('Los Password son iguales...'); </script>";
-          // $accion="C";
-          // $mensaje_usuario="Usuario Actualizado Satisfactoriamente";
-          // $procesar="listo";
-          // }else{
-          //     // echo "<script> alert('Los Password no son iguales...'); </script>";
-          //     $accion="E";
-          //     $mensaje_usuario="No se pudo actualizar, claves no coinciden";
-          //     $error_accion=2;
-          //    $procesar="ok";
-          //}
-
-      break;
-
-      case "Eliminar";
-          // echo "<script> alert('Quieres Eliminar Registro...'); </script>";
-          // echo "<script> alert('Usuario Eliminado Satisfactoriamente...'); </script>";
-          // header('Location:usuarios.php');
-
-          // $sentencia=$pdo->prepare("DELETE FROM Tblusuarios WHERE nro=:nro");
-          // $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-          // $sentencia->execute();
-      break;
-      
-      case "Finalizar";
-          echo "<script> alert('Quieres Finalizar Simulación...'); </script>";
-          // echo "<script> alert('Usuario Eliminado Satisfactoriamente...'); </script>";
-          // header('Location:usuarios.php');
-      break;
     }
   }
 ?>

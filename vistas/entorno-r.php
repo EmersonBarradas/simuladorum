@@ -56,27 +56,32 @@ include "../controladores/enlaces.php";
                             A continuación te explicaremos como es la estructura y organización de la empresa. Pero antes debemos registrar el nombre comercial de la Empresa.
                         </p>
                     </div>
-                    <div class="col-md-5" style="padding-top:20px;">
+                    <div class="col-md-8" style="padding-top:20px;">
                         <form action="entorno-r.php" method="post">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Datos del Entorno</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="txtId">ID de la empresa (*)</label>
-                                        <input type="text"  class="form-control" name="txtId" placeholder="ID de la empresa" required>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txtId">ID de la empresa (*)</label>
+                                            <input type="text"  class="form-control" name="txtId" placeholder="ID de la empresa" required>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="txtNombre">Nombre de la Empresa (*)</label>
-                                        <input type="text" class="form-control" name="txtNombre" placeholder="Nombre de la empresa" required>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txtNombre">Nombre de la Empresa (*)</label>
+                                            <input type="text" class="form-control" name="txtNombre" placeholder="Nombre de la empresa" required>
+                                        </div>
                                     </div>
+                                </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-md-3"><input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"></div>
-                                <div class="col-md-3"><input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"></div>
+                                <div class="col-md-4"><input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"></div>
                             </div>
                         </form>
                     </div>

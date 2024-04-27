@@ -71,24 +71,24 @@ include "../controladores/enlaces.php";
                                 <input type="text" class="form-control" name="txtTotal_inversion" value="<?php echo $txtTotal_inversion; ?>">
                             </div>
                         </div>
-                    <!-- /. Fin DIV Empresa-->
+                        <!-- /. Fin DIV Empresa-->
 
-                    <!-- DIV Vacío-->
-                         <div class="col-md-1">
-                            <div class="form-group">
-                                <!-- <form action="pcm-mod.php" method="post" > -->
-                                    <label for="btn_accion">.</label>
-                                    <input type="submit" class="btn btn-primary form-control" name="btn_accion" value="Calcular">
-                                <!-- </form> -->
+                        <!-- DIV Vacío-->
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <!-- <form action="pcm-mod.php" method="post" > -->
+                                        <label for="btn_accion">.</label>
+                                        <input type="submit" class="btn btn-primary form-control" name="btn_accion" value="Calcular">
+                                    <!-- </form> -->
+                                </div>
                             </div>
-                        </div>
-                    <!-- /. Fin DIV Operador-->
-                    <!-- DIV Vacío-->
-                         <div class="col-md-3">
+                        <!-- /. Fin DIV Operador-->
+                        <!-- DIV Vacío-->
+                            <div class="col-md-3">
 
+                            </div>
+                        <!-- /. Fin DIV Operador-->
                         </div>
-                    <!-- /. Fin DIV Operador-->
-                    </div>
                     </form>
 
                     <!-- Tabla de movimientos -->
@@ -124,7 +124,7 @@ include "../controladores/enlaces.php";
                                                     <td> Queso Duro Blanco</td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_dub_arm">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -135,7 +135,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_dub_sfi">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -146,7 +146,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_dub_ciu">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -157,7 +157,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_dub_lsa">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -171,7 +171,7 @@ include "../controladores/enlaces.php";
                                                     <td> Queso Mozzarella</td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_moz_arm">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -182,7 +182,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_moz_sfi">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -193,7 +193,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_moz_ciu">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -204,7 +204,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_moz_lsa">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -218,7 +218,7 @@ include "../controladores/enlaces.php";
                                                     <td> Queso Gouda </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_gou_arm">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -229,7 +229,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_gou_sfi">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -240,7 +240,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_gou_ciu">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -251,7 +251,7 @@ include "../controladores/enlaces.php";
                                                     </td>
                                                     <td> 
                                                         <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
+                                                            <select class="form-control" name="txtpub_gou_lsa">
                                                                     <option value="1"> Ninguna </option>
                                                                     <option value="2"> Videos Promocionales </option>
                                                                     <option value="3"> Vallas en avenidas y carreteras </option>
@@ -261,6 +261,54 @@ include "../controladores/enlaces.php";
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td> Queso Dietético </td>
+                                                    <td> 
+                                                        <div class="">
+                                                            <select class="form-control" name="txtpub_die_arm">
+                                                                    <option value="1"> Ninguna </option>
+                                                                    <option value="2"> Videos Promocionales </option>
+                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
+                                                                    <option value="4"> Flyers </option>
+                                                                    <option value="5"> Otros </option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td> 
+                                                        <div class="">
+                                                            <select class="form-control" name="txtpub_die_sfi">
+                                                                    <option value="1"> Ninguna </option>
+                                                                    <option value="2"> Videos Promocionales </option>
+                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
+                                                                    <option value="4"> Flyers </option>
+                                                                    <option value="5"> Otros </option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td> 
+                                                        <div class="">
+                                                            <select class="form-control" name="txtpub_die_ciu">
+                                                                    <option value="1"> Ninguna </option>
+                                                                    <option value="2"> Videos Promocionales </option>
+                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
+                                                                    <option value="4"> Flyers </option>
+                                                                    <option value="5"> Otros </option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td> 
+                                                        <div class="">
+                                                            <select class="form-control" name="txtpub_die_lsa">
+                                                                    <option value="1"> Ninguna </option>
+                                                                    <option value="2"> Videos Promocionales </option>
+                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
+                                                                    <option value="4"> Flyers </option>
+                                                                    <option value="5"> Otros </option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
                                                 <tr>
                                                     <td> Queso Dietético </td>
                                                     <td> 

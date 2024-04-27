@@ -15,6 +15,31 @@
   $mensaje_usuario=""; // Vacío en inicalización
   $calcular="NO";
 
+// Variables de datos ---------------------------------------
+  $txtpub_dub_arm=0.00;
+  $txtpub_dub_ciu=0.00;
+  $txtpub_dub_sfi=0.00;
+  $txtpub_dub_lsa=0.00;
+  
+  $txtpub_moz_arm=0.00;
+  $txtpub_moz_ciu=0.00;
+  $txtpub_moz_sfi=0.00;
+  $txtpub_moz_lsa=0.00;
+
+  $txtpub_gou_arm=0.00;
+  $txtpub_gou_ciu=0.00;
+  $txtpub_gou_sfi=0.00;
+  $txtpub_gou_lsa=0.00;
+  
+  $txtpub_die_arm=0.00;
+  $txtpub_die_ciu=0.00;
+  $txtpub_die_sfi=0.00;
+  $txtpub_die_lsa=0.00;
+
+// ----------------------------------------------------------
+
+ 
+
 // inicialización de variables
   $txtTotal_inversion=0.00;
   
@@ -35,29 +60,28 @@
     $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
     $cant_empresa=$sentencia->rowCount(); 
 
-    foreach($listado_empresa as $empresa){
-        $txtNro_empresa=$empresa['nro'];
-        $txtNombre_empresa=$empresa['nombre'];
+    if ($cant_empresa>=1){
+      foreach($listado_empresa as $empresa){
+          $txtNro_empresa=$empresa['nro'];
+          $txtNombre_empresa=$empresa['nombre'];
+      }
+      // Selecciono publicidad de la empresa  ---------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `publicidad` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_publicidad=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_publicidad=$sentencia->rowCount();
+        
+        if($cant_publicidad>=1){
+          $txtNombre_publicidad=" encontró publicidad";
+        }else{
+          $txtNombre_publicidad="No se encontró publicidad";
+        }
+      // -----------------------------------------------------------------------------------------------
+    }else{
+      $procesar="listo"; //Muestra Vista normal
+      $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+      $mensaje_usuario="No se encontró empresa asociada"; // Vacío en inicalización
     }
-
-    // Selección Operador de empresa del usuario -------------------------------------------------------------------------
-    $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_operador` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
-    $sentencia->execute();
-    $listado_operador=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    foreach($listado_operador as $operador){
-      $txtNro_operador=$operador['nro'];
-      $txtNombre_operador=$operador['nombre'];
-    }
-
-    // Selección de movimientos por usuario y empresa
-    $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa  ORDER BY ciclo ");
-    $sentencia->execute();
-    $listado_pcm_mod=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-    // print_r($txtNombre_empresa);
-    // print_r("</br>");
-    // print_r($txtNro_empresa);
-    // print_r("</br>");
   }
 //----------------------------------------------------------------------------------------------
 
@@ -68,19 +92,12 @@ if(isset($_POST["btn_accion"])){
   
 
   // Variables de Datos---------------------------------------------
+  
   $txtNro=0;
-  // $txtId=($_POST["txtId"]);
+
   $txtNro_empresa=($_POST["txtEmpresa"]);
   $txtNro_operador=($_POST["txtOperador"]);
-  // $txtCiclo=($_POST["txtCiclo"]);
-  // $txtFecha=($_POST["txtFecha"]);
-  // $txtCant_total_horas_trab=($_POST["txtCant_total_horas_trab"]);
-  // $txtMonto_pago_hora=($_POST["txtMonto_pago_hora"]);
-  // $txtMonto_pago_adicional=($_POST["txtMonto_pago_adicional"]);
-  // $txtMonto_total_jornada=($_POST["txtMonto_total_jornada"]);
-  // $txtCant_porcentaje_trab=($_POST["txtCant_porcentaje_trab"]);
-  // $txtEmoji1=($_POST["txtEmoji1"]);
-  // $txtEmoji2=($_POST["txtEmoji2"]);
+
 
   // -----------------------------------------------------------------
 
@@ -98,72 +115,6 @@ if(isset($_POST["btn_accion"])){
         // echo "<script> alert('Quieres Guardar Operación...'); </script>";
         // header('Location:usuarios.php');
         
-        // Calcula el valor de la hora adicional
-        $txtMonto_pago_adicional=$txtMonto_pago_hora*0.5;
-
-        //Calcula el el monto total de la jornada
-        if ($txtCant_total_horas_trab<=40){
-          $txtMonto_total_jornada=$txtCant_total_horas_trab*$txtMonto_pago_hora;
-        }
-        if ($txtCant_total_horas_trab>40){
-          $txtMonto_total_jornada=(40*$txtMonto_pago_hora)+(($txtCant_total_horas_trab-40)*$txtMonto_pago_adicional);
-        }
-
-        //Calcular el % trabajado
-        $txtCant_porcentaje_trab=($txtCant_total_horas_trab*100)/40;
-
-        if ($txtCant_porcentaje_trab>124) {
-          $txtEmoji1="?";
-        }else {
-          if ($txtCant_porcentaje_trab>122) {
-            $txtEmoji1=":(";
-          }else {
-            if ($txtCant_porcentaje_trab>120) {
-              $txtEmoji1=":()";
-            }else {
-              if ($txtCant_porcentaje_trab>115) {
-                $txtEmoji1=":%";
-              }else{
-                if ($txtCant_porcentaje_trab>110) {
-                  $txtEmoji1=":?";
-                }else {
-                  if ($txtCant_porcentaje_trab>105) {
-                    $txtEmoji1=":?";
-                  }else{
-                    if ($txtCant_porcentaje_trab==100) {
-                      $txtEmoji1=":)";
-                    }
-                  }
-                }
-              }
-            }
-          }  
-        }
-        
-        if ($txtCant_total_horas_trab>20) {
-          $txtEmoji2=":()";
-        }else {
-          if ($txtCant_total_horas_trab>10) {
-            $txtEmoji2=":|";
-          }else {
-            if ($txtCant_total_horas_trab>1) {
-              $txtEmoji2=":(";
-            }else {
-              if ($txtCant_total_horas_trab==0) {
-                $txtEmoji2="Si";
-              }
-            }
-          }
-        }
-
-        // print_r("</br>");
-        // print_r("Empresa: ".$txtEmpresa);
-              
-        // print_r("</br>");
-        // print_r("Usuario: ".$txtUsuario_reg);
-
-        // print_r("</br>");
-        // print_r("Almacén: ".$txtNro_AMP);
 
         $calcular="SI";
               

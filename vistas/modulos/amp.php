@@ -57,8 +57,10 @@
 
     }else {
       $encontrado="NO";
-      $mensaje_usuario="NO HAY MOVIMIENTOS";
       $txtEmpresa="";
+      $procesar="ok"; //Muestra Vista normal
+      $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+      $mensaje_usuario="NO HAY MOVIMIENTOS";
     }
   }
   // --------------------------------------------------------------------------------
