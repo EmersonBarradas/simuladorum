@@ -14,28 +14,33 @@
   $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
   $mensaje_usuario=""; // Vacío en inicalización
   $calcular="NO";
+  $btnGuardar="NO";
 
 // Variables de datos ---------------------------------------
-  $txtpub_dub_arm=0.00;
-  $txtpub_dub_ciu=0.00;
-  $txtpub_dub_sfi=0.00;
-  $txtpub_dub_lsa=0.00;
+  $txtpub_dub_arm=1;
+  $txtpub_dub_ciu=1;
+  $txtpub_dub_sfi=1;
+  $txtpub_dub_lsa=1;
+  $monto_dub=0.00;
   
-  $txtpub_moz_arm=0.00;
-  $txtpub_moz_ciu=0.00;
-  $txtpub_moz_sfi=0.00;
-  $txtpub_moz_lsa=0.00;
-
-  $txtpub_gou_arm=0.00;
-  $txtpub_gou_ciu=0.00;
-  $txtpub_gou_sfi=0.00;
-  $txtpub_gou_lsa=0.00;
+  $txtpub_moz_arm=1;
+  $txtpub_moz_ciu=1;
+  $txtpub_moz_sfi=1;
+  $txtpub_moz_lsa=1;
+  $monto_moz=0.00;
   
-  $txtpub_die_arm=0.00;
-  $txtpub_die_ciu=0.00;
-  $txtpub_die_sfi=0.00;
-  $txtpub_die_lsa=0.00;
-
+  $txtpub_gou_arm=1;
+  $txtpub_gou_ciu=1;
+  $txtpub_gou_sfi=1;
+  $txtpub_gou_lsa=1;
+  $monto_gou=0.00;
+  
+  $txtpub_die_arm=1;
+  $txtpub_die_ciu=1;
+  $txtpub_die_sfi=1;
+  $txtpub_die_lsa=1;
+  $monto_die=0.00;
+  
 // ----------------------------------------------------------
 
  
@@ -72,7 +77,10 @@
         $cant_publicidad=$sentencia->rowCount();
         
         if($cant_publicidad>=1){
-          $txtNombre_publicidad=" encontró publicidad";
+          foreach($listado_publicidad as $publicidad){
+            $Nro_publicidad=$publicidad['nro'];
+          }
+          $txtNombre_publicidad="encontró publicidad";
         }else{
           $txtNombre_publicidad="No se encontró publicidad";
         }
@@ -80,7 +88,7 @@
     }else{
       $procesar="listo"; //Muestra Vista normal
       $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-      $mensaje_usuario="No se encontró empresa asociada"; // Vacío en inicalización
+      $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
     }
   }
 //----------------------------------------------------------------------------------------------
@@ -89,34 +97,412 @@
 if(isset($_POST["btn_accion"])){
 
   $accion=($_POST["btn_accion"]);
+  $txtNro_empresa=($_POST["txtEmpresa"]);
+  $txtTotal_inversion=($_POST["txtTotal_inversion"]);
   
 
   // Variables de Datos---------------------------------------------
-  
-  $txtNro=0;
 
   $txtNro_empresa=($_POST["txtEmpresa"]);
-  $txtNro_operador=($_POST["txtOperador"]);
+
+  $txtpub_dub_arm=($_POST["txtpub_dub_arm"]);
+  $txtpub_dub_ciu=($_POST["txtpub_dub_ciu"]);
+  $txtpub_dub_sfi=($_POST["txtpub_dub_sfi"]);
+  $txtpub_dub_lsa=($_POST["txtpub_dub_lsa"]);
+
+  
+  $txtpub_moz_arm=($_POST["txtpub_moz_arm"]);
+  $txtpub_moz_ciu=($_POST["txtpub_moz_ciu"]);
+  $txtpub_moz_sfi=($_POST["txtpub_moz_sfi"]);
+  $txtpub_moz_lsa=($_POST["txtpub_moz_lsa"]);
+
+  
+  $txtpub_gou_arm=($_POST["txtpub_gou_arm"]);
+  $txtpub_gou_ciu=($_POST["txtpub_gou_ciu"]);
+  $txtpub_gou_sfi=($_POST["txtpub_gou_sfi"]);
+  $txtpub_gou_lsa=($_POST["txtpub_gou_lsa"]);
+
+  
+  $txtpub_die_arm=($_POST["txtpub_die_arm"]);
+  $txtpub_die_ciu=($_POST["txtpub_die_ciu"]);
+  $txtpub_die_sfi=($_POST["txtpub_die_sfi"]);
+  $txtpub_die_lsa=($_POST["txtpub_die_lsa"]);
+ 
 
 
   // -----------------------------------------------------------------
 
   switch($accion){
-    case "Ver";
-        // echo "<script> alert('Quieres Guardar Operación...'); </script>";
-        // header('Location:usuarios.php');
-        
-        // Selección de movimientos por usuario, empresa y operador
-        $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa AND nro_operador=$txtNro_operador ORDER BY ciclo ");
-        $sentencia->execute();
-        $listado_pcm_mod=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    break;
+
     case "Calcular";
         // echo "<script> alert('Quieres Guardar Operación...'); </script>";
         // header('Location:usuarios.php');
         
+        $videos=5000;
+        $vallas=3000;
+        $flyers=2000;
+        $otros=1000;
+        $txtTotal_inversion=0.00;
+
+        // Queso Duro
+        switch($txtpub_dub_arm){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_dub_ciu){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $monto_dub=$monto_dub+$otros;
+          break;
+        }
+
+        switch($txtpub_dub_sfi){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_dub_lsa){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        // Queso Mozarella
+
+        switch($txtpub_moz_arm){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+        
+        switch($txtpub_moz_ciu){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_moz_sfi){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_moz_lsa){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+        
+        // Queso Gouda
+        switch($txtpub_gou_arm){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_gou_ciu){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_gou_sfi){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_gou_lsa){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        // Queso Dietético
+        switch($txtpub_die_arm){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_die_ciu){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_die_sfi){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
+
+        switch($txtpub_die_lsa){
+          case 1;
+            $txtTotal_inversion=$txtTotal_inversion+0;
+          break;
+
+          case 2;
+            $txtTotal_inversion=$txtTotal_inversion+$videos;
+          break;
+
+          case 3;
+            $txtTotal_inversion=$txtTotal_inversion+$vallas;
+          break;
+          
+          case 4;
+            $txtTotal_inversion=$txtTotal_inversion+$flyers;
+          break;
+
+          case 5;
+            $txtTotal_inversion=$txtTotal_inversion+$otros;
+          break;
+        }
 
         $calcular="SI";
+        $btnGuardar="SI";
               
     break;
     case "Guardar";
@@ -189,10 +575,35 @@ if(isset($_POST["btn_accion"])){
         header('Location:pcm-mod-operador.php');
     break;
 
-    case "Aceptar";
-        // echo "<script> alert('Quieres Aceptar Operación...'); </script>";
+    case "Limpiar";
+        //echo "<script> alert('Quieres Limpiar...'); </script>";
+
+        $txtpub_dub_arm=1;
+        $txtpub_dub_ciu=1;
+        $txtpub_dub_sfi=1;
+        $txtpub_dub_lsa=1;
+
+        
+        $txtpub_moz_arm=1;
+        $txtpub_moz_ciu=1;
+        $txtpub_moz_sfi=1;
+        $txtpub_moz_lsa=1;
+
+        
+        $txtpub_gou_arm=1;
+        $txtpub_gou_ciu=1;
+        $txtpub_gou_sfi=1;
+        $txtpub_gou_lsa=1;
+
+        
+        $txtpub_die_arm=1;
+        $txtpub_die_ciu=1;
+        $txtpub_die_sfi=1;
+        $txtpub_die_lsa=1;
+
+        $txtTotal_inversion=0.00;
         $procesar="ok";
-        header('Location:pcm-mod-operador.php');
+        // header('Location:pcm-mod-operador.php');
     break;
 
     case "Actualizar";

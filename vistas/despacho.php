@@ -264,11 +264,14 @@ include "../controladores/enlaces.php";
                                     <div class="col-md-6">
                                         <form action="despacho.php" method="post">
                                             <div class="row justify-content-center">
+                                                <?php if($btnDespacho=="SI") { ?>
+                                                    <div class="col-md-4">
+                                                        <a href="despacho-r.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
+                                                    </div>
+                                                <?php } ?>
+
                                                 <div class="col-md-4">
-                                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a href="despacho-r.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
+                                                    <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
                                             </div>
                                         </form>

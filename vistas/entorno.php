@@ -95,35 +95,49 @@ include "../controladores/enlaces.php";
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
-                                <div class="">
+                                <div class="row">
                                     <!-- <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> -->
                                     <?php if($entorno=="NO") { ?>
-                                        <a href="entorno-r.php" class="btn btn-primary">Nuevo</a>
+                                        <div class="col-md-4">
+                                            <a href="entorno-r.php" class="btn btn-primary">Nuevo Entorno</a>
+                                        </div>
+                                    <?php }else { ?>
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Consultar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Modificar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Eliminar">
+                                        </div>
                                     <?php } ?>
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Consultar">
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Modificar">
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Eliminar">
-                                    <!-- <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"> -->
+                                        <!-- <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"> -->
                                     <!-- <button type="submit" class="btn btn-primary">Crear Entorno</button> -->
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <!-- Estructura de la empresa -->
+                    <?php if ($entorno=="SI") {?>
+                        <div class="row justify-content-around" style="padding: 50px 0 50px 0;">
+                            <div class="col-md-3">
+                                <h3 class="text-center">Mapa</h3>
+                                <img src="img/mapa.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
+                            </div>
+                            <div class="col-md-3">
+                                <h3 class="text-center">Organigrama</h3>
+                                <img src="img/organigrama.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
+                            </div>
+                            <div class="col-md-3">
+                                <h3 class="text-center">Estructura</h3>
+                                <img src="img/lafabrica.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <!-- Estructura de la empresa -->
 
-                    <div class="row justify-content-around" style="padding: 50px 0 50px 0;">
-                        <div class="col-md-3">
-                            <h3 class="text-center">Mapa</h3>
-                            <img src="img/mapa.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
-                        </div>
-                        <div class="col-md-3">
-                            <h3 class="text-center">Organigrama</h3>
-                            <img src="img/organigrama.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
-                        </div>
-                        <div class="col-md-3">
-                            <h3 class="text-center">Estructura</h3>
-                            <img src="img/lafabrica.png" class="img-fluid rounded mx-auto d-block" alt="Logo Universidad">
-                        </div>
-                    </div>
+
                 <?php }else{ ?>
 
                     <?php  if ($mensaje_usuario!=""){ ?>

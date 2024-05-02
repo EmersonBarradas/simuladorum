@@ -51,10 +51,10 @@ include "../controladores/enlaces.php";
                         </div>
                     <?php } ?>
 
-                    <!-- DIV Empresa-->
-                    <form class="col-md-12" action="publicidad.php" method="post" >
-                        <div class="row">
-
+                <!-- Formulario principal-->    
+                <form class="col-md-12" action="publicidad.php" method="post" >
+                    <div class="row">
+                        <!-- DIV Empresa-->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtEmpresa">Empresa</label>
@@ -65,34 +65,26 @@ include "../controladores/enlaces.php";
                                 </select>
                             </div>
                         </div>
+                        <!-- /. Fin DIV Empresa-->
+                        <!-- DIV Total Inversión-->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtTotal_inversion">Total Inversión</label>
                                 <input type="text" class="form-control" name="txtTotal_inversion" value="<?php echo $txtTotal_inversion; ?>">
                             </div>
                         </div>
-                        <!-- /. Fin DIV Empresa-->
+                        <!-- /. Fin DIV Inversión-->
 
                         <!-- DIV Vacío-->
-                            <div class="col-md-1">
-                                <div class="form-group">
-                                    <!-- <form action="pcm-mod.php" method="post" > -->
-                                        <label for="btn_accion">.</label>
-                                        <input type="submit" class="btn btn-primary form-control" name="btn_accion" value="Calcular">
-                                    <!-- </form> -->
-                                </div>
-                            </div>
-                        <!-- /. Fin DIV Operador-->
-                        <!-- DIV Vacío-->
-                            <div class="col-md-3">
+                            <div class="col-md-4">
 
                             </div>
-                        <!-- /. Fin DIV Operador-->
-                        </div>
-                    </form>
+                        <!-- /. Fin Vacío-->
+
+                    
 
                     <!-- Tabla de movimientos -->
-                        <div class="col-12" style="padding: 0px 0px 0px 0px;">
+                        <div class="col-md-12">
                             <div class="card card-primary">
                                 <div class="card-header ">
                                     <h3 class="card-title"><b>Publicidad</b></h3>
@@ -125,44 +117,44 @@ include "../controladores/enlaces.php";
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_dub_arm">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_dub_arm==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_dub_arm==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_dub_arm==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_dub_arm==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_dub_arm==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_dub_sfi">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_dub_sfi==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_dub_sfi==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_dub_sfi==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_dub_sfi==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_dub_sfi==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_dub_ciu">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_dub_ciu==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_dub_ciu==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_dub_ciu==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_dub_ciu==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_dub_ciu==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_dub_lsa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_dub_lsa==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_dub_lsa==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_dub_lsa==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_dub_lsa==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_dub_lsa==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -172,44 +164,44 @@ include "../controladores/enlaces.php";
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_moz_arm">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_moz_arm==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_moz_arm==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_moz_arm==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_moz_arm==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_moz_arm==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_moz_sfi">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_moz_sfi==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_moz_sfi==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_moz_sfi==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_moz_sfi==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_moz_sfi==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_moz_ciu">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_moz_ciu==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_moz_ciu==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_moz_ciu==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_moz_ciu==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_moz_ciu==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_moz_lsa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_moz_lsa==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_moz_lsa==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_moz_lsa==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_moz_lsa==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_moz_lsa==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -219,44 +211,44 @@ include "../controladores/enlaces.php";
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_gou_arm">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_gou_arm==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_gou_arm==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_gou_arm==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_gou_arm==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_gou_arm==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_gou_sfi">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_gou_sfi==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_gou_sfi==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_gou_sfi==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_gou_sfi==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_gou_sfi==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_gou_ciu">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_gou_ciu==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_gou_ciu==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_gou_ciu==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_gou_ciu==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_gou_ciu==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_gou_lsa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_gou_lsa==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_gou_lsa==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_gou_lsa==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_gou_lsa==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_gou_lsa==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -266,92 +258,44 @@ include "../controladores/enlaces.php";
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_die_arm">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_die_arm==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_die_arm==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_die_arm==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_die_arm==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_die_arm==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_die_sfi">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_die_sfi==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_die_sfi==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_die_sfi==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_die_sfi==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_die_sfi==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_die_ciu">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_die_ciu==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_die_ciu==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_die_ciu==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_die_ciu==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_die_ciu==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td> 
                                                         <div class="">
                                                             <select class="form-control" name="txtpub_die_lsa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td> Queso Dietético </td>
-                                                    <td> 
-                                                        <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td> 
-                                                        <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td> 
-                                                        <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td> 
-                                                        <div class="">
-                                                            <select class="form-control" name="txtEmpresa">
-                                                                    <option value="1"> Ninguna </option>
-                                                                    <option value="2"> Videos Promocionales </option>
-                                                                    <option value="3"> Vallas en avenidas y carreteras </option>
-                                                                    <option value="4"> Flyers </option>
-                                                                    <option value="5"> Otros </option>
+                                                                <option value=1 <?php if($txtpub_die_lsa==1) { echo "Selected"; } ?> > Ninguna </option>
+                                                                <option value=2 <?php if($txtpub_die_lsa==2) { echo "Selected"; } ?> > Videos Promocionales </option>
+                                                                <option value=3 <?php if($txtpub_die_lsa==3) { echo "Selected"; } ?> > Vallas en avenidas y carreteras </option>
+                                                                <option value=4 <?php if($txtpub_die_lsa==4) { echo "Selected"; } ?> > Flyers </option>
+                                                                <option value=5 <?php if($txtpub_die_lsa==5) { echo "Selected"; } ?> > Otros </option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -364,6 +308,43 @@ include "../controladores/enlaces.php";
                             <!-- /.card -->
                         </div>
                     <!-- /. Fin Tabla de movimientos -->
+                    
+                    <!-- /. Div CTA -->
+                        <!-- DIV btnCalcular-->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!-- <form action="pcm-mod.php" method="post" > -->
+                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Calcular">
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        <!-- /. Fin DIV btnCalcular-->
+                        <!-- DIV btnCalcular-->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!-- <form action="pcm-mod.php" method="post" > -->
+                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Limpiar">
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        <!-- /. Fin DIV btnCalcular-->
+                        <!-- DIV btnGuardar-->
+                            <?php if($btnGuardar=="SI") { ?>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!-- <form action="pcm-mod.php" method="post" > -->
+                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Guardar">
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                            <?php } ?>
+                        <!-- /. Fin DIV btnGuardar-->
+                        
+                    <!-- /. Fin Div CTA -->
+
+                    </div>
+                    <!-- /. Fin Row principal de formulario -->
+                </form>
 
                     <!-- Inicio de imágenes --->
                     <div class="col-md-12">
@@ -428,13 +409,15 @@ include "../controladores/enlaces.php";
                                 <?php } ?>    
                             </div>
                             <div class="col-md-12">
-                                <form action="pcm-mod-operador-r.php" method="post">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4">
+                                                <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         <?php } ?>
 

@@ -180,17 +180,17 @@ include "../controladores/enlaces.php";
                     </div>
                 <?php } ?>
 
-                <form action="bitacora-r.php" method="post">
                     <div class="col-md-12">
-                        <input type="hidden" name="txtCiclo" value="<?php $txtCiclo; ?>">
-                        <input type="hidden" name="txtNro_empresa" value="<?php $txtNro_empresa; ?>">
-                        <input type="hidden" name="txtFecha" value="<?php $txtFecha; ?>">
-                        <input type="hidden" name="txtMontoMulta" value="<?php $txtMontoMulta; ?>">
-                        <input type="hidden" name="txtFechaPago" value="<?php $txtFechaPago; ?>">
-                        <input type="hidden" name="txtObservacion" value="<?php $txtObservacion; ?>">
-                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
                 </div>
             <?php } ?>
         </div>

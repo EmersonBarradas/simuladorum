@@ -58,7 +58,7 @@ include('../controladores/global/constantes.php');
        // Variables de Acción
        $procesar="listo"; //Muestra Vista normal
        $error_accion=2; // Valor 0 si todo va normal
-       $mensaje_usuario="NO HAY ENTORNO CREADO"; // Vacío en inicalización
+       $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
     }
         
   }

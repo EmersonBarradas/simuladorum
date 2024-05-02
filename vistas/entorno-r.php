@@ -81,7 +81,10 @@ include "../controladores/enlaces.php";
                                 <!-- /.card-body -->
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-md-4"><input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar"></div>
+                                <div class="col-md-4">
+                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> 
+                                    <a href="entorno.php"type="button" class="btn btn-primary"> Cancelar</a>
+                                </div>
                             </div>
                         </form>
                     </div>

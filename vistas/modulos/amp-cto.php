@@ -16,6 +16,7 @@
     $mensaje_usuario=""; // Vacío en inicalización
     $Mensaje_Mov="";
     $SubastaMovimientos="SI";
+    $movimientos="NO";
 
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
@@ -33,22 +34,35 @@
         $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-        $cant_empresa=$sentencia->rowCount(); 
-
-        foreach ($listado_empresa as $empresa){
-            $NroEmpresa=$empresa['nro'];
-            $NombreEmpresa=$empresa['nombre'];
-            $EstatusEmpresa=$empresa['estatus'];
-        }
-
-        // Selecciona los costos de almacen
-        $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
-        $sentencia->execute();
-        $listado_AMP_CTO=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-        $cant_listado_AMP_CTO=$sentencia->rowCount();
-        // echo "<script> alert('Se encontraron".$cant_compras_subasta."<script> El usuario es ADMINISTRADOR...'); </script>";
-
+        $cant_empresa=$sentencia->rowCount();
+        if($cant_empresa>=1){
+            foreach ($listado_empresa as $empresa){
+                $NroEmpresa=$empresa['nro'];
+                $NombreEmpresa=$empresa['nombre'];
+                $EstatusEmpresa=$empresa['estatus'];
+            }
+            // Selecciona los costos de almacen
+            $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+            $sentencia->execute();
+            $listado_AMP_CTO=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+            $cant_listado_AMP_CTO=$sentencia->rowCount();
+            if($cant_listado_AMP_CTO>=1){
+                foreach($listado_AMP_CTO as $AMP_CTO){
+                    $Nro_amp_cto=$AMP_CTO['nro'];
+                }
+            }else{
+                $procesar="listo"; //Muestra Vista normal
+                $error_accion=2; // Valor 0 si todo va normal
+                $mensaje_usuario="No hay movimientos de almacén"; // Vacío en inicalización
+                $movimientos="SI";
+            }
+            // echo "<script> alert('Se encontraron".$cant_compras_subasta."<script> El usuario es ADMINISTRADOR...'); </script>";
+        }else{
+            $procesar="listo"; //Muestra Vista normal
+            $error_accion=2; // Valor 0 si todo va normal
+            $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
+            $movimientos="NO";
+        } 
     }
 
   //Recepción de Post

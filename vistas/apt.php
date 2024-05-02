@@ -561,15 +561,14 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <form action="apt.php" method="post">
                                     <div class="row justify-content-center">
-                                        <?php if($btnOperador="SI"){ ?>
+                                        <?php if($btnOperador=="SI"){ ?>
                                             <div class="col-md-2">    
-                                            <a href="apt-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
-                                            </div>
-                                        <?php }else { ?>
-                                            <div class="col-md-2">
-                                                <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                            <a href="apt-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
                                             </div>
                                         <?php } ?>
+                                            <div class="col-md-2">
+                                            <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                            </div>
                                     </div>
                                 </form>
                             </div>

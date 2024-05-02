@@ -14,6 +14,7 @@
  $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
  $mensaje_usuario=""; // Vacío en inicalización
  $calcular="NO";
+ $btnOperador="NO";
 
 // Selección de Empresa / Entorno y operador
  if ($txtUsuarioTipo=="A") {
@@ -106,7 +107,7 @@
         // Fin movimientos de queso dietetico ---------
 
      }else{
-       $procesar="NO"; //Muestra Vista normal
+       $procesar="SI"; //Muestra Vista normal
        $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
        $mensaje_usuario="No Hay Operador registrado para la empresa"; // Vacío en inicalización
        $btnOperador="SI";

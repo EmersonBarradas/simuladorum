@@ -247,13 +247,11 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
-                                        <form action="subasta-r.php" method="post">
                                             <div class="row justify-content-center">
                                                 <div class="col-md-3">
-                                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                                    <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

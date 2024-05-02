@@ -14,7 +14,7 @@
   $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
   $mensaje_usuario=""; // Vacío en inicalización
   $calcular="NO";
-  $btnOperador="SI";
+  $btnOperador="NO";
 
 // Selección de Empresa / Entorno y operador
   if ($txtUsuarioTipo=="A") {
@@ -63,7 +63,7 @@
         // print_r("</br>");
 
       }else{
-        $procesar="NO"; //Muestra Vista normal
+        $procesar="SI"; //Muestra Vista normal
         $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
         $mensaje_usuario="No Hay Operador registrado para la empresa"; // Vacío en inicalización
         $btnOperador="SI";
@@ -72,7 +72,7 @@
     }else{
       $procesar="NO"; //Muestra Vista normal
       $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-      $mensaje_usuario="No Hay empresa registrada"; // Vacío en inicalización
+      $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
     }
   }
 //----------------------------------------------------------------------------------------------

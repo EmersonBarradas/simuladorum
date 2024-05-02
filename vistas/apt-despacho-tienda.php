@@ -349,11 +349,13 @@ include "../controladores/enlaces.php";
                                         <form action="despacho.php" method="post">
                                             <div class="row justify-content-center">
                                                 <div class="col-md-4">
-                                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                                    <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <a href="despacho-r.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
-                                                </div>
+                                                <?php if($movimientos=="SI") { ?>
+                                                    <div class="col-md-4">
+                                                        <a href="despacho-r.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
+                                                    </div>
+                                                <?php } ?>
                                             </div>
                                         </form>
                                     </div>

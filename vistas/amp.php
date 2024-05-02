@@ -37,8 +37,8 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-            <!-- Inicio del contenedor de datos -->
-            <div class="container" style="padding: 0px 20px 50px 20px;">
+    <!-- Inicio del contenedor de datos -->
+        <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
                 <?php if ($procesar=="ok") {  ?>
                     <?php  if ($mensaje_usuario!=""){ ?>
@@ -162,6 +162,7 @@ include "../controladores/enlaces.php";
                         <div class="col-md-12">
                             <h3>Almacén Aditivo (AD)</h3>
                         </div>
+                        
                         <div class="col-md-12" style="padding-top: 10px;">
                             <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>

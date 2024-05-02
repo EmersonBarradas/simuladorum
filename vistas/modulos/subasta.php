@@ -35,24 +35,38 @@
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
 
-        foreach ($listado_empresa as $empresa){
-            $NroEmpresa=$empresa['nro'];
-            $NombreEmpresa=$empresa['nombre'];
-            $EstatusEmpresa=$empresa['estatus'];
+        if ($cant_empresa>=1){
+            foreach ($listado_empresa as $empresa){
+                $NroEmpresa=$empresa['nro'];
+                $NombreEmpresa=$empresa['nombre'];
+                $EstatusEmpresa=$empresa['estatus'];
+            }
+            // Selecciona las compras de la empresa
+            $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'AND empresa=$NroEmpresa");
+            $sentencia->execute();
+            $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+            $cant_compras_subasta=$sentencia->rowCount();
+            // echo "<script> alert('Se encontraron".$cant_compras_subasta."<script> El usuario es ADMINISTRADOR...'); </script>";
+
+            if ($cant_compras_subasta<1){
+                $SubastaMovimientos="NO";
+                $Mensaje_Mov="¡NO HAY REGISTROS DE ESTA EMPRESA!";
+            }else{
+                // Variables de Acción
+                $procesar="listo"; //Muestra Vista normal
+                $error_accion=2; // Valor 0 si todo va normal
+                $SubastaMovimientos="NO";
+                $mensaje_usuario="No Hay Movimientos de compra"; // Vacío en inicalización
+            }
+
+        }else{
+            // Variables de Acción
+            $procesar="listo"; //Muestra Vista normal
+            $error_accion=2; // Valor 0 si todo va normal
+            $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
         }
 
-        // Selecciona las compras de la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'AND empresa=$NroEmpresa");
-        $sentencia->execute();
-        $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-        $cant_compras_subasta=$sentencia->rowCount();
-        // echo "<script> alert('Se encontraron".$cant_compras_subasta."<script> El usuario es ADMINISTRADOR...'); </script>";
-
-        if ($cant_compras_subasta<1){
-            $SubastaMovimientos="NO";
-            $Mensaje_Mov="¡NO HAY REGISTROS DE ESTA EMPRESA!";
-        }
     }
 
   //Recepción de Post

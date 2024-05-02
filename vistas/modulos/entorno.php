@@ -36,14 +36,14 @@
         // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
         //print_r($cant_entorno);
 
-        if ($cant_entorno<=0){
-            $entorno="NO";
-            $mensaje_entorno="NO HAY EMPRESAS ACTIVAS PARA LA SIMULACIÓN";
-        }else{
+        if ($cant_entorno>=1){
             foreach ($listado_entorno as $empresa){
                 $txtNombre=$empresa['nombre'];
                 //print_r($txtNombre);
             }
+        }else{
+            $entorno="NO";
+            $mensaje_entorno="NO HAY EMPRESAS ACTIVAS PARA LA SIMULACIÓN";
         }
 
     }else{
@@ -56,14 +56,15 @@
         //print_r("|");
         //print_r($listado_entorno);
 
-        if ($cant_entorno<=0){
-            $entorno="NO";
-            $mensaje_entorno="USUARIO NO TIENE EMPRESA REGISTRADA";
-        }else{
+        if ($cant_entorno>=1){
             foreach ($listado_entorno as $empresa){
                 $txtNombre=$empresa['nombre'];
-                // print_r($txtNombre);
+                $entorno="SI";
+                print_r($entorno);
             }
+        }else{
+            $entorno="NO";
+            $mensaje_entorno="¡No hay empresa registrada!";
         }
         // echo "<script> alert('El usuario es PARTICIPANTE...'); </script>";
     }

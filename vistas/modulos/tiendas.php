@@ -87,7 +87,7 @@
         }else{
           $procesar="listo"; //Muestra Vista normal
           $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-          $mensaje_usuario="No se encontró una empresa para el usuario"; // Vacío en inicalización
+          $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
         }
         
         

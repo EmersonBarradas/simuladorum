@@ -47,10 +47,10 @@ include "../controladores/enlaces.php";
                         </div>
                     <?php } ?>
 
-                    <!-- DIV Empresa-->
-                    <form class="col-md-12" action="subasta-r.php" method="post" >
-                        <div class="row">
-
+                    
+                <form class="col-md-12" action="subasta-r.php" method="post" >
+                    <div class="row">
+                        <!-- DIV Empresa-->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtEmpresa">Empresa</label>
@@ -192,25 +192,32 @@ include "../controladores/enlaces.php";
 
                     <!-- Div CTA -->
                         <div class="col-md-12">
-                            <div class="row justify-content-center">
-                                <div class="col-md-3">
-                                    <input type="hidden" name="txtNro_AMP" value="<?php echo $nro_AMP;?>">
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Calcular">
-                                    <?php if ($calcular=="SI"){ ?>
-                                        <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar">
-                                    <?php } ?>
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar">
+                            <div class="row justify-content-left">
+                                <div class="col-md-2">
+                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Calcular">
                                     <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
                                     <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-window-close"></i> &nbsp; Cancelar</a> -->
                                 </div>
+                                <?php if ($calcular=="SI"){ ?>
+                                    <div class="col-md-2">
+                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Guardar">
+                                    </div>
+                                <?php } ?>
+                                <div class="col-md-2">
+                                    <a href="subasta.php"type="button" class="btn btn-primary btn-block">Cancelar</a>
+                                </div>
                             </div>
                         </div>
+                        <!-- Inputs ocultos -->
+                        <div class="col-12">
+                            <input type="hidden" name="txtNro_AMP" value="<?php echo $nro_AMP;?>">
+                        </div>
+                        <!-- /. Fin Div CTA -->
+
                     <!-- /. Fin Div CTA -->
-
-
                     </div>
                     <!-- /. Fin row-->
-                    </form>
+                </form>
 
                     <!-- Tabla de movimientos -->
                         <div class="col-12" style="padding: 0px 0px 0px 0px;">
@@ -236,13 +243,11 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
-                                        <form action="subasta-r.php" method="post">
                                             <div class="row justify-content-center">
-                                                <div class="col-md-3">
-                                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                                                <div class="col-md-2">
+                                                    <a href="subasta.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
