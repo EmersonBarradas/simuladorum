@@ -15,6 +15,27 @@
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
+    $finalizar=0;
+
+    if ($txtUsuarioTipo=="A") {
+      // Asigno la empresa seleccionada
+      $NroEmpresa=$_SESSION['nro_empresa'];
+
+      // Selecciono la empresa
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+      $sentencia->execute();
+      $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_empresa=$sentencia->rowCount();
+      if($cant_empresa>=1){
+        $finalizar=1;
+      }else{
+        $finalizar=0;
+      }
+      
+
+  }else{
+    $finalizar=0;
+  }
 
   // Verifica los registros activos en simulación ---------------------------------------
     $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
@@ -57,95 +78,270 @@
       case "Cancelar";
           // echo "<script> alert('Quieres cancelar Operación...'); </script>";
           $procesar="ok";
-          header('Location:usuarios.php');
+          header('Location:inicio.php');
       break;
 
       case "Aceptar";
           // echo "<script> alert('Quieres Aceptar Operación...'); </script>";
           $procesar="ok";
-          header('Location:usuarios.php');
+          header('Location:inicio.php');
       break;
 
       case "Finalizar";
         // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
-        $estatus="I";
-
-        $sentencia=$pdo->prepare("UPDATE simulacion SET 
-        estatus=:estatus WHERE
-        nro=:nro");
-              
-        $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-        $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
-        $sentencia->execute();
-
-        // echo "<script> alert('Simulación Finalizada Satisfactoriamente...'); </script>";
-        // $accion="C";
-        $cantRegistros=0;
-        $txtNro=0;
-        $txtId="";
-        $txtFechaInicio="";
-        $txtEstatus="";
-        $txtDescripcion="";
-        //header('Location:simulacion.php');
-
-        $mensaje_usuario="Simulación Finalizada Satisfactoriamente";
-        $procesar="listo";
-        $error_accion=0;
-
-      break;
-      case "Finalizarr";
-        // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
         
-        // Actualizamos los montos y estatus de la tabla de almacén de materia prima (AMP)
-            $estatus_actual="A";
-            $estatus="F";
+        if($finalizar>0){
 
-            $sentencia=$pdo->prepare("UPDATE amp SET cant_existencia_lc=:cant_existencia_lc,
-            cant_capdisp_lc=:cant_capdisp_lc,cant_existencia_ad=:cant_existencia_ad, 
-            cant_capdisp_ad=;cant_capdisp_ad, estatus=:estatus WHERE
-            estatus=:estatus_actual");
-                
-            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
-            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_existencia_lc',$cant_existencia_lc,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_capdisp_lc',$cant_capdisp_lc,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_existencia_ad',$cant_existencia_ad,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_capdisp_ad',$cant_capdisp_ad,PDO::PARAM_STR);
-            $sentencia->execute();
-
-            $cant_cambiosAMP=$sentencia->rowCount();
-
-        // Fin de actualizar AMP----------------------------------------------------------------------------
-
-        // Actualizamos los montos y estatus de la tabla de almacén de productos terminados (AMP)
-        
-            $sentencia=$pdo->prepare("UPDATE apt SET 
-            cant_e_qd=:cant_e_qd, cant_disp_qd=:cant_disp_qd,
-            cant_e_moz=:cant_e_moz, cant_disp_moz=:cant_disp_moz,
-            cant_e_gou=:cant_e_gou, cant_disp_gou=:cant_disp_gou,
-            cant_e_die=:cant_e_die, cant_disp_die=:cant_disp_die,
+          // Cambia a inactiva la simulación -----------------------------------------------
+            $estatus="I";
+            $sentencia=$pdo->prepare("UPDATE simulacion SET 
             estatus=:estatus WHERE
-            estatus=:estatus_actual");
-                
-            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
+            nro=:nro");
+                  
+            $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_e_qd',$cant_e_qd,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_disp_qd',$cant_disp_qd,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_e_moz',$cant_e_moz,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_disp_moz',$cant_disp_moz,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_e_gou',$cant_e_gou,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_disp_gou',$cant_disp_gou,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_e_die',$cant_e_die,PDO::PARAM_STR);
-            $sentencia->bindParam(':cant_disp_die',$cant_disp_die,PDO::PARAM_STR);
-
             $sentencia->execute();
-
-            $cant_cambiosAPT=$sentencia->rowCount();
-
-        // Fin de Actualizamos los montos y estatus de la tabla de almacén de productos terminados (AMP)
+          // -------------------------------------------------------------------------------
 
 
+          // Finaliza la empresa-------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE empresa SET 
+            estatus=:estatus WHERE
+            nro=:nro");
+                  
+            $sentencia->bindParam(':nro',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
 
+          // Finaliza amp -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE amp SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza amp_cto -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE amp_cto SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza amp_mov -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE amp_mov SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza apt -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE apt SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza apt_dtienda -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE apt_dtienda SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza amp_mov -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE apt_mov SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza bitacora -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE bitacora SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza bitacora -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE bitacora SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+          
+          // Finaliza calendario -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE calendario SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+
+          // Finaliza compra_subasta -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE compra_subasta SET 
+            estatus=:estatus WHERE
+            empresa=:empresa");
+                  
+            $sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+          // --------------------------------------------------------------------------------
+
+          // Finaliza despacho -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE despacho SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza empresa -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE empresa SET 
+            estatus=:estatus WHERE
+            nro=:nro");
+                  
+            $sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+
+        // Finaliza pcm -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE pcm SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza pcm -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE pcm SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza pcm_mod_mov -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE pcm_mod_mov SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza pcm_mod_operador -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE pcm_mod_operador SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza publicidad -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE publicidad SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza tiendas -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE tiendas SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza tiendas_existe -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE tiendas_existe SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+        
+        // Finaliza tiendas_mov -------------------------------------------------------------------
+            $estatus="F";
+            $sentencia=$pdo->prepare("UPDATE tiendas_mov SET 
+            estatus=:estatus WHERE
+            nro_empresa=:nro_empresa");
+                  
+            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+        // --------------------------------------------------------------------------------
+
+
+        }else{
+          $mensaje_usuario="";
+          $procesar="ok";
+          $error_accion=0;
+        }
+        
         // echo "<script> alert('Simulación Finalizada Satisfactoriamente...'); </script>";
         // $accion="C";
         $cantRegistros=0;

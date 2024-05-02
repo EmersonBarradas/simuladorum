@@ -40,33 +40,26 @@ include "../controladores/enlaces.php";
         <div class="container" style="padding: 0px 20px 0px 20px;">
             <!-- Íconos Generales -->
             <div class="row justify-content-left">
-                <!-- Título -->
-                <div class="col-md-12">
-                    <h3>Armadillo</h3>
-                </div> 
-               
-                <!-- Íconos Generales -->
-                <!--
-                <div class="col-md-6" style="padding: 10px 0px 10px 10px;">
-                    <a href="apt-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
-                </div>
-                -->
 
-                <!-- Variables Globales -->
-                <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto-empresa">Empresa</label>
-                        <input type="text" class="form-control" id="texto-empresa" placeholder="Empresa" value="">
+
+                 <!-- Inicio Div Empresa-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtEmpresa">Empresa</label>
+                            <select class="form-control" name="txtEmpresa">
+                                <?php foreach ($listado_empresa as $empresa) { ?>
+                                    <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <!-- /. Fin inicio Div Empresa-->
             </div>
 
             <!-- Tabla de movimientos -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary text-right">
                     <div class="card-header">
                         <h3 class="card-title"><b>Ventas Armadillo</b></h3>
 
@@ -81,7 +74,7 @@ include "../controladores/enlaces.php";
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 260px;">
+                    <div class="card-body table-responsive p-0" style="height: 280px;">
                         <table class="table table-head-fixed text-nowrap">
                         <thead>
                             <tr>
@@ -96,70 +89,64 @@ include "../controladores/enlaces.php";
                                 <th>Ciclo 8</th>
                                 <th>Ciclo 9</th>
                                 <th>Ciclo 10</th>
-                                <th>Ciclo 11</th>
-                                <th>Ciclo 12</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Queso Duro Blanco </td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_arm_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Mozarella</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_arm_moz; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Gouda</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_arm_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Dietético</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_arm_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                         </tbody>
                         </table>
@@ -196,18 +183,24 @@ include "../controladores/enlaces.php";
                 -->
 
                 <!-- Variables Globales -->
-                <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto-empresa">Empresa</label>
-                        <input type="text" class="form-control" id="texto-empresa" placeholder="Empresa" value="">
+                <!-- Inicio Div Empresa-->
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtEmpresa">Empresa</label>
+                            <select class="form-control" name="txtEmpresa">
+                                <?php foreach ($listado_empresa as $empresa) { ?>
+                                    <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <!-- /. Fin inicio Div Empresa-->
             </div>
 
             <!-- Tabla de movimientos -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary text-right">
                     <div class="card-header">
                         <h3 class="card-title"><b>Ventas San Ferro</b></h3>
 
@@ -222,7 +215,7 @@ include "../controladores/enlaces.php";
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 260px;">
+                    <div class="card-body table-responsive p-0" style="height: 280px;">
                         <table class="table table-head-fixed text-nowrap">
                         <thead>
                             <tr>
@@ -237,70 +230,64 @@ include "../controladores/enlaces.php";
                                 <th>Ciclo 8</th>
                                 <th>Ciclo 9</th>
                                 <th>Ciclo 10</th>
-                                <th>Ciclo 11</th>
-                                <th>Ciclo 12</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Queso Duro Blanco </td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_sfi_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Mozarella</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_sfi_moz; ?>&nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Gouda</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_sfi_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Dietético</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_sfi_die; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                         </tbody>
                         </table>
@@ -326,29 +313,26 @@ include "../controladores/enlaces.php";
                 <div class="col-md-12">
                     <h3>Ciudadela</h3>
                 </div> 
-               
-                <!-- Íconos Generales -->
-                <!--
-                <div class="col-md-6" style="padding: 10px 0px 10px 10px;">
-                    <a href="apt-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
-                </div>
-                -->
 
                 <!-- Variables Globales -->
-                <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto-empresa">Empresa</label>
-                        <input type="text" class="form-control" id="texto-empresa" placeholder="Empresa" value="">
+                <!-- Inicio Div Empresa-->
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtEmpresa">Empresa</label>
+                            <select class="form-control" name="txtEmpresa">
+                                <?php foreach ($listado_empresa as $empresa) { ?>
+                                    <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <!-- /. Fin inicio Div Empresa-->
             </div>
 
             <!-- Tabla de movimientos -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary text-right">
                     <div class="card-header">
                         <h3 class="card-title"><b>Ventas Ciudadela</b></h3>
 
@@ -363,7 +347,7 @@ include "../controladores/enlaces.php";
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 260px;">
+                    <div class="card-body table-responsive p-0" style="height: 280px;">
                         <table class="table table-head-fixed text-nowrap">
                         <thead>
                             <tr>
@@ -378,70 +362,64 @@ include "../controladores/enlaces.php";
                                 <th>Ciclo 8</th>
                                 <th>Ciclo 9</th>
                                 <th>Ciclo 10</th>
-                                <th>Ciclo 11</th>
-                                <th>Ciclo 12</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Queso Duro Blanco </td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_ciu_dub; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Mozarella</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_ciu_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                            
                             </tr>
                             <tr>
                                 <td>Queso Gouda</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_ciu_gou; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Dietético</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_ciu_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                
                             </tr>
                         </tbody>
                         </table>
@@ -467,29 +445,25 @@ include "../controladores/enlaces.php";
                 <div class="col-md-12">
                     <h3>Los Santos</h3>
                 </div> 
-               
-                <!-- Íconos Generales -->
-                <!--
-                <div class="col-md-6" style="padding: 10px 0px 10px 10px;">
-                    <a href="apt-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
-                </div>
-                -->
+                 <!-- Inicio Div Empresa-->
+                 <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtEmpresa">Empresa</label>
+                                <select class="form-control" name="txtEmpresa">
+                                    <?php foreach ($listado_empresa as $empresa) { ?>
+                                        <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    <!-- /. Fin inicio Div Empresa-->
 
-                <!-- Variables Globales -->
-                <div class="col-md-3">
-                    <div class="form-group" style="padding-top: 20px;">
-                        <label for="texto-empresa">Empresa</label>
-                        <input type="text" class="form-control" id="texto-empresa" placeholder="Empresa" value="">
-                    </div>
-                </div>
             </div>
 
-            <!-- Tabla de movimientos -->
+            <!-- Tabla de movimientos Los Santos -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card card-primary text-right">
                     <div class="card-header">
                         <h3 class="card-title"><b>Ventas Los Santos</b></h3>
 
@@ -504,8 +478,8 @@ include "../controladores/enlaces.php";
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 260px;">
-                        <table class="table table-head-fixed text-nowrap">
+                    <div class="card-body table-responsive p-0" style="height: 280px;">
+                        <table class="table table-head-fixed text-nowrap ">
                         <thead>
                             <tr>
                                 <th>Queso</th>
@@ -519,71 +493,64 @@ include "../controladores/enlaces.php";
                                 <th>Ciclo 8</th>
                                 <th>Ciclo 9</th>
                                 <th>Ciclo 10</th>
-                                <th>Ciclo 11</th>
-                                <th>Ciclo 12</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Queso Duro Blanco </td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c2_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c3_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c4_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c5_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c6_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c7_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c8_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c9_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+                                <td> <?php echo $cant_total_c10_lsa_dub; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"> </td>
+
                             </tr>
                             <tr>
                                 <td>Queso Mozarella</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_lsa_moz; ?>  &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Gouda</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
+                                <td> <?php echo $cant_total_c1_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_lsa_gou; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                             </tr>
                             <tr>
                                 <td>Queso Dietético</td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                                <td>0,0 &nbsp; &nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;</a></td>
-                            </tr>
+                                <td> <?php echo $cant_total_c1_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c2_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c3_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c4_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c5_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c6_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c7_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c8_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c9_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+                                <td> <?php echo $cant_total_c10_lsa_die; ?> &nbsp; <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C"></td>
+
                         </tbody>
                         </table>
                     </div>

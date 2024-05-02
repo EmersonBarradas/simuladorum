@@ -26,13 +26,64 @@
 
 // Selecciono empresa y operadores de la empresa del usuario ------------------------------------------------
   if ($txtUsuarioTipo=="A") {
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
+      // Asigno la empresa seleccionada
+      $NroEmpresa=$_SESSION['nro_empresa'];
+      $txtNro_empresa=$NroEmpresa;
+
+      // Selecciono la empresa
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
       $sentencia->execute();
       $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_empresa=$sentencia->rowCount(); 
 
-      $listado_empresa=$sentencia->rowCount();
-      // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-      //print_r($cant_entorno);
+      // Seleccionar produccción de la empresa
+      $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+      $sentencia->execute();
+      $listado_PCM=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_PCM=$sentencia->rowCount();
+      if($cant_PCM>=1){
+          foreach($listado_PCM as $PCM){
+              $nro_PCM=$PCM['nro'];
+          }
+      }
+
+      // Selección Operador de empresa del usuario -------------------------------------------------------------------------
+      $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_operador` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+      $sentencia->execute();
+      $listado_operador=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_listado_operador=$sentencia->rowCount();
+    
+      if($cant_listado_operador>=1){
+          foreach($listado_operador as $operador){
+            $txtNro_operador=$operador['nro'];
+            $txtNombre_operador=$operador['nombre'];
+            $txtCant_horas_sem=$operador['cant_horas_sem'];
+            $txtCant_horas_max_sem=$operador['cant_horas_max_sem'];
+          }
+
+          // Selección de movimientos por usuario, empresa Y operador
+          $sentencia=$pdo->prepare("SELECT * FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa AND nro_operador=$txtNro_operador ORDER BY ciclo ");
+          $sentencia->execute();
+          $listado_pcm_mod=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+          // Suma de horas trabajadas
+          $sentencia=$pdo->prepare("SELECT sum(cant_total_horas_trab) FROM `pcm_mod_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa AND nro_operador=$txtNro_operador ");
+          $sentencia->execute();
+          $Suma_HorasTrabajadas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+          $cant_sumadehoras=$sentencia->rowCount();
+          //print_r($cant_sumadehoras);
+          if($cant_sumadehoras>1){
+            foreach($Suma_HorasTrabajadas as $TotalHorasTrabajadas){
+              $txtCant_total_horas_trab=$TotalHorasTrabajadas['sum(cant_total_horas_trab)'];
+            }
+          }else{
+            $txtCant_total_horas_trab=0.00;
+          }
+          // print_r($txtNombre_empresa);
+          // print_r("</br>");
+          // print_r($txtNro_empresa);
+          // print_r("</br>");
+      }
 
   }else{
       // Selección de empresa del usuario 

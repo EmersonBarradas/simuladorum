@@ -54,7 +54,9 @@ include "../controladores/enlaces.php";
 
                     <!-- Íconos Generales -->
                         <div class="col-md-12" style="padding: 0px 15px 10px 20px;">
+                        <?php if ($txtUsuarioTipo!="A") {?>
                             <a href="apt-despacho-tienda.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Despacho Tienda</a>
+                        <?php }?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>
@@ -148,7 +150,14 @@ include "../controladores/enlaces.php";
                                     <td><?php echo $quesoduro['cant_entrada'] ?></td>
                                     <td><?php echo $quesoduro['cant_salida'] ?></td>
                                     <td><?php echo $quesoduro['cant_total'] ?></td>
-                                    <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td>
+                                        <form action="" method="">
+                                            <input type="hidden" name="txtvariable" value="<?php echo "";?>">
+                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                            <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
+                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php } ?>
                                 <?php }else{ ?>
@@ -223,12 +232,12 @@ include "../controladores/enlaces.php";
                         <input type="number" class="form-control" name="txt_cant_disp_moz" placeholder="" value="<?php echo $txt_cant_disp_moz; ?>">
                     </div>
                 </div>
-                <!-- /. Fin de Variables de Almacén Queso Blanco Duro -->
+                <!-- /. Fin de Variables de Almacén queso Mozarella -->
 
             </div>
             <!-- /. Fin de contenido General -->
 
-            <!-- Tabla de movimientos Queso Blanco Duro -->
+            <!-- Tabla de movimientos Queso Mozarella -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
                     <div class="card card-primary text-center">
@@ -269,7 +278,14 @@ include "../controladores/enlaces.php";
                                         <td><?php echo $mozarella['cant_entrada'] ?></td>
                                         <td><?php echo $mozarella['cant_salida'] ?></td>
                                         <td><?php echo $mozarella['cant_total'] ?></td>
-                                        <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                        <td>
+                                            <form action="" method="">
+                                                <input type="hidden" name="txtvariable" value="<?php echo "";?>">
+                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                                <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
+                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                            </form>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 <?php }else{ ?>
@@ -303,7 +319,7 @@ include "../controladores/enlaces.php";
             <!-- /. Fin de separador -->
 
         </div>
-    <!-- /. fin del contenedor Queso Queso Mozarella ------------------------------------------------>
+    <!-- /. fin del contenedor Queso Mozarella ------------------------------------------------>
 
     <!-- Contenedor Queso Gouda---------------------------------------------------------------------->
         <div class="container" style="padding: 10px 15px 0px 20px;">
@@ -314,7 +330,7 @@ include "../controladores/enlaces.php";
                     <h3>Almacén Queso Gouda</h3>
                 </div>                
 
-            <!-- Variables de Almacén Queso Queso Mozarella----------->
+            <!-- Variables de Almacén Queso Gouda ----------->
                 <!-- Inicio Div Empresa-->
                 <div class="col-md-3">
                     <div class="form-group">
@@ -350,7 +366,7 @@ include "../controladores/enlaces.php";
             </div>
             <!-- /. Fin de contenido General -->
 
-            <!-- Tabla de movimientos Queso Blanco Duro -->
+            <!-- Tabla de movimientos Queso Gouda -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
                     <div class="card card-primary text-center">
@@ -391,7 +407,14 @@ include "../controladores/enlaces.php";
                                             <td><?php echo $gouda['cant_entrada'] ?></td>
                                             <td><?php echo $gouda['cant_salida'] ?></td>
                                             <td><?php echo $gouda['cant_total'] ?></td>
-                                            <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                            <td>
+                                                <form action="" method="">
+                                                    <input type="hidden" name="txtvariable" value="<?php echo "";?>">
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                                    <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 <?php }else{ ?>
@@ -424,7 +447,7 @@ include "../controladores/enlaces.php";
             <!-- /. Fin de separador -->
 
         </div>
-    <!-- /. fin del contenedor Queso Queso Mozarella ----------------------------------------------------------->
+    <!-- /. fin del contenedor Queso Gouda ----------------------------------------------------------->
    
     <!-- Contenedor Queso Dietético------------------------------------------------------------------>
         <div class="container" style="padding: 10px 15px 0px 20px;">
@@ -435,7 +458,7 @@ include "../controladores/enlaces.php";
                     <h3>Almacén Queso Dietético</h3>
                 </div>                
 
-            <!-- Variables de Almacén Queso Queso Mozarella----------->
+            <!-- Variables de Almacén Queso Dietético----------->
                 <!-- Inicio Div Empresa-->
                 <div class="col-md-3">
                     <div class="form-group">
@@ -466,12 +489,12 @@ include "../controladores/enlaces.php";
                         <input type="number" class="form-control" name="txt_cant_disp_die" placeholder="" value="<?php echo $txt_cant_disp_die; ?>">
                     </div>
                 </div>
-                <!-- /. Fin de Variables de Almacén Queso gouda -->
+                <!-- /. Fin de Variables de Almacén Dietético -->
 
             </div>
             <!-- /. Fin de contenido General -->
 
-            <!-- Tabla de movimientos Queso Blanco Duro -->
+            <!-- Tabla de movimientos Queso Dietético -->
             <div class="row" style="padding: 0px 0px 0px 0px;">
                 <div class="col-12">
                     <div class="card card-primary text-center">
@@ -512,7 +535,14 @@ include "../controladores/enlaces.php";
                                             <td><?php echo $dietetico['cant_entrada'] ?></td>
                                             <td><?php echo $dietetico['cant_salida'] ?></td>
                                             <td><?php echo $dietetico['cant_total'] ?></td>
-                                            <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                            <td>
+                                                <form action="" method="">
+                                                    <input type="hidden" name="txtvariable" value="<?php echo "";?>">
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                                    <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 <?php }else{ ?>
@@ -545,7 +575,7 @@ include "../controladores/enlaces.php";
             <!-- /. Fin de separador -->
 
         </div>
-    <!-- /. fin del contenedor Queso Queso Mozarella ------------------------------------------------>
+    <!-- /. fin del contenedor Queso dietético ------------------------------------------------>
 
 
                     <?php }else{ ?>
@@ -559,18 +589,16 @@ include "../controladores/enlaces.php";
                                 <?php } ?>    
                             </div>
                             <div class="col-md-12">
-                                <form action="apt.php" method="post">
-                                    <div class="row justify-content-center">
-                                        <?php if($btnOperador=="SI"){ ?>
-                                            <div class="col-md-2">    
+                                <div class="row justify-content-center">
+                                    <?php if($btnOperador=="SI"){ ?>
+                                        <div class="col-md-2">    
                                             <a href="apt-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Despacho</a>
-                                            </div>
-                                        <?php } ?>
-                                            <div class="col-md-2">
+                                        </div>
+                                    <?php } ?>
+                                        <div class="col-md-2">
                                             <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
-                                            </div>
-                                    </div>
-                                </form>
+                                        </div>
+                                </div>
                             </div>
                         <?php } ?>
 

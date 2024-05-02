@@ -52,7 +52,9 @@ include "../controladores/enlaces.php";
                     <!-- /. Fin del mensaje -----------------------------------------------  -->
                     <!-- Íconos Generales -->
                     <div class="col-md-12" style="padding: 0px 10px 20px 10px;">
-                            <a href="tiendas-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Venta</a>
+                            <?php if ($txtUsuarioTipo!="A") {?>
+                                <a href="tiendas-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Venta</a>
+                            <?php }?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>

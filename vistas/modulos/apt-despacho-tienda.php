@@ -20,13 +20,89 @@
 
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_entorno=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
+        $txtNro_empresa=$NroEmpresa;
 
-      $cant_entorno=$sentencia->rowCount();
-      // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-      //print_r($cant_entorno);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
+
+        // Selecciono productos por despachar del almacén de productos terminados APT por ciclo -------------
+        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_apt_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_apt_mov=$sentencia->rowCount();
+
+
+        if($cant_apt_mov>=1){
+          $dub_ciclo_1=0.00;  $moz_ciclo_1=0.00;  $gou_ciclo_1=0.00;  $die_ciclo_1=0.00;
+          $dub_ciclo_2=0.00;  $moz_ciclo_2=0.00;  $gou_ciclo_2=0.00;  $die_ciclo_2=0.00;
+          $dub_ciclo_3=0.00;  $moz_ciclo_3=0.00;  $gou_ciclo_3=0.00;  $die_ciclo_3=0.00;
+          $dub_ciclo_4=0.00;  $moz_ciclo_4=0.00;  $gou_ciclo_4=0.00;  $die_ciclo_4=0.00;
+          $dub_ciclo_5=0.00;  $moz_ciclo_5=0.00;  $gou_ciclo_5=0.00;  $die_ciclo_5=0.00;
+          $dub_ciclo_6=0.00;  $moz_ciclo_6=0.00;  $gou_ciclo_6=0.00;  $die_ciclo_6=0.00;
+          $dub_ciclo_7=0.00;  $moz_ciclo_7=0.00;  $gou_ciclo_7=0.00;  $die_ciclo_7=0.00;
+          $dub_ciclo_8=0.00;  $moz_ciclo_8=0.00;  $gou_ciclo_8=0.00;  $die_ciclo_8=0.00;
+          $dub_ciclo_9=0.00;  $moz_ciclo_9=0.00;  $gou_ciclo_9=0.00;  $die_ciclo_9=0.00;
+          $dub_ciclo_10=0.00;  $moz_ciclo_10=0.00;  $gou_ciclo_10=0.00;  $die_ciclo_10=0.00;
+          $dub_ciclo_11=0.00;  $moz_ciclo_11=0.00;  $gou_ciclo_11=0.00;  $die_ciclo_11=0.00;
+          $dub_ciclo_12=0.00;  $moz_ciclo_12=0.00;  $gou_ciclo_12=0.00;  $die_ciclo_12=0.00;
+
+          foreach($listado_apt_mov as $apt_mov){
+
+            if($apt_mov['ciclo']==1){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_1=$dub_ciclo_1+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_1=$moz_ciclo_1+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_1=$gou_ciclo_1+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_1=$die_ciclo_1+$apt_mov['cant_entrada']; } 
+            }
+            
+            if($apt_mov['ciclo']==2){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_2=$dub_ciclo_2+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_2=$moz_ciclo_2+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_2=$gou_ciclo_2+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_2=$die_ciclo_2+$apt_mov['cant_entrada']; } 
+            }
+
+            if($apt_mov['ciclo']==3){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_3=$dub_ciclo_3+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_3=$moz_ciclo_3+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_3=$gou_ciclo_3+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_3=$die_ciclo_3+$apt_mov['cant_entrada']; } 
+            }
+            
+            if($apt_mov['ciclo']==4){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_4=$dub_ciclo_4+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_4=$moz_ciclo_4+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_4=$gou_ciclo_4+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_4=$die_ciclo_4+$apt_mov['cant_entrada']; } 
+            }
+
+            if($apt_mov['ciclo']==5){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_5=$dub_ciclo_5+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_5=$moz_ciclo_5+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_5=$gou_ciclo_5+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_5=$die_ciclo_5+$apt_mov['cant_entrada']; } 
+            }
+
+            if($apt_mov['ciclo']==6){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_6=$dub_ciclo_6+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_6=$moz_ciclo_6+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_6=$gou_ciclo_6+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_6=$die_ciclo_6+$apt_mov['cant_entrada']; } 
+            }
+
+            // Consulto los despachos preparados
+            $sentencia=$pdo->prepare("SELECT * FROM `apt_dtienda` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+            $sentencia->execute();
+            $listado_apt_dtienda=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+            $cant_apt_dtienda=$sentencia->rowCount(); 
+
+          }
+        }
 
     }else{
       // Selección de empresa del usuario -------------------------------------------------------------------------

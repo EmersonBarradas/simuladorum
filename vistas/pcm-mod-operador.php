@@ -54,10 +54,9 @@ include "../controladores/enlaces.php";
 
                     <!-- Íconos Generales -->
                         <div class="col-md-4" style="padding: 0 0 15px 0;">
+                        <?php if ($txtUsuarioTipo!="A") {?>
                             <a href="pcm-mod-operador-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
-                            <!-- 
-                            <a href="pcm-mod-operador.php"type="button" class="btn btn-primary"><i class="fa fa-address-card"></i> Operadores</a>
-                            -->
+                        <?php }?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>

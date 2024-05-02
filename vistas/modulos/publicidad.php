@@ -15,6 +15,7 @@
   $mensaje_usuario=""; // Vacío en inicalización
   $calcular="NO";
   $btnGuardar="NO";
+  $EsNuevo="NO";
 
 // Variables de datos ---------------------------------------
   $txtpub_dub_arm=1;
@@ -50,13 +51,52 @@
   
 // Selección de Empresa / Entorno y operador
   if ($txtUsuarioTipo=="A") {
-    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
-    $sentencia->execute();
-    $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      // Asigno la empresa seleccionada
+      $NroEmpresa=$_SESSION['nro_empresa'];
+      $txtNro_empresa=$NroEmpresa;
 
-    $listado_empresa=$sentencia->rowCount();
-    // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-    //print_r($cant_entorno);
+      // Selecciono la empresa
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+      $sentencia->execute();
+      $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_empresa=$sentencia->rowCount(); 
+
+      // Selecciono publicidad de la empresa  ---------------------------------------------------------
+      $sentencia=$pdo->prepare("SELECT * FROM `publicidad` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+      $sentencia->execute();
+      $listado_publicidad=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_publicidad=$sentencia->rowCount();
+      
+      if($cant_publicidad>=1){
+        //echo "<script> alert('Ya existe ...'); </script>";
+
+        foreach($listado_publicidad as $publicidad){
+          $Nro_publicidad=$publicidad['nro'];
+          $txtpub_dub_arm=$publicidad['pub_dub_arm'];
+          $txtpub_dub_ciu=$publicidad['pub_dub_ciu'];
+          $txtpub_dub_sfi=$publicidad['pub_dub_sfi'];
+          $txtpub_dub_lsa=$publicidad['pub_dub_lsa'];
+            
+          $txtpub_moz_arm=$publicidad['pub_moz_arm'];
+          $txtpub_moz_ciu=$publicidad['pub_moz_ciu'];
+          $txtpub_moz_sfi=$publicidad['pub_moz_sfi'];
+          $txtpub_moz_lsa=$publicidad['pub_moz_lsa'];
+            
+          $txtpub_gou_arm=$publicidad['pub_gou_arm'];
+          $txtpub_gou_ciu=$publicidad['pub_gou_ciu'];
+          $txtpub_gou_sfi=$publicidad['pub_gou_sfi'];
+          $txtpub_gou_lsa=$publicidad['pub_gou_lsa'];
+            
+          $txtpub_die_arm=$publicidad['pub_die_arm'];
+          $txtpub_die_ciu=$publicidad['pub_die_ciu'];
+          $txtpub_die_sfi=$publicidad['pub_die_sfi'];
+          $txtpub_die_lsa=$publicidad['pub_die_lsa'];
+
+          $txtTotal_inversion=$publicidad['total_inversion'];
+        }
+
+        $txtNombre_publicidad="encontró publicidad";
+      }
 
   }else{
     // Selección de empresa del usuario -------------------------------------------------------------------------
@@ -70,6 +110,7 @@
           $txtNro_empresa=$empresa['nro'];
           $txtNombre_empresa=$empresa['nombre'];
       }
+
       // Selecciono publicidad de la empresa  ---------------------------------------------------------
         $sentencia=$pdo->prepare("SELECT * FROM `publicidad` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
         $sentencia->execute();
@@ -77,12 +118,37 @@
         $cant_publicidad=$sentencia->rowCount();
         
         if($cant_publicidad>=1){
+          //echo "<script> alert('Ya existe ...'); </script>";
+
           foreach($listado_publicidad as $publicidad){
             $Nro_publicidad=$publicidad['nro'];
+            $txtpub_dub_arm=$publicidad['pub_dub_arm'];
+            $txtpub_dub_ciu=$publicidad['pub_dub_ciu'];
+            $txtpub_dub_sfi=$publicidad['pub_dub_sfi'];
+            $txtpub_dub_lsa=$publicidad['pub_dub_lsa'];
+              
+            $txtpub_moz_arm=$publicidad['pub_moz_arm'];
+            $txtpub_moz_ciu=$publicidad['pub_moz_ciu'];
+            $txtpub_moz_sfi=$publicidad['pub_moz_sfi'];
+            $txtpub_moz_lsa=$publicidad['pub_moz_lsa'];
+              
+            $txtpub_gou_arm=$publicidad['pub_gou_arm'];
+            $txtpub_gou_ciu=$publicidad['pub_gou_ciu'];
+            $txtpub_gou_sfi=$publicidad['pub_gou_sfi'];
+            $txtpub_gou_lsa=$publicidad['pub_gou_lsa'];
+              
+            $txtpub_die_arm=$publicidad['pub_die_arm'];
+            $txtpub_die_ciu=$publicidad['pub_die_ciu'];
+            $txtpub_die_sfi=$publicidad['pub_die_sfi'];
+            $txtpub_die_lsa=$publicidad['pub_die_lsa'];
+
+            $txtTotal_inversion=$publicidad['total_inversion'];
           }
+
           $txtNombre_publicidad="encontró publicidad";
         }else{
           $txtNombre_publicidad="No se encontró publicidad";
+          $EsNuevo="SI";
         }
       // -----------------------------------------------------------------------------------------------
     }else{
@@ -144,7 +210,7 @@ if(isset($_POST["btn_accion"])){
         $otros=1000;
         $txtTotal_inversion=0.00;
 
-        // Queso Duro
+      // Queso Duro
         switch($txtpub_dub_arm){
           case 1;
             $txtTotal_inversion=$txtTotal_inversion+0;
@@ -233,7 +299,7 @@ if(isset($_POST["btn_accion"])){
           break;
         }
 
-        // Queso Mozarella
+      // Queso Mozarella
 
         switch($txtpub_moz_arm){
           case 1;
@@ -323,7 +389,7 @@ if(isset($_POST["btn_accion"])){
           break;
         }
         
-        // Queso Gouda
+      // Queso Gouda
         switch($txtpub_gou_arm){
           case 1;
             $txtTotal_inversion=$txtTotal_inversion+0;
@@ -412,7 +478,7 @@ if(isset($_POST["btn_accion"])){
           break;
         }
 
-        // Queso Dietético
+      // Queso Dietético
         switch($txtpub_die_arm){
           case 1;
             $txtTotal_inversion=$txtTotal_inversion+0;
@@ -500,72 +566,107 @@ if(isset($_POST["btn_accion"])){
             $txtTotal_inversion=$txtTotal_inversion+$otros;
           break;
         }
-
+      // Variables de control
         $calcular="SI";
         $btnGuardar="SI";
               
-    break;
+    
+      break;
     case "Guardar";
         // echo "<script> alert('Quieres Guardar Operación...'); </script>";
         // header('Location:usuarios.php');
 
-        $sentencia=$pdo->prepare("INSERT INTO pcm_mod_mov (nro,id,nro_empresa,nro_operador,ciclo,fecha,
-        cant_total_horas_trab,monto_pago_hora,monto_pago_adicional,monto_total_jornada,cant_porcentaje_trab,
-        emoji1,emoji2,estatus,fecha_reg,usuario_reg,estatus_reg)  
-        VALUES (NULL, :id, :nro_empresa, :nro_operador, :ciclo, :fecha, :cant_total_horas_trab,
-        :monto_pago_hora, :monto_pago_adicional, :monto_total_jornada, :cant_porcentaje_trab,
-        :emoji1, :emoji2, :estatus, :fecha_reg, :usuario_reg, :estatus_reg)");
+        if($EsNuevo=="SI"){
+          //echo "<script> alert('Es Nuevo...'); </script>";
 
-        $sentencia->bindParam(':id',$txtId,PDO::PARAM_STR);
-        $sentencia->bindParam(':nro_empresa',$txtNro_empresa,PDO::PARAM_INT);
-        $sentencia->bindParam(':nro_operador',$txtNro_operador,PDO::PARAM_STR);
-        $sentencia->bindParam(':ciclo',$txtCiclo,PDO::PARAM_STR);
-        $sentencia->bindParam(':fecha',$txtFecha,PDO::PARAM_STR);
-        $sentencia->bindParam(':cant_total_horas_trab',$txtCant_total_horas_trab,PDO::PARAM_STR);
-        $sentencia->bindParam(':monto_pago_hora',$txtMonto_pago_hora,PDO::PARAM_STR);
-        $sentencia->bindParam(':monto_pago_adicional',$txtMonto_pago_adicional,PDO::PARAM_STR);
-        $sentencia->bindParam(':monto_total_jornada',$txtMonto_total_jornada,PDO::PARAM_STR);
-        $sentencia->bindParam(':cant_porcentaje_trab',$txtCant_porcentaje_trab,PDO::PARAM_STR);
-        $sentencia->bindParam(':emoji1',$txtEmoji1,PDO::PARAM_STR);
-        $sentencia->bindParam(':emoji2',$txtEmoji2,PDO::PARAM_STR);
-        $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
-        $sentencia->bindParam(':fecha_reg',$txtFecha_reg);
-        $sentencia->bindParam(':usuario_reg',$txtUsuario_reg,PDO::PARAM_INT);
-        $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
-        $sentencia->execute();
+          $txtEstatus="A";
+          $txtFecha_reg=date("Y/m/d");
+          $txtUsuario_reg=$txtUsuario;
+          $txtEstatus_reg="A";
 
-        // echo "<br>";
-        // print_r("Nro: ".$txtNro);
-        // echo "<br>";
-        // print_r("ID: ".$txtId);
-        // echo "<br>";
-        // print_r("Fecha: ".$txtFecha);
-        // echo "<br>";
-        // print_r("Empresa: ".$txtEmpresa);
-        // echo "<br>";
-        // print_r("ID Empresa: ".$txtIdEmpresa);
-        // echo "<br>";
-        // print_r("Observación: ".$txtObservacion);
-        // echo "<br>";
-        // print_r("Monto Multa: ".$txtMontoMulta);
-        // echo "<br>";
-        // print_r("Fecha de Pago: ".$txtFechaPago);
-        // echo "<br>";
-        // print_r("Estatus: ".$txtEstatus);
-        // echo "<br>";
-        // print_r("Fecha de Registro: ".$txtFecha_reg);
-        // echo "<br>";
-        // print_r("Usuario del Registro: ".$txtUsuario_reg);
-        // echo "<br>";
-        // print_r("Estatus de Registro: ".$txtEstatus_reg);
-        // echo "<br>";
-        // print_r("Ciclo: ".$txtCiclo);
-        // echo "<br>";
-        
-        // echo "<script> alert('Bitacora Registrada Satisfactoriamente...'); </script>";
-        $procesar="Listo";
-        $error_accion=1; 
-        $mensaje_usuario="Registro Satisfactorio...";
+
+          $sentencia=$pdo->prepare("INSERT INTO publicidad (nro,nro_empresa,
+          pub_dub_arm, pub_dub_ciu, pub_dub_sfi, pub_dub_lsa, pub_moz_arm, pub_moz_ciu, pub_moz_sfi, pub_moz_lsa,
+          pub_gou_arm, pub_gou_ciu, pub_gou_sfi, pub_gou_lsa, pub_die_arm, pub_die_ciu, pub_die_sfi, pub_die_lsa,
+          total_inversion, estatus, fecha_reg, usuario_reg, estatus_reg)  
+          VALUES (NULL, :nro_empresa, 
+          :pub_dub_arm, :pub_dub_ciu, :pub_dub_sfi, :pub_dub_lsa, :pub_moz_arm, :pub_moz_ciu, :pub_moz_sfi, :pub_moz_lsa,
+          :pub_gou_arm, :pub_gou_ciu, :pub_gou_sfi, :pub_gou_lsa, :pub_die_arm, :pub_die_ciu, :pub_die_sfi, :pub_die_lsa,
+          :total_inversion, :estatus, :fecha_reg, :usuario_reg, :estatus_reg)");
+
+          $sentencia->bindParam(':nro_empresa',$txtNro_empresa,PDO::PARAM_INT);
+          $sentencia->bindParam(':pub_dub_arm',$txtpub_dub_arm,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_dub_ciu',$txtpub_dub_ciu,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_dub_sfi',$txtpub_dub_sfi,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_dub_lsa',$txtpub_dub_lsa,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_moz_arm',$txtpub_moz_arm,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_moz_ciu',$txtpub_moz_ciu,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_moz_sfi',$txtpub_moz_sfi,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_moz_lsa',$txtpub_moz_lsa,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_gou_arm',$txtpub_gou_arm,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_gou_ciu',$txtpub_gou_ciu,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_gou_sfi',$txtpub_gou_sfi,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_gou_lsa',$txtpub_gou_lsa,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_die_arm',$txtpub_die_arm,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_die_ciu',$txtpub_die_ciu,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_die_sfi',$txtpub_die_sfi,PDO::PARAM_STR);
+          $sentencia->bindParam(':pub_die_lsa',$txtpub_die_lsa,PDO::PARAM_STR); 
+          $sentencia->bindParam(':total_inversion',$txtTotal_inversion,PDO::PARAM_STR);
+          $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
+          $sentencia->bindParam(':fecha_reg',$txtFecha_reg);
+          $sentencia->bindParam(':usuario_reg',$txtUsuario_reg,PDO::PARAM_INT);
+          $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
+          $sentencia->execute();
+          
+          $mensaje_usuario="Publicidad Creada Satisfactoriamente";
+          $procesar="listo";
+
+        }else{
+          //echo "<script> alert('Ya existe ...'); </script>";
+            $sentencia=$pdo->prepare("UPDATE publicidad SET
+            pub_dub_arm=:pub_dub_arm,
+            pub_dub_ciu=:pub_dub_ciu,
+            pub_dub_sfi=:pub_dub_sfi,
+            pub_dub_lsa=:pub_dub_lsa,
+            pub_moz_arm=:pub_moz_arm,
+            pub_moz_ciu=:pub_moz_ciu,
+            pub_moz_sfi=:pub_moz_sfi,
+            pub_moz_lsa=:pub_moz_lsa,
+            pub_gou_arm=:pub_gou_arm,
+            pub_gou_ciu=:pub_gou_ciu,
+            pub_gou_sfi=:pub_gou_sfi,
+            pub_gou_lsa=:pub_gou_lsa,
+            pub_die_arm=:pub_die_arm,
+            pub_die_ciu=:pub_die_ciu,
+            pub_die_sfi=:pub_die_sfi,
+            pub_die_lsa=:pub_die_lsa,
+            total_inversion=:total_inversion WHERE
+            nro=:nro");
+            
+            $sentencia->bindParam(':nro',$Nro_publicidad,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_dub_arm',$txtpub_dub_arm,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_dub_ciu',$txtpub_dub_ciu,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_dub_sfi',$txtpub_dub_sfi,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_dub_lsa',$txtpub_dub_lsa,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_moz_arm',$txtpub_moz_arm,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_moz_ciu',$txtpub_moz_ciu,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_moz_sfi',$txtpub_moz_sfi,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_moz_lsa',$txtpub_moz_lsa,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_gou_arm',$txtpub_gou_arm,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_gou_ciu',$txtpub_gou_ciu,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_gou_sfi',$txtpub_gou_sfi,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_gou_lsa',$txtpub_gou_lsa,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_die_arm',$txtpub_die_arm,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_die_ciu',$txtpub_die_ciu,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_die_sfi',$txtpub_die_sfi,PDO::PARAM_STR);
+            $sentencia->bindParam(':pub_die_lsa',$txtpub_die_lsa,PDO::PARAM_STR);
+            $sentencia->bindParam(':total_inversion',$txtTotal_inversion,PDO::PARAM_STR);
+            $sentencia->execute();
+
+            $mensaje_usuario="Publicidad Actualizada Satisfactoriamente";
+            $procesar="listo";
+            $error_accion=0; 
+        }
 
     break;
 

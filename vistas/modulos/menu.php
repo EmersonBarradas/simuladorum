@@ -36,6 +36,17 @@
                 </a>
             </li>
             <li class="nav-header">SIMULACIÓN</li>
+            <?php if ($usuariosesion['tipo']=="A"){ ?>
+                <li class="nav-item">
+                    <a href="../vistas/entorno-seleccion.php" class="nav-link">
+                    <i class="nav-icon fas fa-blog"></i>
+                    <p>
+                        Seleccionar Empresa
+                        <span class="badge badge-info right"></span>
+                    </p>
+                    </a>
+                </li>
+            <?php } ?>
             <li class="nav-item">
                 <a href="../vistas/bitacora.php" class="nav-link">
                 <i class="nav-icon fas fa-blog"></i>
@@ -75,7 +86,7 @@
                 <a href="../vistas/amp-cto.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    Costos [AMP]
+                    Costo AMP
                 </p>
                 </a>
             </li>
@@ -107,7 +118,7 @@
                 <a href="../vistas/apt-cto.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    Costos Almacén [APT]
+                    Costo APT
                 </p>
                 </a>
             </li>
@@ -115,7 +126,7 @@
                 <a href="../vistas/apt-despacho-tienda.php" class="nav-link">
                 <i class="nav-icon fas fa-store-alt"></i>
                 <p>
-                    APT-Despacho Tiendas
+                    APT Despacho Tiendas
                 </p>
                 </a>
             </li>
@@ -196,8 +207,7 @@
                 </a>
             </li>
             -->
-            <?php 
-               if ($usuariosesion['tipo']=="A"){ ?>
+            <?php if ($usuariosesion['tipo']=="A"){ ?>
 
                 <li class="nav-item">
                     <a href="../vistas/simulacion.php" class="nav-link">
@@ -208,9 +218,9 @@
                     </p>
                     </a>
                 </li>
-                <?php
-               };
-            ?>
+            <?php }; ?>
+
+            <?php if ($usuariosesion['tipo']=="A"){ ?>
 
                 <li class="nav-item">
                     <a href="../vistas/simulacion-final.php" class="nav-link">
@@ -221,6 +231,7 @@
                     </p>
                     </a>
                 </li>
+            <?php }; ?>
 
             <!--
             <li class="nav-item">

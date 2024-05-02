@@ -17,13 +17,54 @@
 
   // Selección de Almacén
   if ($txtUsuarioTipo=="A") {
-    $sentencia=$pdo->prepare("SELECT * FROM `amp` WHERE estatus='A'");
+    // Asigno la empresa seleccionada
+    $NroEmpresa=$_SESSION['nro_empresa'];
+
+    // Selecciono la empresa
+    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+    $sentencia->execute();
+    $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cant_empresa=$sentencia->rowCount(); 
+
+    $sentencia=$pdo->prepare("SELECT * FROM `amp` WHERE estatus='A' AND nro_empresa=$NroEmpresa");
     $sentencia->execute();
     $listado_amp=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
     $cant_amp=$sentencia->rowCount();
-    // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-    //print_r($cant_amp);
+    if ($cant_amp>=1){
+        foreach($listado_amp as $amp){
+          $NroAMP=$amp['nro'];
+          $txtCant_capmax_lc=$amp['cant_capmax_lc'];
+          $txtCant_existencia_lc=$amp['cant_existencia_lc'];
+          $txtCant_capdisp_lc=$amp['cant_capdisp_lc'];
+          $txtCant_capmax_ad=$amp['cant_capmax_ad'];
+          $txtCant_existencia_ad=$amp['cant_existencia_ad'];
+          $txtCant_capdisp_ad=$amp['cant_capdisp_ad'];
+        }
+
+        // selecciona movimientos de almacen------------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `amp_mov` WHERE estatus='A' AND nro_empresa=$NroEmpresa");
+        $sentencia->execute();
+        $listado_amp_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_amp_mov=$sentencia->rowCount();
+        if ($cant_amp_mov>=1){
+
+        }else{
+          $encontrado="NO";
+          $txtEmpresa="";
+          $procesar="Listo"; //Muestra Vista normal
+          $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+          $mensaje_usuario="No hay movimientos registrados";
+        }
+        // --------------------------------------------------------------------------------------------------
+                        
+      }else {
+        $encontrado="NO";
+        $txtEmpresa="";
+        $procesar="listo"; //Muestra Vista normal
+        $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+        $mensaje_usuario="No se encontró almacén de materia prima";
+      } 
+
 
   }else{
     // Selección de empresa del usuario -------------------------------------------------------------------------

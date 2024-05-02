@@ -152,7 +152,7 @@ include "../controladores/enlaces.php";
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label for="txtFecha">Fecha</label>
-                                                        <input type="date" class="form-control" name="txtFecha" placeholder="" value="<?php echo $txtFecha;?>">
+                                                        <input type="date" class="form-control" name="txtFecha" placeholder="" value="<?php echo $txtFecha;?>" required>
                                                     </div>
                                                 </div>
                                             </div>

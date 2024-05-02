@@ -53,7 +53,9 @@ include "../controladores/enlaces.php";
 
                     <!-- Íconos Generales -->
                         <div class="col-md-4" style="padding: 0 0 15px 0;">
-                            <a href="pcm-mod-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <?php if ($txtUsuarioTipo!="A") {?>
+                                <a href="pcm-mod-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <?php } ?>
                             <a href="pcm-mod-operador.php"type="button" class="btn btn-primary"><i class="fa fa-address-card"></i> Operadores</a>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
@@ -112,7 +114,7 @@ include "../controladores/enlaces.php";
 
                     <!-- Tabla de movimientos -->
                         <div class="col-12" style="padding: 0px 0px 0px 0px;">
-                            <div class="card">
+                            <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title"><b>Movimientos PCM Mod</b></h3>
 
@@ -127,7 +129,7 @@ include "../controladores/enlaces.php";
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                <div class="card-body table-responsive p-0" style="height: 350px;">
                                     <table class="table table-head-fixed text-nowrap">
                                         <thead>
                                             <tr>
@@ -166,8 +168,15 @@ include "../controladores/enlaces.php";
                                                     <td> <?php echo $pcm_mod_mov['monto_pago_adicional']; ?></td>
                                                     <td> <?php echo $pcm_mod_mov['monto_total_jornada']; ?></td>
                                                     <td> <?php echo $pcm_mod_mov['emoji1']; ?></td>
-                                                    <td> <?php echo $pcm_mod_mov['emoji2']; ?></td>
-                                                    <td><a href="#"><i class="fas fa-file"></i></a>&nbsp;<a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;<a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                                                    <td> <?php echo $pcm_mod_mov['emoji2']; ?></td>                                                    
+                                                    <td>
+                                                        <form action="" method="">
+                                                            <input type="hidden" name="txtvariable" value="<?php echo "";?>">
+                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                                            <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
+                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>

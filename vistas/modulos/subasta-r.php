@@ -109,13 +109,15 @@
               // print_r("</br>");
               // print_r("Almacén: ".$txtNro_AMP);
 
-              if( ($txtCant_litros_lc<=0) or ($txtCant_litros_ad<=0) or ($txtMonto_precio_lc<=0) or ($txtMonto_precio_ad<=0) ){
+
+              if( ($txtMonto_total_usb_lc<=0) AND ($txtMonto_total_usb_ad<=0)){
                 $procesar="ok"; //Muestra Vista normal
                 $error_accion=2; // Valor 0 si todo va normal
                 $mensaje_usuario="Los campos numéricos no pueden ser cero (0)"; // Vacío en inicalización
               }else{
                 $calcular="SI";
               }
+              
 
           break;
 
@@ -125,7 +127,7 @@
               
               $txtNro_AMP=($_POST["txtNro_AMP"]);
 
-              if( ($txtCant_litros_lc<=0) or ($txtCant_litros_ad<=0) or ($txtMonto_precio_lc<=0) or ($txtMonto_precio_ad<=0) ){
+              if( ($txtMonto_total_usb_lc<=0) AND ($txtMonto_total_usb_ad<=0)){
                 $procesar="ok"; //Muestra Vista normal
                 $error_accion=2; // Valor 0 si todo va normal
                 $mensaje_usuario="Los campos numéricos no pueden ser cero (0)"; // Vacío en inicalización
@@ -213,7 +215,7 @@
                 $txtCant_salida_lc=0.00;
                 $txtCant_total_lc=$cant_existencia_lc;
                 $txtTipo_mov_ad="C";
-                $txtCant_entrada_ad=($_POST["txtCant_litros_lc"]);
+                $txtCant_entrada_ad=($_POST["txtCant_litros_ad"]);
                 $txtCant_salida_ad=0.00;
                 $txtCant_total_ad=$cant_existencia_ad;
                 $txtEstatus="A";

@@ -55,32 +55,40 @@ include "../controladores/enlaces.php";
                             <h3>Almacén Leche Cruda (LC)</h3>
                         </div>
                         <div class="col-md-6" style="padding: 10px 0px 10px 10px;">
-                            <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <?php if ($txtUsuarioTipo!="A") {?>
+                                <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <?php } ?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>
                         <div class="col-md-6">
                             
                         </div>
+                    <!-- DIV Empresa-->
                         <div class="col-md-3">
-                            <div class="form-group" style="padding-top: 20px;">
+                            <div class="form-group">
                                 <label for="txtEmpresa">Empresa</label>
-                                <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtEmpresa; ?>">
+                                <select class="form-control" name="txtEmpresa">
+                                    <?php foreach ($listado_empresa as $empresa) { ?>
+                                        <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                    <!-- /. Fin DIV Empresa-->
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_capmax_lc">Capacidad Máxima LC</label>
                                 <input type="text" class="form-control" name="txtCant_capmax_lc" placeholder="" value="<?php echo $txtCant_capmax_lc; ?>">
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_existencia_lc">Existencia LC</label>
                                 <input type="text" class="form-control"  name="txtCant_existencia_lc" placeholder="" value="<?php echo $txtCant_existencia_lc; ?>">
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_capdisp_lc">Capacidad Disponible LC</label>
                                 <input type="text" class="form-control" name="txtCant_capdisp_lc" placeholder="" value="<?php echo $txtCant_capdisp_lc; ?>">
@@ -132,11 +140,6 @@ include "../controladores/enlaces.php";
                                                         <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
                                                         <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
                                                         <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
-                                                        <!-- 
-                                                            <button class="btn btn-primary" type="submit" value="btnconsultar" name="btnaccion"><i class="fas fa-file"></i></button>
-                                                            <button class="btn btn-primary" type="submit" value="btneditar" name="btnaccion"><i class="fas fa-file-alt"></i></button>
-                                                            <button class="btn btn-primary" type="submit" value="btneliminar" name="btnaccion"><i class="fas fa-trash-alt"></i></button>
-                                                        -->
                                                     </form>
                                                 </td>
                                             </tr>
@@ -163,32 +166,39 @@ include "../controladores/enlaces.php";
                             <h3>Almacén Aditivo (AD)</h3>
                         </div>
                         
-                        <div class="col-md-12" style="padding-top: 10px;">
+                        <div class="col-md-12" style="padding: 10px 0px 10px 10px;">
                             <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>
 
 
-                        <div class="col-md-3">
-                            <div class="txtEmpresa" style="padding-top: 20px;">
-                                <label for="texto">Empresa</label>
-                                <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtEmpresa; ?>">
+                    <!-- DIV Empresa-->
+                    <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtEmpresa">Empresa</label>
+                                <select class="form-control" name="txtEmpresa">
+                                    <?php foreach ($listado_empresa as $empresa) { ?>
+                                        <option value="<?php echo $empresa['nro']; ?>"> <?php echo $empresa['nombre']; ?> </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                    <!-- /. Fin DIV Empresa-->
+
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_capmax_ad">Capacidad Máxima AD</label>
                                 <input type="text" class="form-control" name="txtCant_capmax_ad" placeholder="" value="<?php echo $txtCant_capmax_ad; ?>">
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_existencia_ad">Existencia AD</label>
                                 <input type="text" class="form-control"  name="txtCant_existencia_ad" placeholder="" value="<?php echo $txtCant_existencia_ad; ?>">
                             </div>
                         </div>
-                        <div class="col-md-3" style="padding-top: 20px;">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txtCant_capdisp_ad">Capacidad Disponible AD</label>
                                 <input type="text" class="form-control" name="txtCant_capdisp_ad" placeholder="" value="<?php echo $txtCant_capdisp_ad; ?>">

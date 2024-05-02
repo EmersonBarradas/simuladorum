@@ -310,6 +310,7 @@ include "../controladores/enlaces.php";
                     <!-- /. Fin Tabla de movimientos -->
                     
                     <!-- /. Div CTA -->
+                    <?php if ($txtUsuarioTipo!="A") {?>
                         <!-- DIV btnCalcular-->
                             <div class="col-md-2">
                                 <div class="form-group">
@@ -341,6 +342,7 @@ include "../controladores/enlaces.php";
                         <!-- /. Fin DIV btnGuardar-->
                         
                     <!-- /. Fin Div CTA -->
+                    <?php }?>
 
                     </div>
                     <!-- /. Fin Row principal de formulario -->
@@ -413,7 +415,7 @@ include "../controladores/enlaces.php";
                                     <div class="col-md-6">
                                         <div class="row justify-content-center">
                                             <div class="col-md-4">
-                                                <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                                <a href="publicidad.php" type="button" class="btn btn-primary btn-block">Volver</a>
                                             </div>
                                         </div>
                                     </div>

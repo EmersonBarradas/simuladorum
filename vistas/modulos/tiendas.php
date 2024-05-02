@@ -18,13 +18,50 @@
 
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_entorno=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
+        $txtNro_empresa=$NroEmpresa;
 
-      $cant_entorno=$sentencia->rowCount();
-      // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-      //print_r($cant_entorno);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
+        // Selecciono el almacén tiendas ---------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `tiendas` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_tiendas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_tiendas=$sentencia->rowCount();
+
+        if($cant_tiendas>=1){
+          foreach($listado_tiendas as $tiendas){
+            $nro_tiendas=$tiendas['nro'];
+            $txtCant_cap_almacen=$tiendas['cant_cap_almacen'];
+            $txtCant_existencia=$tiendas['cant_existencia'];
+            $txtCant_cap_disp=$tiendas['cant_cap_disp'];
+          }
+          // Selecciono los movimientos de las tiendas ---------------------------------------------------------------
+          $sentencia=$pdo->prepare("SELECT * FROM `tiendas_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+          $sentencia->execute();
+          $listado_tiendas_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+          $cant_tiendas_mov=$sentencia->rowCount();
+          
+          if($cant_tiendas_mov>=1){
+            // Selecciono las existencias de queso ---------------------------------------------------------------
+              $sentencia=$pdo->prepare("SELECT * FROM `tiendas_existe` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+              $sentencia->execute();
+              $listado_tiendas_existe=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+              $cant_tiendas_existe=$sentencia->rowCount();
+              if($listado_tiendas_existe>=1){
+                $temporal="SI";
+              }else{
+                $procesar="listo"; //Muestra Vista normal
+                $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+                $mensaje_usuario="No se encontraron las existencias de la empresa"; // Vacío en inicalización
+              }
+
+          }
+        }
 
     }else{
       // Selección de empresa del usuario -------------------------------------------------------------------------

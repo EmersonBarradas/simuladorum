@@ -19,13 +19,61 @@
 
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_entorno=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
+        $txtNro_empresa=$NroEmpresa;
 
-      $cant_entorno=$sentencia->rowCount();
-      // echo "<script> alert('El usuario es ADMINISTRADOR...'); </script>";
-      //print_r($cant_entorno);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
+        // Selección los despachos de la empresa empresa ---------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `despacho` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_despacho=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_despacho=$sentencia->rowCount();
+
+        if($cant_despacho>=1){
+          foreach($listado_despacho as $despacho) {
+            $nro_despacho=$despacho['nro'];
+          }
+        }else{
+          $procesar="Listo"; //Muestra Vista normal
+          $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+          $mensaje_usuario="No hay despachos registrados de la empresa"; // Vacío en inicalización      
+          $btnDespacho="SI";
+        }
+        //-----------------------------------------------------------------------------------------------------
+
+        // Selección Depósito AMP de la empresa ---------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_pcm=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_pcm=$sentencia->rowCount();
+        if($cant_pcm>=1){
+
+        }else{
+          $procesar="Listo"; //Muestra Vista normal
+          $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+          $mensaje_usuario="No se encontró depósito de producción (PCM)"; // Vacío en inicalización 
+        }
+        //------------------------------------------------------------------------------------------------------
+
+        // Selección Depósito APT de la empresa ---------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_apt_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_apt_mov=$sentencia->rowCount();
+        if($cant_apt_mov>=1){
+
+        }else{
+          $procesar="Listo"; //Muestra Vista normal
+          $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+          $mensaje_usuario="No se encontró movimientos de almacén APT"; // Vacío en inicalización 
+        }
+       // ----------------------------------------------------------------------------------------------------------
+    
 
     }else{
       // Selección de empresa del usuario -------------------------------------------------------------------------
@@ -91,14 +139,6 @@
           $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
           $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización  
         }
-
-          
-
-      
-          
-
-      
-
       
     }
   // /. Fin selección empresa--------------------------------------------------------------------------------

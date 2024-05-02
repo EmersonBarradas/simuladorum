@@ -25,7 +25,7 @@ include "../controladores/enlaces.php";
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Tiendas</a></li>
+                <li class="breadcrumb-item"><a href="tiendas.php">Tiendas</a></li>
                 <li class="breadcrumb-item active">Tiendas</li>
                 </ol>
             </div><!-- /.col -->
@@ -52,7 +52,9 @@ include "../controladores/enlaces.php";
                     <!-- /. Fin del mensaje -----------------------------------------------  -->
                     <!-- Íconos Generales -->
                     <div class="col-md-12" style="padding: 0px 10px 20px 10px;">
+                        <?php if ($txtUsuarioTipo!="A") {?>
                             <a href="despacho-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php }?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>

@@ -155,21 +155,6 @@ include "../controladores/enlaces.php";
                         </div>
                         <!--/. Fin tabla de contenido -->
 
-                    <!-- Div CTA -->
-                        <div class="col-md-12">
-                            <div class="row justify-content-left">
-                                <div class="col-md-4">
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Producir">
-                                    <?php if ($calcular=="SI"){ ?>
-                                        <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar">
-                                    <?php } ?>
-                                    <input type="submit" class="btn btn-primary" name="btn_accion" value="Cancelar">
-                                    <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
-                                    <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-window-close"></i> &nbsp; Cancelar</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    <!-- /. Fin Div CTA -->
 
                 <!-- /. Instrucciones si no se va a procesar -->
                 <?php }else{ ?>

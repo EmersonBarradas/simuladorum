@@ -26,8 +26,9 @@
     if($numeroRegistros>=1){
       session_start();
       $_SESSION['usuario']=$registro;
+      $_SESSION['nro_empresa']=0;
       echo "Bienvenido...";
-      header('Location:vistas/inicio.php');
+      header('Location:vistas/entorno-seleccion.php');
     }else{
       echo "No se encontraron registros";
     }

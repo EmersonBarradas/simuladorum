@@ -52,7 +52,9 @@ include "../controladores/enlaces.php";
                     
                     <!-- Div Opciones generales -----------------------------------------------  -->
                     <div class="col-md-6" >
-                        <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php if ($txtUsuarioTipo!="A") {?>
+                            <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php }?>
                         <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                         <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                     </div>
@@ -150,9 +152,9 @@ include "../controladores/enlaces.php";
                                                     <input type="hidden" name="txtUsuario_reg" value="<?php echo $compras_subasta['usuario_reg'];?>">
                                                     <input type="hidden" name="txtProducto" value="LC">
 
-                                                    <input class="btn btn-primary" type="submit" name="btn_accion" value="C">
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="C">
                                                     <!-- <input class="btn btn-primary" type="submit" name="btn_accion" value="E" readonly> -->
-                                                    <input class="btn btn-primary" type="submit" name="btn_accion" value="X">
+                                                    <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">
                                                     <!-- <a href="#"><i class="fas fa-file"></i></a>&nbsp;
                                                     <a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;
                                                     <a href="#"><i class="fas fa-trash-alt"></i></a> -->

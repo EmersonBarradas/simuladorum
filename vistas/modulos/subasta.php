@@ -19,14 +19,22 @@
 
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
+        // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
 
-      $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
 
-      $cant_compras_subasta=$sentencia->rowCount();
-      // echo "<script> alert('Se encontraron ".$cant_compras_subasta." registros...'); </script>";
-      //print_r($cant_compras_subasta);
+        // Selecciono la compra_subasta
+        $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A' AND empresa=$NroEmpresa");
+        $sentencia->execute();
+        $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_compras_subasta=$sentencia->rowCount();
+        // echo "<script> alert('Se encontraron ".$cant_compras_subasta." registros...'); </script>";
+        //print_r($cant_compras_subasta);
 
     }else{
         // Selección de empresa del usuario -------------------------------------------------------------------------
@@ -45,13 +53,13 @@
             $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'AND empresa=$NroEmpresa");
             $sentencia->execute();
             $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
             $cant_compras_subasta=$sentencia->rowCount();
             // echo "<script> alert('Se encontraron".$cant_compras_subasta."<script> El usuario es ADMINISTRADOR...'); </script>";
 
-            if ($cant_compras_subasta<1){
-                $SubastaMovimientos="NO";
-                $Mensaje_Mov="¡NO HAY REGISTROS DE ESTA EMPRESA!";
+            if ($cant_compras_subasta>=1){
+                foreach($listado_compras_subasta as $subasta){
+                    $Nro_subasta=$subasta['nro'];
+                }
             }else{
                 // Variables de Acción
                 $procesar="listo"; //Muestra Vista normal

@@ -207,13 +207,11 @@ include "../controladores/enlaces.php";
                                 <?php } ?>    
                             </div>
                             <div class="col-md-12">
-                                <form action="pcm-mod-operador-r.php" method="post">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                        </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-2">
+                                        <a href="pcm-mod.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         <?php } ?>
 

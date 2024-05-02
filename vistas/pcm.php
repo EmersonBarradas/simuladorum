@@ -51,7 +51,9 @@
                     
                     <!-- CTA Generales  --------------------------------------------------->
                     <div class="col-md-6" >
-                        <a href="pcm-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php if ($txtUsuarioTipo!="A") {?>
+                            <a href="pcm-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php }?>
                         <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                         <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                     </div>
@@ -120,9 +122,9 @@
                                                 <input type="hidden" name="txtEstatus" value="<?php echo $PCM['estatus'];?>">
                                                 <input type="hidden" name="txtUsuario_reg" value="<?php echo $PCM['usuario_reg'];?>">
 
-                                                <input class="btn btn-primary" type="submit" name="btn_accion" value="C">
+                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="C">
                                                 <!-- <input class="btn btn-primary" type="submit" name="btn_accion" value="E" readonly> -->
-                                                <input class="btn btn-primary" type="submit" name="btn_accion" value="X">
+                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">
                                                 <!-- <a href="#"><i class="fas fa-file"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-trash-alt"></i></a> -->
@@ -163,7 +165,7 @@
                                         <div class="row justify-content-center">
                                             <?php if($SubastaMovimientos=="NO") { ?>
                                                 <div class="col-md-3">
-                                                    <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                                                    <a href="pcm-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> &nbsp; Producir</a>
                                                 </div>
                                             <?php } ?>
                                             <div class="col-md-3">

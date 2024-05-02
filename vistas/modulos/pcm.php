@@ -20,13 +20,25 @@
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
 
-      $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
 
-      $cant_compras_subasta=$sentencia->rowCount();
-      // echo "<script> alert('Se encontraron ".$cant_compras_subasta." registros...'); </script>";
-      //print_r($cant_compras_subasta);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
+
+        // Seleccionar produccción de la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+        $sentencia->execute();
+        $listado_PCM=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_PCM=$sentencia->rowCount();
+        if($cant_PCM>=1){
+            foreach($listado_PCM as $PCM){
+                $nro_PCM=$PCM['nro'];
+            }
+        }
 
     }else{
         // Selección de empresa del usuario -------------------------------------------------------------------------
@@ -53,7 +65,7 @@
                 }
             }else{
                 $SubastaMovimientos="NO";
-                $Mensaje_Mov="¡NO HAY REGISTROS DE ESTA EMPRESA!";
+                $Mensaje_Mov="¡No hay registros de esta empresa!";
                 $procesar="listo"; //Muestra Vista normal
                 $error_accion=2; // Valor 0 si todo va normal
                 $mensaje_usuario="No hay movimientos de producción"; // Vacío en inicalización

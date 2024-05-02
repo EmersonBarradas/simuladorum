@@ -236,7 +236,7 @@
       case "Cancelar";
           // echo "<script> alert('Quieres cancelar Operación...'); </script>";
           $procesar="ok";
-          header('Location:pcm-mod-operador.php');
+          header('Location:pcm-mod.php');
       break;
 
       case "Aceptar";

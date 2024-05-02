@@ -59,7 +59,9 @@ include "../controladores/enlaces.php";
 
                     <!-- Íconos Generales -->
                         <div class="col-md-12" style="padding: 0px 10px 20px 10px;">
+                        <?php if ($txtUsuarioTipo!="A") {?>
                             <a href="despacho-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <?php }?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>

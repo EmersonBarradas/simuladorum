@@ -42,8 +42,6 @@
                 <div class="col-md-10" style="padding: 0px 0px 20px 10px;">
                     <?php if($cantRegistros>=1) { ?>
                         <!-- <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a> -->
-                        <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
-                        <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                     <?php } ?>
                 </div>
                 <?php  if ($mensaje_usuario!=""){ ?>
@@ -56,6 +54,12 @@
                     </div>
                 <?php } ?>
                 <?php if($cantRegistros==1){ ?>
+                        <div class="col-md-12">
+                            <h2 class="text-center"> ¿Desea Finalizar la Simulación?</h2>
+                        </div>
+                        <div class="col-md-12">
+                            <p class="text-center">Al finalizar la simulación todos los datos serán eliminados</p>
+                        </div>
                         <div class="col-md-10">
                             <!-- Tarjeta -->
                             <div class="card card-primary">

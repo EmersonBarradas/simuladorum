@@ -21,13 +21,26 @@
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
 
-      $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus='A'");
-      $sentencia->execute();
-      $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        // Asigno la empresa seleccionada
+        $NroEmpresa=$_SESSION['nro_empresa'];
 
-      $cant_compras_subasta=$sentencia->rowCount();
-      // echo "<script> alert('Se encontraron ".$cant_compras_subasta." registros...'); </script>";
-      //print_r($cant_compras_subasta);
+        // Selecciono la empresa
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia->execute();
+        $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_empresa=$sentencia->rowCount(); 
+
+        // Selecciona los costos de almacen
+        $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+        $sentencia->execute();
+        $listado_AMP_CTO=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_listado_AMP_CTO=$sentencia->rowCount();
+        if($cant_listado_AMP_CTO>=1){
+            foreach($listado_AMP_CTO as $AMP_CTO){
+                $Nro_amp_cto=$AMP_CTO['nro'];
+            }
+        }
+
 
     }else{
         // Selección de empresa del usuario -------------------------------------------------------------------------

@@ -473,7 +473,7 @@ include "../controladores/enlaces.php";
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="row justify-content-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <a href="despacho.php"type="button" class="btn btn-primary btn_block">Aceptar</a>
                                             </div>
                                         </div>
