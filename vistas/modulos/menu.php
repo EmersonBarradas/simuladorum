@@ -196,6 +196,15 @@
                 <?php
                };
             ?>
+            <li class="nav-item">
+                <a href="../vistas/calendario.php"  class="nav-link">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                    Calendario
+                    <span class="badge badge-info right"></span>
+                </p>
+                </a>
+            </li>
             <!--
             <li class="nav-item">
                 <a href="../vistas/usuarios.php"  class="nav-link">
@@ -233,38 +242,7 @@
                 </li>
             <?php }; ?>
 
-            <!--
-            <li class="nav-item">
-                <a href="../vistas/simulacion.php" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
-                <p>
-                    Simulación
-                    <span class="badge badge-info right"></span>
-                </p>
-                </a>
-            </li>
-            -->
-            <!--
-            <li class="nav-item">
-                <a href="../vistas/grupos.php" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>  
-                <p>
-                    Grupos
-                    <span class="badge badge-info right"></span>
-                </p>
-                </a>
-            </li>
-            -->
-            <li class="nav-item">
-                <a href="../vistas/calendario.php"  class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                    Calendario
-                    <span class="badge badge-info right"></span>
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="../vistas/variables.php" class="nav-link">
                 <i class="nav-icon fas fa-subscript"></i> 
                 <p>
@@ -273,6 +251,7 @@
                 </p>
                 </a>
             </li>
+            -->
             <li class="nav-item">
                 <a href="../vistas/cerrarsesion.php"  class="nav-link">
                 <i class="nav-icon far fa-times-circle"></i>

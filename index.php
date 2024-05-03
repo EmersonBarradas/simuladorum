@@ -53,7 +53,7 @@
 
             <div class="row justify-content-center" style="padding: 40px 40px; ">
                 <div class="col-sm-2 col-md-2">
-                    <a class="btn btn-primary" href="iniciar-sesion.php" role="button">Comenzar</a>
+                    <a class="btn btn-primary btn-block" href="iniciar-sesion.php" role="button">Comenzar</a>
                 </div>
             </div>
     

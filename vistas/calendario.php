@@ -633,7 +633,7 @@ include "../controladores/enlaces.php";
                     <!-- Íconos Generales -->
                     <div class="col-sm-4 col-md-2 col-" style="padding: 20px 0px 0px 0px;">
                         <?php if($txtUsuarioTipo=="A") { ?>
-                            <a href="calendario-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <a href="calendario-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo</a>
                         <?php } ?>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
     
     $txtEmail=($_POST["txtEmail"]);
     $txtPassword=($_POST["txtPassword"]);
-
+    
     $sentenciaSQL=$pdo->prepare("SELECT * FROM tblusuarios 
     WHERE usuario=:usuario 
     AND clave=:clave");
@@ -17,20 +17,26 @@
     $sentenciaSQL->bindParam("usuario",$txtEmail,PDO::PARAM_STR);
     $sentenciaSQL->bindParam("clave",$txtPassword,PDO::PARAM_STR);
     $sentenciaSQL->execute();
-
     $registro=$sentenciaSQL->fetch(PDO::FETCH_ASSOC);
-    //print_r($registro); 
-
     $numeroRegistros=$sentenciaSQL->rowCount();
+
+    $tipousuario="N";
     
     if($numeroRegistros>=1){
       session_start();
       $_SESSION['usuario']=$registro;
       $_SESSION['nro_empresa']=0;
-      echo "Bienvenido...";
-      header('Location:vistas/entorno-seleccion.php');
+      $tipousuario=$registro['tipo'];
+
+      if($tipousuario=="A"){
+        header('Location:vistas/entorno-seleccion.php');
+      }else {
+        header('Location:vistas/inicio.php');
+      }
+      
     }else{
       echo "No se encontraron registros";
     }
-  }
+
+}
 ?>

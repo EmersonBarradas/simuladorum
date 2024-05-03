@@ -100,13 +100,13 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <?php if($cantRegistros>=1) { ?>
+
                                             <div class="row justify-content-center">
                                                 <div class="col-md-2">
-                                                    <input type="submit" class="btn btn-primary btn-block" value="Finalizar" name="btn_accion">
+                                                    <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
                                             </div>
-                                        <?php } ?>
+
                                     </div>
 
                                 </form>
