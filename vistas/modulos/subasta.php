@@ -63,7 +63,7 @@
             }else{
                 // Variables de Acción
                 $procesar="listo"; //Muestra Vista normal
-                $error_accion=2; // Valor 0 si todo va normal
+                $error_accion=3; // Valor 0 si todo va normal
                 $SubastaMovimientos="NO";
                 $mensaje_usuario="No Hay Movimientos de compra"; // Vacío en inicalización
             }

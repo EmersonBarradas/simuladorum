@@ -69,7 +69,7 @@
                                 </div>
                                 <!-- / cabecera de tarjeta -->
                                 <!-- Inicio formulario -->
-                                <form action="simulacion.php" method="post">
+                                <form action="simulacion-final.php" method="post">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -92,6 +92,12 @@
                                                     <input type="input" class="form-control" placeholder="Estatus de la Simulación" name="txtEstatus" value="<?php echo $txtEstatus; ?>">
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="txtEstatus">Finalizar</label>
+                                                    <input type="input" class="form-control" placeholder="Finalizar" name="txtFinalizar" value="<?php echo $finalizar; ?>">
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
@@ -99,7 +105,7 @@
                                                     </div>
                                                     <textarea class="form-control" aria-label="With textarea" name="txtDescripcion" > <?php echo $txtDescripcion; ?> </textarea>
                                                 </div>
-                                            </div>
+                                            </div>  
                                         </div>
                                     </div>
 

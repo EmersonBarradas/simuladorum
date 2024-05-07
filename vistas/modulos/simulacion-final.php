@@ -22,7 +22,7 @@
       $NroEmpresa=$_SESSION['nro_empresa'];
 
       // Selecciono la empresa
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");
       $sentencia->execute();
       $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       $cant_empresa=$sentencia->rowCount();
@@ -88,7 +88,7 @@
       break;
 
       case "Finalizar";
-        // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
+        //echo "<script> alert('Quieres Finalizar Registro...'); </script>";
         
         if($finalizar>0){
 
@@ -104,25 +104,29 @@
           // -------------------------------------------------------------------------------
 
 
-          // Finaliza la empresa-------------------------------------------------------------
             $estatus="F";
+            $estatus_actual="A";
+
+          // Finaliza la empresa-------------------------------------------------------------
             $sentencia=$pdo->prepare("UPDATE empresa SET 
             estatus=:estatus WHERE
-            nro=:nro");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
+
           // --------------------------------------------------------------------------------
 
           // Finaliza amp -------------------------------------------------------------------
-            $estatus="F";
             $sentencia=$pdo->prepare("UPDATE amp SET 
-            estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus  WHERE
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -130,10 +134,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE amp_cto SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -141,10 +146,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE amp_mov SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -152,10 +158,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE apt SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -163,10 +170,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE apt_dtienda SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -174,10 +182,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE apt_mov SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -185,10 +194,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE bitacora SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -196,10 +206,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE bitacora SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
           
@@ -207,10 +218,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE calendario SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
 
@@ -218,10 +230,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE compra_subasta SET 
             estatus=:estatus WHERE
-            empresa=:empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
           // --------------------------------------------------------------------------------
 
@@ -229,10 +242,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE despacho SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -240,10 +254,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE empresa SET 
             estatus=:estatus WHERE
-            nro=:nro");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
 
@@ -251,10 +266,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE pcm SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -262,10 +278,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE pcm SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -273,10 +290,10 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE pcm_mod_mov SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
-                  
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            estatus=:estatus_actual");
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -284,10 +301,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE pcm_mod_operador SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -295,10 +313,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE publicidad SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -306,10 +325,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE tiendas SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -317,10 +337,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE tiendas_existe SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
         
@@ -328,10 +349,11 @@
             $estatus="F";
             $sentencia=$pdo->prepare("UPDATE tiendas_mov SET 
             estatus=:estatus WHERE
-            nro_empresa=:nro_empresa");
+            estatus=:estatus_actual");
                   
-            $sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
+            //$sentencia->bindParam(':nro_empresa',$NroEmpresa,PDO::PARAM_STR);
             $sentencia->bindParam(':estatus',$estatus,PDO::PARAM_STR);
+            $sentencia->bindParam(':estatus_actual',$estatus_actual,PDO::PARAM_STR);
             $sentencia->execute();
         // --------------------------------------------------------------------------------
 

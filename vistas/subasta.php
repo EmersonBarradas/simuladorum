@@ -269,9 +269,15 @@ include "../controladores/enlaces.php";
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="row justify-content-center">
-                                            <div class="col-md-3">
-                                                <a href="entorno-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Empresa</a>
-                                            </div>
+                                            <?php if($error_accion==2) { ?>
+                                                <div class="col-md-4">
+                                                    <a href="entorno-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Empresa</a>
+                                                </div>
+                                            <?php }else { ?>
+                                                <div class="col-md-4">
+                                                    <a href="subasta-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Subasta / Compra</a>
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
