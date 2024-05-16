@@ -4,18 +4,50 @@
   include('../controladores/global/constantes.php');
 
 
-  //Datos del Usuario
+  //Datos del Usuario---------------------------------------------------------------------------------------
     $usuariosesion=($_SESSION['usuario']);
     $txtUsuario=$usuariosesion['nro'];
     $txtIdUsuario=$usuariosesion['id'];
     $txtUsuarioTipo=$usuariosesion['tipo'];
-  
-  // Variables de Acción
+  // ---------------------------------------------------------------------------------------------------------
+
+  // Variables de Acción---------------------------------------------------------------------------------------
     $procesar="ok"; //Muestra Vista normal
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
     $movimientos="NO";
+  // ---------------------------------------------------------------------------------------------------------
+
+  // Variables de datos---------------------------------------------------------------------------------------
+    $Estatus="A";
+  // ---------------------------------------------------------------------------------------------------------
+  
+  // Variables de Datos --------------------------------------------------------------------------------------
+    $listado_apt_dtienda=0;
+    $dub_ciclo_1=0.00;  $moz_ciclo_1=0.00;  $gou_ciclo_1=0.00;  $die_ciclo_1=0.00;
+    $dub_ciclo_2=0.00;  $moz_ciclo_2=0.00;  $gou_ciclo_2=0.00;  $die_ciclo_2=0.00;
+    $dub_ciclo_3=0.00;  $moz_ciclo_3=0.00;  $gou_ciclo_3=0.00;  $die_ciclo_3=0.00;
+    $dub_ciclo_4=0.00;  $moz_ciclo_4=0.00;  $gou_ciclo_4=0.00;  $die_ciclo_4=0.00;
+    $dub_ciclo_5=0.00;  $moz_ciclo_5=0.00;  $gou_ciclo_5=0.00;  $die_ciclo_5=0.00;
+    $dub_ciclo_6=0.00;  $moz_ciclo_6=0.00;  $gou_ciclo_6=0.00;  $die_ciclo_6=0.00;
+    $dub_ciclo_7=0.00;  $moz_ciclo_7=0.00;  $gou_ciclo_7=0.00;  $die_ciclo_7=0.00;
+    $dub_ciclo_8=0.00;  $moz_ciclo_8=0.00;  $gou_ciclo_8=0.00;  $die_ciclo_8=0.00;
+    $dub_ciclo_9=0.00;  $moz_ciclo_9=0.00;  $gou_ciclo_9=0.00;  $die_ciclo_9=0.00;
+    $dub_ciclo_10=0.00;  $moz_ciclo_10=0.00;  $gou_ciclo_10=0.00;  $die_ciclo_10=0.00;
+    $dub_ciclo_11=0.00;  $moz_ciclo_11=0.00;  $gou_ciclo_11=0.00;  $die_ciclo_11=0.00;
+    $dub_ciclo_12=0.00;  $moz_ciclo_12=0.00;  $gou_ciclo_12=0.00;  $die_ciclo_12=0.00;
+    $listado_apt_dtienda=[];
+  // ---------------------------------------------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+  // ------------------------------------------------------------------------------------
     
 
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
@@ -25,13 +57,17 @@
         $txtNro_empresa=$NroEmpresa;
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
 
         // Selecciono productos por despachar del almacén de productos terminados APT por ciclo -------------
-        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_apt_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_apt_mov=$sentencia->rowCount();
@@ -54,45 +90,73 @@
           foreach($listado_apt_mov as $apt_mov){
 
             if($apt_mov['ciclo']==1){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_1=$dub_ciclo_1+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_1=$moz_ciclo_1+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_1=$gou_ciclo_1+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_1=$die_ciclo_1+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_1=$dub_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_1=$moz_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_1=$gou_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_1=$die_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
             
             if($apt_mov['ciclo']==2){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_2=$dub_ciclo_2+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_2=$moz_ciclo_2+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_2=$gou_ciclo_2+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_2=$die_ciclo_2+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_2=$dub_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_2=$moz_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_2=$gou_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_2=$die_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
 
             if($apt_mov['ciclo']==3){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_3=$dub_ciclo_3+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_3=$moz_ciclo_3+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_3=$gou_ciclo_3+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_3=$die_ciclo_3+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_3=$dub_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_3=$moz_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_3=$gou_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_3=$die_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
             
             if($apt_mov['ciclo']==4){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_4=$dub_ciclo_4+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_4=$moz_ciclo_4+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_4=$gou_ciclo_4+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_4=$die_ciclo_4+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_4=$dub_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_4=$moz_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_4=$gou_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_4=$die_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
 
             if($apt_mov['ciclo']==5){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_5=$dub_ciclo_5+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_5=$moz_ciclo_5+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_5=$gou_ciclo_5+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_5=$die_ciclo_5+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_5=$dub_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_5=$moz_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_5=$gou_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_5=$die_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
 
             if($apt_mov['ciclo']==6){
-              if($apt_mov['nro_queso']==1){$dub_ciclo_6=$dub_ciclo_6+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==2){$moz_ciclo_6=$moz_ciclo_6+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==3){$gou_ciclo_6=$gou_ciclo_6+$apt_mov['cant_entrada']; } 
-              if($apt_mov['nro_queso']==4){$die_ciclo_6=$die_ciclo_6+$apt_mov['cant_entrada']; } 
+              if($apt_mov['nro_queso']==1){$dub_ciclo_6=$dub_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_6=$moz_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_6=$gou_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_6=$die_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+            }
+            
+            if($apt_mov['ciclo']==7){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_7=$dub_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_7=$moz_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_7=$gou_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_7=$die_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+            }
+
+            if($apt_mov['ciclo']==8){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_8=$dub_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_8=$moz_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_8=$gou_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_8=$die_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+            }
+
+            if($apt_mov['ciclo']==9){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_9=$dub_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_9=$moz_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_9=$gou_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_9=$die_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+            }
+
+            if($apt_mov['ciclo']==10){
+              if($apt_mov['nro_queso']==1){$dub_ciclo_10=$dub_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==2){$moz_ciclo_10=$moz_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==3){$gou_ciclo_10=$gou_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              if($apt_mov['nro_queso']==4){$die_ciclo_10=$die_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
             }
 
             // Consulto los despachos preparados
@@ -141,45 +205,73 @@
             foreach($listado_apt_mov as $apt_mov){
 
               if($apt_mov['ciclo']==1){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_1=$dub_ciclo_1+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_1=$moz_ciclo_1+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_1=$gou_ciclo_1+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_1=$die_ciclo_1+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_1=$dub_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_1=$moz_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_1=$gou_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_1=$die_ciclo_1+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
               
               if($apt_mov['ciclo']==2){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_2=$dub_ciclo_2+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_2=$moz_ciclo_2+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_2=$gou_ciclo_2+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_2=$die_ciclo_2+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_2=$dub_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_2=$moz_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_2=$gou_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_2=$die_ciclo_2+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
-
+  
               if($apt_mov['ciclo']==3){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_3=$dub_ciclo_3+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_3=$moz_ciclo_3+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_3=$gou_ciclo_3+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_3=$die_ciclo_3+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_3=$dub_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_3=$moz_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_3=$gou_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_3=$die_ciclo_3+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
               
               if($apt_mov['ciclo']==4){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_4=$dub_ciclo_4+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_4=$moz_ciclo_4+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_4=$gou_ciclo_4+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_4=$die_ciclo_4+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_4=$dub_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_4=$moz_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_4=$gou_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_4=$die_ciclo_4+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
-
+  
               if($apt_mov['ciclo']==5){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_5=$dub_ciclo_5+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_5=$moz_ciclo_5+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_5=$gou_ciclo_5+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_5=$die_ciclo_5+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_5=$dub_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_5=$moz_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_5=$gou_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_5=$die_ciclo_5+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
-
+  
               if($apt_mov['ciclo']==6){
-                if($apt_mov['nro_queso']==1){$dub_ciclo_6=$dub_ciclo_6+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==2){$moz_ciclo_6=$moz_ciclo_6+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==3){$gou_ciclo_6=$gou_ciclo_6+$apt_mov['cant_entrada']; } 
-                if($apt_mov['nro_queso']==4){$die_ciclo_6=$die_ciclo_6+$apt_mov['cant_entrada']; } 
+                if($apt_mov['nro_queso']==1){$dub_ciclo_6=$dub_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_6=$moz_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_6=$gou_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_6=$die_ciclo_6+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              }
+              
+              if($apt_mov['ciclo']==7){
+                if($apt_mov['nro_queso']==1){$dub_ciclo_7=$dub_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_7=$moz_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_7=$gou_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_7=$die_ciclo_7+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              }
+  
+              if($apt_mov['ciclo']==8){
+                if($apt_mov['nro_queso']==1){$dub_ciclo_8=$dub_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_8=$moz_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_8=$gou_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_8=$die_ciclo_8+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              }
+  
+              if($apt_mov['ciclo']==9){
+                if($apt_mov['nro_queso']==1){$dub_ciclo_9=$dub_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_9=$moz_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_9=$gou_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_9=$die_ciclo_9+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+              }
+  
+              if($apt_mov['ciclo']==10){
+                if($apt_mov['nro_queso']==1){$dub_ciclo_10=$dub_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==2){$moz_ciclo_10=$moz_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==3){$gou_ciclo_10=$gou_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
+                if($apt_mov['nro_queso']==4){$die_ciclo_10=$die_ciclo_10+$apt_mov['cant_entrada']-$apt_mov['cant_salida']; } 
               }
 
               // Consulto los despachos preparados

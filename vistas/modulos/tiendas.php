@@ -9,12 +9,28 @@
     $txtUsuario=$usuariosesion['nro'];
     $txtIdUsuario=$usuariosesion['id'];
     $txtUsuarioTipo=$usuariosesion['tipo'];
+  // ------------------------------------------------------------------------------------
   
-  // Variables de Acción
+  // Variables de Acción ----------------------------------------------------------------
     $procesar="ok"; //Muestra Vista normal
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
+  // ------------------------------------------------------------------------------------
+  
+  // Variables de datos ----------------------------------------------------------------
+    $listado_tiendas_mov=[]; // Arreglo Vacío
+    $Estatus="A";
+  // ------------------------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+  // ------------------------------------------------------------------------------------
 
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
@@ -23,12 +39,17 @@
         $txtNro_empresa=$NroEmpresa;
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
+
         // Selecciono el almacén tiendas ---------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `tiendas` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `tiendas` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_tiendas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_tiendas=$sentencia->rowCount();
@@ -41,14 +62,18 @@
             $txtCant_cap_disp=$tiendas['cant_cap_disp'];
           }
           // Selecciono los movimientos de las tiendas ---------------------------------------------------------------
-          $sentencia=$pdo->prepare("SELECT * FROM `tiendas_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+          $sentencia=$pdo->prepare("SELECT * FROM `tiendas_mov` WHERE estatus=:estatus AND nro_empresa=:nro");
+          $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+          $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
           $sentencia->execute();
           $listado_tiendas_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
           $cant_tiendas_mov=$sentencia->rowCount();
           
           if($cant_tiendas_mov>=1){
             // Selecciono las existencias de queso ---------------------------------------------------------------
-              $sentencia=$pdo->prepare("SELECT * FROM `tiendas_existe` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+              $sentencia=$pdo->prepare("SELECT * FROM `tiendas_existe` WHERE estatus=:estatus AND nro_empresa=:nro");
+              $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+              $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
               $sentencia->execute();
               $listado_tiendas_existe=$sentencia->fetchAll(PDO::FETCH_ASSOC);
               $cant_tiendas_existe=$sentencia->rowCount();

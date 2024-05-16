@@ -20,7 +20,6 @@
     $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
     $sentencia->execute();
     $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
     $cantsimulacion=$sentencia->rowCount();
     //print_r($cantRegistros);
     //print_r($listasimulacion);
@@ -47,8 +46,14 @@
         }
 
     }else{
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
+        $Estatus="A";
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND usuario=:usuario");
+        $sentencia->bindParam("usuario",$txtUsuario,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
+
+        //$sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
+        //$sentencia->execute();
         $listado_entorno=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         $cant_entorno=$sentencia->rowCount(); 
@@ -62,6 +67,7 @@
                 $entorno="SI";
                 print_r($entorno);
             }
+
         }else{
             $entorno="NO";
             $mensaje_entorno="¡No hay empresa registrada!";
@@ -69,9 +75,6 @@
         // echo "<script> alert('El usuario es PARTICIPANTE...'); </script>";
     }
     // --------------------------------------------------------------------------------
-
-  
-
 
   // Variables de Datos
   //$txtNombre="";

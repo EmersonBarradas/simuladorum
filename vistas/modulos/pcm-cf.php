@@ -15,6 +15,10 @@
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
+
+  // Variables de datos ----------------------------------------------------------------
+    $Estatus="A";
+  // ------------------------------------------------------------------------------------
   
   // Variables de Datos
     $AlquilerGalpon=2800*8.2;
@@ -87,6 +91,16 @@
     $cant_total_c9=0.00;
     $cant_total_c10=0.00;
   // . fin variables totales -----------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+  // --------------------------------------------------------------------------------------------------------
+
     // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
       // Asigno la empresa seleccionada
@@ -94,7 +108,9 @@
         $txtNro_empresa=$NroEmpresa;
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 

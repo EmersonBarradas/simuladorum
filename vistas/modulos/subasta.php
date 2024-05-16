@@ -4,32 +4,47 @@
     include('../controladores/global/constantes.php');
     
     //Datos del Usuario
-    $usuariosesion=($_SESSION['usuario']);
-    $txtUsuario=$usuariosesion['nro'];
-    $txtIdUsuario=$usuariosesion['id'];
-    $txtUsuarioTipo=$usuariosesion['tipo'];
-    // print_r($txtUsuario);
+        $usuariosesion=($_SESSION['usuario']);
+        $txtUsuario=$usuariosesion['nro'];
+        $txtIdUsuario=$usuariosesion['id'];
+        $txtUsuarioTipo=$usuariosesion['tipo'];
+        // print_r($txtUsuario);
+    // ------------------------------------------------------------------------------------
 
     // Variables de Acción
-    $procesar="ok"; //Muestra Vista normal
-    $error_accion=0; // Valor 0 si todo va normal
-    $mensaje_usuario=""; // Vacío en inicalización
-    $Mensaje_Mov="";
-    $SubastaMovimientos="SI";
+        $procesar="ok"; //Muestra Vista normal
+        $error_accion=0; // Valor 0 si todo va normal
+        $mensaje_usuario=""; // Vacío en inicalización
+        $Mensaje_Mov="";
+        $SubastaMovimientos="SI";
+    // ------------------------------------------------------------------------------------
+
+    // Verifica los registros activos en simulación ---------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+        $sentencia->execute();
+        $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cantsimulacion=$sentencia->rowCount();
+        //print_r($cantRegistros);
+        //print_r($listasimulacion);
+    // ------------------------------------------------------------------------------------
 
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
         // Asigno la empresa seleccionada
         $NroEmpresa=$_SESSION['nro_empresa'];
-
+        $Estatus="A";
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
 
         // Selecciono la compra_subasta
-        $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A' AND empresa=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus=:estatus AND empresa=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_compras_subasta=$sentencia->rowCount();
@@ -38,7 +53,10 @@
 
     }else{
         // Selección de empresa del usuario -------------------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
+        $Estatus="A";
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND usuario=:usuario");
+        $sentencia->bindParam("usuario",$txtUsuario,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
@@ -50,7 +68,10 @@
                 $EstatusEmpresa=$empresa['estatus'];
             }
             // Selecciona las compras de la empresa
-            $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'AND empresa=$NroEmpresa");
+            $sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus=:estatus AND empresa=:nro_empresa");
+            //$sentencia=$pdo->prepare("SELECT * FROM `compra_subasta` WHERE estatus='A'AND empresa=$NroEmpresa");
+            $sentencia->bindParam("nro_empresa",$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
             $sentencia->execute();
             $listado_compras_subasta=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             $cant_compras_subasta=$sentencia->rowCount();

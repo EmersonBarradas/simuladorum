@@ -226,14 +226,8 @@ include "../controladores/enlaces.php";
                             </div>
                             <div class="col-md-12">
                                 <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        <form action="pcm-r.php" method="post">
-                                            <div class="row justify-content-center">
-                                                <div class="col-md-3">
-                                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                                </div>
-                                            </div>
-                                        </form>
+                                    <div class="col-md-2">
+                                        <a href="pcm.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
                                     </div>
                                 </div>
                             </div>

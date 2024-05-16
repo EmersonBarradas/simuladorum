@@ -37,6 +37,8 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+    <!-- Verifica si hay simulación activa -->
+    <?php if($cantsimulacion>=1){ ?>
     <!-- Inicio del contenedor de datos -->
         <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
@@ -170,11 +172,18 @@ include "../controladores/enlaces.php";
                                                     <td> <?php echo $pcm_mod_mov['emoji1']; ?></td>
                                                     <td> <?php echo $pcm_mod_mov['emoji2']; ?></td>                                                    
                                                     <td>
-                                                        <form action="" method="">
-                                                            <input type="hidden" name="txtvariable" value="<?php echo "";?>">
-                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
+                                                        <form action="pcm-mod-c.php" method="post">
+                                                            <input type="hidden" name="txtNro" value="<?php echo $pcm_mod_mov['nro']; ?>">
+                                                            <input type="hidden" name="txtCiclo" value="<?php echo $pcm_mod_mov['ciclo']; ?>">
+                                                            <input type="hidden" name="txtFecha" value="<?php echo $pcm_mod_mov['fecha']; ?>">
+                                                            <input type="hidden" name="txtNro_operador" value="<?php echo $pcm_mod_mov['nro_operador']; ?>">
+                                                            <input type="hidden" name="txtCant_total_horas_trab" value="<?php echo $pcm_mod_mov['cant_total_horas_trab'];  ?>">
+                                                            <input type="hidden" name="txtMonto_pago_hora" value="<?php echo $pcm_mod_mov['monto_pago_hora']; ?>">
+                                                            <input type="hidden" name="txtMonto_pago_adicional" value="<?php echo $pcm_mod_mov['monto_pago_adicional'];?>">
+                                                            <input type="hidden" name="txtMonto_total_jornada" value="<?php echo $pcm_mod_mov['monto_total_jornada'];?>">
+                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="C">
                                                             <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
-                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                                            <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -201,14 +210,20 @@ include "../controladores/enlaces.php";
                             <div class="col-md-12">
                                 <form action="pcm-mod-operador-r.php" method="post">
                                     <div class="row justify-content-center">
-                                        <?php if($btnOperador=="SI"){ ?>
-                                            <div class="col-md-2">    
-                                                <a href="pcm-mod-operador-r.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
+                                        <?php if($error_accion==2) { ?>
+                                            <div class="col-md-2">
+                                                <a href="entorno.php"type="button" class="btn btn-primary btn-block">Entorno</a>
+                                            </div>
+                                        <?php }else { ?>
+                                            <?php if($btnOperador=="SI"){ ?>
+                                                <div class="col-md-2">    
+                                                    <a href="pcm-mod-operador.php" type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="col-md-2">
+                                                <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
                                             </div>
                                         <?php } ?>
-                                            <div class="col-md-2">
-                                                <a href="inicio.php" type="button" class="btn btn-primary btn-block">Aceptar</a>
-                                            </div>
 
                                     </div>
                                 </form>
@@ -221,6 +236,22 @@ include "../controladores/enlaces.php";
 
         </div>
     <!-- /. Fin de contenedor de datos -->
+    <?php }else{ ?>
+
+        <div class="col-md-12">
+            <h3 class="text-center text-danger">NO HAY SIMULACIÓN ACTIVA <?php if ($txtUsuarioTipo=="P") { echo "CONTACTE CON EL ADMINISTRADOR"; }?></h3>
+        </div>
+        <?php if ($txtUsuarioTipo=="A") { ?>
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } ?>
     </div>
     <!-- /.content-wrapper -->
     

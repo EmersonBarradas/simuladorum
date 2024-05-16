@@ -4,32 +4,52 @@
   include('../controladores/global/constantes.php');
 
 
-  //Datos del Usuario
+  //Datos del Usuario -----------------------------------------------------------------
     $usuariosesion=($_SESSION['usuario']);
     $txtUsuario=$usuariosesion['nro'];
     $txtIdUsuario=$usuariosesion['id'];
     $txtUsuarioTipo=$usuariosesion['tipo'];
+  // ------------------------------------------------------------------------------------
   
-  // Variables de Acción
+  // Variables de Acción -----------------------------------------------------------------
     $procesar="ok"; //Muestra Vista normal
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
     $btnDespacho="NO";
+  // ------------------------------------------------------------------------------------
 
-  // Selección de Empresa - Entorno -------------------------------------------------------------------------
+  // Variables de datos ----------------------------------------------------------------
+    $Estatus="A";
+  // ------------------------------------------------------------------------------------
+
+  
+  // Verifica los registros activos en simulación ---------------------------------------
+     $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+     $sentencia->execute();
+     $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+     $cantsimulacion=$sentencia->rowCount();
+     //print_r($cantRegistros);
+     //print_r($listasimulacion);
+  // ------------------------------------------------------------------------------------
+
+  // Selección de Empresa - Entorno -----------------------------------------------------
     if ($txtUsuarioTipo=="A") {
       // Asigno la empresa seleccionada
         $NroEmpresa=$_SESSION['nro_empresa'];
         $txtNro_empresa=$NroEmpresa;
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
         // Selección los despachos de la empresa empresa ---------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `despacho` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `despacho` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_despacho=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_despacho=$sentencia->rowCount();
@@ -42,12 +62,13 @@
           $procesar="Listo"; //Muestra Vista normal
           $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
           $mensaje_usuario="No hay despachos registrados de la empresa"; // Vacío en inicalización      
-          $btnDespacho="SI";
         }
         //-----------------------------------------------------------------------------------------------------
 
         // Selección Depósito AMP de la empresa ---------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_pcm=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_pcm=$sentencia->rowCount();
@@ -61,7 +82,9 @@
         //------------------------------------------------------------------------------------------------------
 
         // Selección Depósito APT de la empresa ---------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `apt_mov` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_apt_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_apt_mov=$sentencia->rowCount();

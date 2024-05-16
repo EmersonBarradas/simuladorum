@@ -35,7 +35,7 @@
       }
       
     }else{
-      echo "No se encontraron registros";
+      echo "Usuario no encontrado o clave errada";
     }
 
 }

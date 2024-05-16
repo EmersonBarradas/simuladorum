@@ -10,11 +10,86 @@
     $txtIdUsuario=$usuariosesion['id'];
     $txtUsuarioTipo=$usuariosesion['tipo'];
   
-  // Variables de Acción
+  // Variables de Acción ---------------------------------------------------------------
     $procesar="ok"; //Muestra Vista normal
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
+  // ------------------------------------------------------------------------------------
+  
+  // Vaiables de Datos -----------------------------------------------------------------
+    $Estatus="A";
+    $cant_e_ciclo1=0;
+    $cant_cto_total1=0;
+    $cant_cto_unidad1=0;
+    $cant_s_ciclo1=0;
+    $cant_cost_unidad_s1=0;  
+    
+    $cant_e_ciclo2=0;
+    $cant_cto_total2=0;
+    $cant_cto_unidad2=0;
+    $cant_s_ciclo2=0;
+    $cant_cost_unidad_s2=0;  
+    
+    $cant_e_ciclo3=0;
+    $cant_cto_total3=0;
+    $cant_cto_unidad3=0;
+    $cant_s_ciclo3=0;
+    $cant_cost_unidad_s3=0;  
+    
+    $cant_e_ciclo4=0;
+    $cant_cto_total4=0;
+    $cant_cto_unidad4=0;
+    $cant_s_ciclo4=0;
+    $cant_cost_unidad_s4=0;
+      
+    $cant_e_ciclo5=0;
+    $cant_cto_total5=0;
+    $cant_cto_unidad5=0;
+    $cant_s_ciclo5=0;
+    $cant_cost_unidad_s5=0;
+    
+    $cant_e_ciclo6=0;
+    $cant_cto_total6=0;
+    $cant_cto_unidad6=0;
+    $cant_s_ciclo6=0;
+    $cant_cost_unidad_s6=0;
+    
+    $cant_e_ciclo7=0;
+    $cant_cto_total7=0;
+    $cant_cto_unidad7=0;
+    $cant_s_ciclo7=0;
+    $cant_cost_unidad_s7=0;
+    
+    $cant_e_ciclo8=0;
+    $cant_cto_total8=0;
+    $cant_cto_unidad8=0;
+    $cant_s_ciclo8=0;
+    $cant_cost_unidad_s8=0;
+    
+    $cant_e_ciclo9=0;
+    $cant_cto_total9=0;
+    $cant_cto_unidad9=0;
+    $cant_s_ciclo9=0;
+    $cant_cost_unidad_s9=0;
+    
+    $cant_e_ciclo10=0;
+    $cant_cto_total10=0;
+    $cant_cto_unidad10=0;
+    $cant_s_ciclo10=0;
+    $cant_cost_unidad_s10=0;
+
+
+  // ------------------------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+  // ------------------------------------------------------------------------------------
 
   // Selección de Empresa / Entorno
   if ($txtUsuarioTipo=="A") {
@@ -23,13 +98,17 @@
       $txtNro_empresa=$NroEmpresa;
 
       // Selecciono la empresa
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+      $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+      $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
       $sentencia->execute();
       $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       $cant_empresa=$sentencia->rowCount(); 
 
       // Selección Depósito AMP de la empresa ---------------------------------------------------------------
-      $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+      $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus=:estatus AND nro_empresa=:nro");
+      $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+      $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
       $sentencia->execute();
       $listado_pcm=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       $cant_pcm=$sentencia->rowCount();

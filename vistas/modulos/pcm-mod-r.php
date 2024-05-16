@@ -267,24 +267,6 @@
       case "Eliminar";
           // echo "<script> alert('Quieres Eliminar Registro...'); </script>";
           // echo "<script> alert('Usuario Eliminado Satisfactoriamente...'); </script>";
-          // header('Location:usuarios.php');
-
-          $sentencia=$pdo->prepare("DELETE FROM Tblusuarios WHERE nro=:nro");
-          $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-          $sentencia->execute();
-
-          $procesar="listo";
-          $accion="C";
-          $error_accion=2;
-          $mensaje_usuario="Usuario Eliminado Satisfactoriamente...";
-          $nro=0;
-          $id="";
-          $nombre="";
-          $usuario="";
-          $tipousuario="";
-          $fecha_reg="";
-          $password1="";
-          $password2="";
       break;
     }
   }

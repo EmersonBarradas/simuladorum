@@ -16,60 +16,53 @@
       //Recepción de Post
   if(isset($_POST["btn_accion"])){
 
-    $accion=($_POST["btn_accion"]);
-
-
-    if ($accion=="Actualizar") {
-        $txtNro=($_POST["txtNro"]);
-    }else{
-        $txtNro=($_POST["txtEmpresa"]);
-    }
-    if ($accion!="Aceptar"){
+        $accion=($_POST["btn_accion"]);
         $txtProducto=($_POST["txtProducto"]);
+
         if ($txtProducto=="LC"){
 
-        $txtNro=($_POST["txtNro"]);
-        $txtId= ($_POST["txtId"]);
-        $txtEmpresa=($_POST["txtEmpresa"]);
-        $txtCiclo=($_POST["txtCiclo"]);
-        $txtMonto_precio_lc=($_POST["txtMonto_precio_lc"]);
-        $txtFecha_ped=($_POST["txtFecha_ped"]);
-        $txtFecha_recep=($_POST["txtFecha_recep"]);
-        $txtCant_contratos_lc=($_POST["txtCant_contratos_lc"]);
-        $txtCant_litros_lc=($_POST["txtCant_litros_lc"]);
-        $txtMonto_total_usb_lc=($_POST["txtMonto_total_usb_lc"]);
-        $txtEstatus=($_POST["txtEstatus"]);
-        $txtUsuario_reg=($_POST["txtUsuario_reg"]);
-        //echo "<script> alert('Es LC...'); </script>";
-
+            $txtNro=($_POST["txtNro"]);
+            $txtId= ($_POST["txtId"]);
+            $txtEmpresa=($_POST["txtEmpresa"]);
+            $txtCiclo=($_POST["txtCiclo"]);
+            $txtMonto_precio_lc=($_POST["txtMonto_precio_lc"]);
+            $txtFecha_ped=($_POST["txtFecha_ped"]);
+            $txtFecha_recep=($_POST["txtFecha_recep"]);
+            $txtCant_contratos_lc=($_POST["txtCant_contratos_lc"]);
+            $txtCant_litros_lc=($_POST["txtCant_litros_lc"]);
+            $txtMonto_total_usb_lc=($_POST["txtMonto_total_usb_lc"]);
+            $txtEstatus=($_POST["txtEstatus"]);
+            $txtUsuario_reg=($_POST["txtUsuario_reg"]);
+            //echo "<script> alert('Es LC...'); </script>";
 
         }else {
-        $txtNro=($_POST["txtNro"]);
-        $txtId= ($_POST["txtId"]);
-        $txtEmpresa=($_POST["txtEmpresa"]);
-        $txtCiclo=($_POST["txtCiclo"]);
-        $txtMonto_precio_ad=($_POST["txtMonto_precio_ad"]);
-        $txtFecha_ped=($_POST["txtFecha_ped"]);
-        $txtFecha_recep=($_POST["txtFecha_recep"]);
-        $txtCant_contratos_ad=($_POST["txtCant_contratos_ad"]);
-        $txtCant_litros_ad=($_POST["txtCant_litros_ad"]);
-        $txtMonto_total_usb_ad=($_POST["txtMonto_total_usb_ad"]);
-        $txtEstatus=($_POST["txtEstatus"]);
-        $txtUsuario_reg=($_POST["txtUsuario_reg"]);
-        //echo "<script> alert('Es AD...'); </script>";
+
+            $txtNro=($_POST["txtNro"]);
+            $txtId= ($_POST["txtId"]);
+            $txtEmpresa=($_POST["txtEmpresa"]);
+            $txtCiclo=($_POST["txtCiclo"]);
+            $txtMonto_precio_ad=($_POST["txtMonto_precio_ad"]);
+            $txtFecha_ped=($_POST["txtFecha_ped"]);
+            $txtFecha_recep=($_POST["txtFecha_recep"]);
+            $txtCant_contratos_ad=($_POST["txtCant_contratos_ad"]);
+            $txtCant_litros_ad=($_POST["txtCant_litros_ad"]);
+            $txtMonto_total_usb_ad=($_POST["txtMonto_total_usb_ad"]);
+            $txtEstatus=($_POST["txtEstatus"]);
+            $txtUsuario_reg=($_POST["txtUsuario_reg"]);
+            //echo "<script> alert('Es AD...'); </script>";
         }
-    }
+        
 
-    // Rescatar nombre de la empresa
-    $sentencianombre=$pdo->prepare("SELECT `nombre`  FROM `empresa` WHERE nro=:nro");
-    $sentencianombre->bindParam("nro",$txtEmpresa,PDO::PARAM_STR);
-    $sentencianombre->execute();
-    $NombreEmpresa=$sentencianombre->fetchAll(PDO::FETCH_ASSOC);
+        // Rescatar nombre de la empresa
+        $sentencianombre=$pdo->prepare("SELECT `nombre`  FROM `empresa` WHERE nro=:nro");
+        $sentencianombre->bindParam("nro",$txtEmpresa,PDO::PARAM_STR);
+        $sentencianombre->execute();
+        $NombreEmpresa=$sentencianombre->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($NombreEmpresa as $valor) {
-        $txtNombreEmpresa=$valor['nombre'];
-    }
-    $cant_empresa=$sentencianombre->rowCount();
+        foreach ($NombreEmpresa as $valor) {
+            $txtNombreEmpresa=$valor['nombre'];
+        }
+        $cant_empresa=$sentencianombre->rowCount();
     // ------------------------------------------------------------------------------------
     
     switch($accion){
@@ -92,6 +85,46 @@
             //echo "<script> alert('Proceso de Eliminación...'); </script>";
             // header('Location:usuarios.php');
 
+            $Estatus="A";
+
+            $sentencia=$pdo->prepare("SELECT * FROM `amp` WHERE estatus=:estatus AND nro_empresa=:nro");
+            $sentencia->bindParam("nro",$txtEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
+            $sentencia->execute();
+            $listado_amp=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+            $cant_amp=$sentencia->rowCount();
+
+            if ($cant_amp>=1){
+                foreach($listado_amp as $amp){
+                $NroAMP=$amp['nro'];
+                $txtCant_capmax_lc=$amp['cant_capmax_lc'];
+                $txtCant_existencia_lc=$amp['cant_existencia_lc'];
+                $txtCant_capdisp_lc=$amp['cant_capdisp_lc'];
+                $txtCant_capmax_ad=$amp['cant_capmax_ad'];
+                $txtCant_existencia_ad=$amp['cant_existencia_ad'];
+                $txtCant_capdisp_ad=$amp['cant_capdisp_ad'];
+                }
+
+                if ($txtProducto=="LC"){
+
+                    if($txtCant_litros_lc>$txtCant_existencia_lc){
+                        echo "<script> alert('Cantidad Ltr Leche Cruda es superior a la existencia...'); </script>";
+                    }else{
+                        echo "<script> alert('Cantidad suficiente, se puede hacer la devolución...'); </script>";
+                    }
+
+                }else {
+
+                    if($txtCant_litros_ad>$txtCant_existencia_ad){
+                        echo "<script> alert('Cantidad Ltr Aditivo es superior a la existencia...'); </script>";
+                    }else{
+                        echo "<script> alert('Cantidad suficiente, se puede hacer la devolución...'); </script>";
+                    }
+                    
+                }
+            }
+
+            /*
             $txtEstatus="F";
             $txtEstatus_reg="E";
             $sentencia=$pdo->prepare("UPDATE compra_subasta SET 
@@ -107,6 +140,7 @@
             $procesar="listo";
             $error_accion=2;
             $mensaje_usuario="Registro Eliminado Satisfactoriamente...";
+            */
             
         break;
 

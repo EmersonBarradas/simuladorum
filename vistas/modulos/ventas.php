@@ -2,21 +2,39 @@
   include('../controladores/global/sesiones.php');
   include('../controladores/global/conexion.php');
   include('../controladores/global/constantes.php');
+  include('../vistas/modulos/valores-c.php');
 
 
-  //Datos del Usuario
+  //Datos del Usuario --------------------------------------------------------------------
     $usuariosesion=($_SESSION['usuario']);
     $txtUsuario=$usuariosesion['nro'];
     $txtIdUsuario=$usuariosesion['id'];
     $txtUsuarioTipo=$usuariosesion['tipo'];
+  // ------------------------------------------------------------------------------------
   
-  // Variables de Acción
+  // Variables de Acción ----------------------------------------------------------------
     $procesar="ok"; //Muestra Vista normal
     $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
     $mensaje_usuario=""; // Vacío en inicalización
     $calcular="NO";
+  // ------------------------------------------------------------------------------------
 
-  // Variables de Datos
+  // Variables de datos ----------------------------------------------------------------
+    $Estatus="A";
+  // ------------------------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación ---------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+        $sentencia->execute();
+        $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cantsimulacion=$sentencia->rowCount();
+        //print_r($cantRegistros);
+        //print_r($listasimulacion);
+  // ------------------------------------------------------------------------------------
+
+  
+
+  // Variables de Datos --------------------------------------------------------------------------
 
     // ARMADILLO **********************************************************************************
 
@@ -800,7 +818,8 @@
 
 
 
-    // -----------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------
+
   // Selección de Empresa - Entorno -------------------------------------------------------------------------
     if ($txtUsuarioTipo=="A") {
       // Asigno la empresa seleccionada
@@ -808,12 +827,16 @@
         $txtNro_empresa=$NroEmpresa;
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount();
         // Selecciono el almacén tiendas ---------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `tiendas` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `tiendas` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_tiendas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_tiendas=$sentencia->rowCount();
@@ -3496,19 +3519,19 @@
                     $temporal="SI";
                   }else{
                     $procesar="listo"; //Muestra Vista normal
-                    $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+                    $error_accion=3; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
                     $mensaje_usuario="No se encontraron las existencias de la empresa"; // Vacío en inicalización
                   }
 
               }else{
                 $procesar="listo"; //Muestra Vista normal
-                $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+                $error_accion=3; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
                 $mensaje_usuario="No se encontraron movimientos de tiendas de la empresa"; // Vacío en inicalización
               }
 
             }else{
               $procesar="listo"; //Muestra Vista normal
-              $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+              $error_accion=3; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
               $mensaje_usuario="No se encontró tiendas para la empresa"; // Vacío en inicalización
             } 
           // ----------------------------------------------------------------------------------------------------

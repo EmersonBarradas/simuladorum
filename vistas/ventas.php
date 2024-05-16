@@ -20,7 +20,7 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">VENTAS</h1>
+                <h1 class="m-0 text-dark">Ventas</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -35,12 +35,14 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+    
+    <!-- Verifica si hay simulación activa -->
+    <?php if($cantsimulacion>=1){ ?>
         
-        <!-- Tienda Armadillo -->
+    <!-- Tienda Armadillo -------------------->
         <div class="container" style="padding: 0px 20px 0px 20px;">
             <!-- Íconos Generales -->
             <div class="row justify-content-left">
-
 
                  <!-- Inicio Div Empresa-->
                     <div class="col-md-4">
@@ -61,7 +63,7 @@ include "../controladores/enlaces.php";
                 <div class="col-12">
                     <div class="card card-primary text-right">
                     <div class="card-header">
-                        <h3 class="card-title"><b>Ventas Armadillo</b></h3>
+                        <h3 class="card-title"><b>Ventas Armadillo ($ USB)</b></h3>
 
                         <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -163,8 +165,9 @@ include "../controladores/enlaces.php";
                 </div>
             </div>
         </div>
+    <!-- /. Fin Tienda Armadillo ------------->
 
-        <!-- Tienda San Ferro -->
+    <!-- Tienda San Ferro -->
         <div class="container" style="padding: 0px 20px 0px 20px;">
             <!-- Íconos Generales -->
             <div class="row justify-content-left">
@@ -202,7 +205,7 @@ include "../controladores/enlaces.php";
                 <div class="col-12">
                     <div class="card card-primary text-right">
                     <div class="card-header">
-                        <h3 class="card-title"><b>Ventas San Ferro</b></h3>
+                        <h3 class="card-title"><b>Ventas San Ferro ($ USB)</b></h3>
 
                         <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -304,8 +307,9 @@ include "../controladores/enlaces.php";
                 </div>
             </div>
         </div>
+    <!-- /. Fin Tienda San Ferro ------------>
 
-        <!-- Tienda Ciudadela -->
+    <!-- Tienda Ciudadela ------------------->
         <div class="container" style="padding: 0px 20px 0px 20px;">
             <!-- Íconos Generales -->
             <div class="row justify-content-left">
@@ -334,7 +338,7 @@ include "../controladores/enlaces.php";
                 <div class="col-12">
                     <div class="card card-primary text-right">
                     <div class="card-header">
-                        <h3 class="card-title"><b>Ventas Ciudadela</b></h3>
+                        <h3 class="card-title"><b>Ventas Ciudadela ($ USB)</b></h3>
 
                         <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -436,8 +440,9 @@ include "../controladores/enlaces.php";
                 </div>
             </div>
         </div>
+    <!-- /. Fin Tienda Ciudadela ------------>
 
-        <!-- Tienda Los Santos -->
+    <!-- Tienda Los Santos ------------------>
         <div class="container" style="padding: 0px 20px 0px 20px;">
             <!-- Íconos Generales -->
             <div class="row justify-content-left">
@@ -465,7 +470,7 @@ include "../controladores/enlaces.php";
                 <div class="col-12">
                     <div class="card card-primary text-right">
                     <div class="card-header">
-                        <h3 class="card-title"><b>Ventas Los Santos</b></h3>
+                        <h3 class="card-title"><b>Ventas Los Santos ($ USB)</b></h3>
 
                         <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -566,6 +571,25 @@ include "../controladores/enlaces.php";
                 </div>
             </div>
         </div>
+    <!-- /. Fin Tienda Los Santos ----------->
+
+    <?php }else{ ?>
+
+        <div class="col-md-12">
+            <h3 class="text-center text-danger">NO HAY SIMULACIÓN ACTIVA <?php if ($txtUsuarioTipo=="P") { echo "CONTACTE CON EL ADMINISTRADOR"; }?></h3>
+        </div>
+        <?php if ($txtUsuarioTipo=="A") { ?>
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } ?>
+    <!--/. Fin Verifica si hay simulación activa -->
 
     </div>
     <!-- /.content-wrapper -->

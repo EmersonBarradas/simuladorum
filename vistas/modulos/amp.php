@@ -9,11 +9,24 @@
   $txtIdUsuario=$usuariosesion['id'];
   $txtUsuarioTipo=$usuariosesion['tipo'];
 
-  // Variables de Acción
-  $procesar="ok"; //Muestra Vista normal
-  $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-  $mensaje_usuario=""; // Vacío en inicalización
-  $estatus_empresa="SI";
+  // Variables de Acción ----------------------------------------------------------------------------------
+    $procesar="ok"; //Muestra Vista normal
+    $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+    $mensaje_usuario=""; // Vacío en inicalización
+    $estatus_empresa="SI";
+  // ----------------------------------------------------------------------------------------------------
+  // Variable de Datos ----------------------------------------------------------------------------------
+    $Estatus="A";
+  // ----------------------------------------------------------------------------------------------------
+
+  // Verifica los registros activos en simulación -------------------------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+  // ----------------------------------------------------------------------------------------------------
 
   // Selección de Almacén
   if ($txtUsuarioTipo=="A") {
@@ -21,12 +34,16 @@
     $NroEmpresa=$_SESSION['nro_empresa'];
 
     // Selecciono la empresa
-    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+    $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+    $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
     $sentencia->execute();
     $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
     $cant_empresa=$sentencia->rowCount(); 
 
-    $sentencia=$pdo->prepare("SELECT * FROM `amp` WHERE estatus='A' AND nro_empresa=$NroEmpresa");
+    $sentencia=$pdo->prepare("SELECT * FROM `amp` WHERE estatus=:estatus AND nro_empresa=:nro");
+    $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+    $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
     $sentencia->execute();
     $listado_amp=$sentencia->fetchAll(PDO::FETCH_ASSOC);
     $cant_amp=$sentencia->rowCount();
@@ -42,7 +59,9 @@
         }
 
         // selecciona movimientos de almacen------------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `amp_mov` WHERE estatus='A' AND nro_empresa=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `amp_mov` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_amp_mov=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_amp_mov=$sentencia->rowCount();
@@ -107,7 +126,7 @@
             $encontrado="NO";
             $txtEmpresa="";
             $procesar="Listo"; //Muestra Vista normal
-            $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+            $error_accion=4; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
             $mensaje_usuario="No hay movimientos registrados";
           }
           // --------------------------------------------------------------------------------------------------
@@ -116,7 +135,7 @@
           $encontrado="NO";
           $txtEmpresa="";
           $procesar="listo"; //Muestra Vista normal
-          $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+          $error_accion=3; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
           $mensaje_usuario="No se encontró almacén de materia prima";
         }
     }else{
@@ -125,7 +144,6 @@
       $error_accion=2; // Valor 0 si todo va normal
       $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
       $estatus_empresa="NO";
-
     }
   }
   // --------------------------------------------------------------------------------

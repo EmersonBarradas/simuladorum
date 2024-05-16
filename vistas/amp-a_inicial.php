@@ -8,7 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-        include "modulos/subasta-r.php";
+        include "modulos/amp-a.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -21,12 +21,12 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Subasta | Registro</h1>
+                <h1 class="m-0 text-dark">AMP | Ajuste</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="subasta.php">Subasta</a></li>
-                <li class="breadcrumb-item active">Subasta</li>
+                <li class="breadcrumb-item"><a href="amp.php">AMP</a></li>
+                <li class="breadcrumb-item active">AMP Ajuste</li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -48,7 +48,7 @@ include "../controladores/enlaces.php";
                     <?php } ?>
 
                     
-                <form class="col-md-12" action="subasta-r.php" method="post" >
+                <form class="col-md-12" action="amp-a.php" method="post" >
                     <div class="row">
                         <!-- DIV Empresa-->
                         <div class="col-md-4">

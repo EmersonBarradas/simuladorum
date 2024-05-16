@@ -14,6 +14,15 @@ include('../controladores/global/constantes.php');
     $error_accion=0; // Valor 0 si todo va normal
     $mensaje_usuario=""; // Vacío en inicalización
 
+    // Verifica los registros activos en simulación ---------------------------------------
+    $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+    $sentencia->execute();
+    $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $cantsimulacion=$sentencia->rowCount();
+    //print_r($cantRegistros);
+    //print_r($listasimulacion);
+// ------------------------------------------------------------------------------------
+
  // Selección de Empresa / Entorno
  if ($txtUsuarioTipo=="A") {
     $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A'");

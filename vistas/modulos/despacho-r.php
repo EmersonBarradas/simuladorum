@@ -58,11 +58,31 @@
             $txtNro_empresa=$empresa['nro'];
             $txtNombre_empresa=$empresa['nombre'];
         }
-        // print_r($txtNombre_empresa);
-        // print_r("</br>");
-        // print_r($txtNro_empresa);
-        // print_r("</br>");
-      // /. Fin selección de empresa del usuario -------------------------------------------------------------------------
+      // ------------------------------------------------------------------------------------------------------------
+
+      // Selecciono el almacén de productos terminados -------------------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `apt` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_apt=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_apt=$sentencia->rowCount(); 
+
+        foreach($listado_apt as $apt){
+            $Nro_apt=$apt['nro'];
+            $cant_cmax_qd_actual=$apt['cant_cmax_qd'];
+            $cant_e_qd_actual=$apt['cant_e_qd'];
+            $cant_disp_qd_actual=$apt['cant_disp_qd'];
+            $cant_cmax_moz_actual=$apt['cant_cmax_moz'];
+            $cant_e_moz_actual=$apt['cant_e_moz'];
+            $cant_disp_moz_actual=$apt['cant_disp_moz'];
+            $cant_cmax_gou_actual=$apt['cant_cmax_gou'];
+            $cant_e_gou_actual=$apt['cant_e_gou'];
+            $cant_disp_gou_actual=$apt['cant_disp_gou'];
+            $cant_cmax_die_actual=$apt['cant_cmax_die'];
+            $cant_e_die_actual=$apt['cant_e_die'];
+            $cant_disp_die_actual=$apt['cant_disp_die'];
+            
+        }
+      // ------------------------------------------------------------------------------------------------------------
 
       
       // Selecciono los despachos de la empresa empresa ---------------------------------------------------------------
@@ -90,36 +110,36 @@
       //print_r($listado_tiendas);
       //print_r("</br>");
       
-      // Selecciono las existencias de tiendas ---------------------------------------------------------------
-      $sentencia=$pdo->prepare("SELECT * FROM `tiendas_existe` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
-      $sentencia->execute();
-      $listado_tiendas_existe=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-      $cant_tiendas_existe=$sentencia->rowCount();
+    // Selecciono las existencias de tiendas ---------------------------------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `tiendas_existe` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
+        $sentencia->execute();
+        $listado_tiendas_existe=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cant_tiendas_existe=$sentencia->rowCount();
 
-      foreach($listado_tiendas_existe as $existencias){
-            $nro_tiendas_existe=$existencias['nro'];
+        foreach($listado_tiendas_existe as $existencias){
+                $nro_tiendas_existe=$existencias['nro'];
 
-            $cant_dub_arm_actual=$existencias['cant_dub_arm'];	
-            $cant_dub_ciu_actual=$existencias['cant_dub_ciu'];	
-            $cant_dub_sfi_actual=$existencias['cant_dub_sfi'];	
-            $cant_dub_lsa_actual=$existencias['cant_dub_lsa'];	
-            
-            $cant_moz_arm_actual=$existencias['cant_moz_arm'];	
-            $cant_moz_ciu_actual=$existencias['cant_moz_ciu'];	
-            $cant_moz_sfi_actual=$existencias['cant_moz_sfi'];
-            $cant_moz_lsa_actual=$existencias['cant_moz_lsa'];
+                $cant_dub_arm_actual=$existencias['cant_dub_arm'];	
+                $cant_dub_ciu_actual=$existencias['cant_dub_ciu'];	
+                $cant_dub_sfi_actual=$existencias['cant_dub_sfi'];	
+                $cant_dub_lsa_actual=$existencias['cant_dub_lsa'];	
+                
+                $cant_moz_arm_actual=$existencias['cant_moz_arm'];	
+                $cant_moz_ciu_actual=$existencias['cant_moz_ciu'];	
+                $cant_moz_sfi_actual=$existencias['cant_moz_sfi'];
+                $cant_moz_lsa_actual=$existencias['cant_moz_lsa'];
 
-            $cant_gou_arm_actual=$existencias['cant_gou_arm'];
-            $cant_gou_ciu_actual=$existencias['cant_gou_ciu'];
-            $cant_gou_sfi_actual=$existencias['cant_gou_sfi'];
-            $cant_gou_lsa_actual=$existencias['cant_gou_lsa'];
+                $cant_gou_arm_actual=$existencias['cant_gou_arm'];
+                $cant_gou_ciu_actual=$existencias['cant_gou_ciu'];
+                $cant_gou_sfi_actual=$existencias['cant_gou_sfi'];
+                $cant_gou_lsa_actual=$existencias['cant_gou_lsa'];
 
-            $cant_die_arm_actual=$existencias['cant_die_arm'];
-            $cant_die_ciu_actual=$existencias['cant_die_ciu'];
-            $cant_die_sfi_actual=$existencias['cant_die_sfi'];
-            $cant_die_lsa_actual=$existencias['cant_die_lsa'];
-
-      }
+                $cant_die_arm_actual=$existencias['cant_die_arm'];
+                $cant_die_ciu_actual=$existencias['cant_die_ciu'];
+                $cant_die_sfi_actual=$existencias['cant_die_sfi'];
+                $cant_die_lsa_actual=$existencias['cant_die_lsa'];
+        }
+      // ------------------------------------------------------------------------------------------------------
 
       //print_r($listado_tiendas_existe);
     }
@@ -302,6 +322,10 @@
                 $txtEstatus_reg="A";
             // -------------------------------------------------------------------------------
 
+            // Calculo la nueva existencia de mercancia del almacén de productos terminados-----
+
+            // ---------------------------------------------------------------------------------
+
             // Calculo la nueva existencia de mercancia ---------------------------------------
                 $cant_dub_arm=$cant_dub_arm_actual+$txtCant_dub_arm;	
                 $cant_dub_ciu=$cant_dub_ciu_actual+$txtCant_dub_ciu;	
@@ -325,8 +349,10 @@
             // -------------------------------------------------------------------------------- 
 
             // Registro Despacho Queso Duro
+                
                 if(($txtCant_dub_arm>0) or ($txtCant_dub_ciu>0) or ($txtCant_dub_sfi>0) or ($txtCant_dub_lsa>0) ){
-
+                    
+                    // Inserto nuevo registro en la tabla despacho---------------------------
                     $sentencia=$pdo->prepare("INSERT INTO despacho(nro,nro_empresa,ciclo,fecha,nro_queso,nombre_queso,
                     cant_xdespacho,cant_desp_arm,cant_desp_ciu,cant_desp_sfi,cant_desp_lsa,cost_t_arm,cost_t_ciu,cost_t_sfi,
                     cost_t_lsa,cost_t_total,estatus,fecha_reg,usuario_reg,estatus_reg) 
@@ -355,7 +381,7 @@
                     $sentencia->bindParam(':estatus_reg',$txtEstatus_reg);
                     $sentencia->execute();
 
-                    // Registro movimiento tienda de queso duro Armadillo ----------------------------------------------
+                    // Registro movimiento tienda de queso duro Armadillo -------------------
                         if($txtCant_dub_arm>0){
                             $nro_almacen_tienda=$nro_tiendas;
                             $nro_tienda=$txtNro_tienda_arm;
@@ -538,14 +564,20 @@
                         $sentencia->bindParam(':cant_dub_lsa',$cant_dub_lsa,PDO::PARAM_STR);
                         $sentencia->execute();
                     //----------------------------------------------------------------------------------------------------
+                    
+                    // Actualizo saldo de queso duro en APT --------------------------------------------------------
+
+
+                    //----------------------------------------------------------------------------------------------------
 
                 } 
             // Fin despacho tiendas Queso Duro
                 
             // Registro Despacho Queso Mozarella
+
                 if(($txtCant_moz_arm>0) or ($txtCant_moz_ciu>0) or ($txtCant_moz_sfi>0) or ($txtCant_moz_lsa>0) ){
 
-                    
+                    // Inserto registro en despacho --------------------------------------------------------
                     $sentencia=$pdo->prepare("INSERT INTO despacho(nro,nro_empresa,ciclo,fecha,nro_queso,nombre_queso,
                     cant_xdespacho,cant_desp_arm,cant_desp_ciu,cant_desp_sfi,cant_desp_lsa,cost_t_arm,cost_t_ciu,cost_t_sfi,
                     cost_t_lsa,cost_t_total,estatus,fecha_reg,usuario_reg,estatus_reg) 
@@ -758,6 +790,75 @@
                         $sentencia->bindParam(':cant_moz_lsa',$cant_moz_lsa,PDO::PARAM_STR);
                         $sentencia->execute();
                     // ---------------------------------------------------------------------------------------------------------------------
+                
+                    // Actualizo la existencia de queso mozarella en almacén de productos terminados APT ------------
+
+                        $cant_total_moz=$txtCant_moz_arm+$txtCant_moz_ciu+$txtCant_moz_sfi+$txtCant_moz_lsa;
+                        $cant_e_moz_actual=$cant_e_moz_actual-$cant_total_moz;
+                        $cant_disp_moz_actual=$cant_cmax_moz_actual-$cant_e_moz_actual;
+                        
+                        $sentencia=$pdo->prepare("UPDATE apt SET
+                        cant_e_moz=:cant_e_moz,
+                        cant_disp_moz=:cant_disp_moz WHERE
+                        nro=:nro");
+                        
+                        $sentencia->bindParam(':nro',$Nro_apt,PDO::PARAM_STR);
+                        $sentencia->bindParam(':cant_e_moz',$cant_e_moz_actual,PDO::PARAM_STR);
+                        $sentencia->bindParam(':cant_disp_moz',$cant_disp_moz_actual,PDO::PARAM_STR);
+                        $sentencia->execute();
+                    // ---------------------------------------------------------------------------------------------------------------------
+
+                    // Inserto registro en tabla APT_MOV --------------------------------------------------------------
+                        // Asigno variables de datos de la tabla
+                        
+                        $txtId=0;
+                        $txtNro_empresa=($_POST["txtEmpresa"]);
+                        $txtNro_almacen=$Nro_apt;
+                        $txtNro_produccion=0;
+                        $txtCiclo=($_POST["txtPedido"]);
+                        $txtFecha=($_POST["txtFecha"]);
+                        $txtTipo="S";
+                        $txtCant_entrada=0.00;
+                        $txtCant_salida=$cant_total_moz;
+                        $txtCant_total=$cant_e_moz_actual;
+                        $txtNro_queso=2; 
+                        $txtTipo_queso="Mozarella";
+                        $txtEstatus="A";
+                        $txtFecha_reg=date("Y/m/d");
+                        $txtUsuario_reg=$txtUsuario;
+                        $txtEstatus_reg="A";
+
+                        $sentencia=$pdo->prepare("INSERT INTO apt_mov (nro,id,nro_empresa,nro_almacen, nro_produccion,
+                        ciclo,fecha,tipo, cant_entrada,cant_salida,cant_total,nro_queso, nombre_queso, estatus,
+                        fecha_reg,usuario_reg, estatus_reg)  
+                        VALUES (NULL, :id, :nro_empresa, :nro_almacen, :nro_produccion, :ciclo, :fecha, :tipo, 
+                        :cant_entrada, :cant_salida, :cant_total, :nro_queso, :nombre_queso, :estatus, :fecha_reg,
+                        :usuario_reg, :estatus_reg)");
+
+                        $sentencia->bindParam(':id',$txtId,PDO::PARAM_STR);
+                        $sentencia->bindParam(':nro_empresa',$txtNro_empresa,PDO::PARAM_STR);
+                        $sentencia->bindParam(':nro_almacen',$txtNro_almacen,PDO::PARAM_STR);
+                        $sentencia->bindParam(':nro_produccion',$txtNro_produccion,PDO::PARAM_STR);
+                        $sentencia->bindParam(':ciclo',$txtCiclo,PDO::PARAM_STR);
+                        $sentencia->bindParam(':fecha',$txtFecha,PDO::PARAM_STR);
+                        $sentencia->bindParam(':tipo',$txtTipo,PDO::PARAM_STR);
+                        $sentencia->bindParam(':cant_entrada',$txtCant_entrada,PDO::PARAM_STR);
+                        $sentencia->bindParam(':cant_salida',$txtCant_salida,PDO::PARAM_STR);
+                        $sentencia->bindParam(':cant_total',$txtCant_total,PDO::PARAM_STR);
+                        $sentencia->bindParam(':nro_queso',$txtNro_queso,PDO::PARAM_STR);
+                        $sentencia->bindParam(':nombre_queso',$txtTipo_queso,PDO::PARAM_STR);
+                        $sentencia->bindParam(':estatus',$txtEstatus,PDO::PARAM_STR);
+                        $sentencia->bindParam(':fecha_reg',$txtFecha_reg,PDO::PARAM_STR);
+                        $sentencia->bindParam(':usuario_reg',$txtUsuario_reg,PDO::PARAM_STR);
+                        $sentencia->bindParam(':estatus_reg',$txtEstatus_reg,PDO::PARAM_STR);
+                        $sentencia->execute();
+
+                        $Nro_pcm=$pdo->lastInsertID();
+
+                        //echo "<script> alert('Insertó registro en APT MOV...'); </script>";
+
+                    // -------------------------------------------------------------------------------------------
+                    
                 } 
             // Fin Registro Despacho mozarella
 
@@ -1229,43 +1330,18 @@
 
         break;
 
-        case "Cancelar";
-            // echo "<script> alert('Quieres cancelar Operación...'); </script>";
-            $procesar="ok";
-            header('Location:despacho.php');
-        break;
-
-        case "Aceptar";
-            // echo "<script> alert('Quieres Aceptar Operación...'); </script>";
-            $procesar="ok";
-            header('Location:despacho.php');
-        break;
-
         case "Actualizar";
             // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
-            if ($password1==$password2){
 
-                $sentencia=$pdo->prepare("UPDATE Tblusuarios SET 
-                clave=:clave,
-                nombre=:nombre WHERE
-                nro=:nro");
-                
-                $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-                $sentencia->bindParam(':nombre',$nombre,PDO::PARAM_STR);
-                $sentencia->bindParam(':clave',$password1,PDO::PARAM_STR);
-                $sentencia->execute();
-
-                // echo "<script> alert('Los Password son iguales...'); </script>";
-                $accion="C";
-                $mensaje_usuario="Usuario Actualizado Satisfactoriamente";
-                $procesar="listo";
-            }else{
-                // echo "<script> alert('Los Password no son iguales...'); </script>";
-                $accion="E";
-                $mensaje_usuario="No se pudo actualizar, claves no coinciden";
-                $error_accion=2;
-                $procesar="ok";
-            }
+            $sentencia=$pdo->prepare("UPDATE Tblusuarios SET 
+            clave=:clave,
+            nombre=:nombre WHERE
+            nro=:nro");
+            
+            $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
+            $sentencia->bindParam(':nombre',$nombre,PDO::PARAM_STR);
+            $sentencia->bindParam(':clave',$password1,PDO::PARAM_STR);
+            $sentencia->execute();
 
         break;
 
@@ -1273,23 +1349,6 @@
             // echo "<script> alert('Quieres Eliminar Registro...'); </script>";
             // echo "<script> alert('Usuario Eliminado Satisfactoriamente...'); </script>";
             // header('Location:usuarios.php');
-
-            $sentencia=$pdo->prepare("DELETE FROM Tblusuarios WHERE nro=:nro");
-            $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-            $sentencia->execute();
-
-            $procesar="listo";
-            $accion="C";
-            $error_accion=2;
-            $mensaje_usuario="Usuario Eliminado Satisfactoriamente...";
-            $nro=0;
-            $id="";
-            $nombre="";
-            $usuario="";
-            $tipousuario="";
-            $fecha_reg="";
-            $password1="";
-            $password2="";
         break;
       }
     }

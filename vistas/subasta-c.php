@@ -52,13 +52,13 @@ include "../controladores/enlaces.php";
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtEmpresa">Empresa</label>
-                                <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtNombreEmpresa ?>">
+                                <input type="text" class="form-control" name="txtEmpresa" placeholder="" value="<?php echo $txtNombreEmpresa ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtCiclo">Ciclo</label>
-                                <input type="text" class="form-control"  placeholder="" name="txtCiclo" value="<?php echo $txtCiclo; ?>">
+                                <input type="text" class="form-control"  placeholder="" name="txtCiclo" value="<?php echo $txtCiclo; ?>" readonly>
                             </div>
                         </div>
 
@@ -73,37 +73,37 @@ include "../controladores/enlaces.php";
                                             <div class="col-md-6">
                                                <div class="form-group">
                                                 <label for="txtMonto_precio_lc">Precio LC</label>
-                                                <input type="text" class="form-control" name="txtMonto_precio_lc" placeholder="" value="<?php echo $txtMonto_precio_lc; ?>">
+                                                <input type="text" class="form-control" name="txtMonto_precio_lc" placeholder="" value="<?php echo $txtMonto_precio_lc; ?>" readonly>
                                             </div> 
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtFecha_ped">Fecha Pedido LC</label>
-                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>" >
+                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>"  readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtFecha_recep">Fecha Recepción</label>
-                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>" >
+                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>"  readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtCant_contratos_lc">Número de Contrato LC</label>
-                                                    <input type="text" class="form-control" name="txtCant_contratos_lc" value="<?php echo $txtCant_contratos_lc; ?>">
+                                                    <input type="text" class="form-control" name="txtCant_contratos_lc" value="<?php echo $txtCant_contratos_lc; ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtCant_litros_lc">Cantidad Litros LC</label>
-                                                    <input type="text" class="form-control" name="txtCant_litros_lc" placeholder="" value="0.00" value="<?php echo $txtCant_litros_lc ?>">
+                                                    <input type="text" class="form-control" name="txtCant_litros_lc" placeholder=""  value="<?php echo $txtCant_litros_lc ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Monto_total_usb_lc">Monto Total $ LC</label>
-                                                    <input type="text" class="form-control" name="txtMonto_total_usb_lc" placeholder="" value="0.00" value="<?php echo $txtMonto_total_usb_lc ?>">
+                                                    <input type="text" class="form-control" name="txtMonto_total_usb_lc" placeholder="" value="<?php echo $txtMonto_total_usb_lc ?>" readonly>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="txtProducto" value="LC">
@@ -126,37 +126,37 @@ include "../controladores/enlaces.php";
                                             <div class="col-md-6">
                                                <div class="form-group">
                                                 <label for="txtMonto_precio_ad">Precio AD</label>
-                                                <input type="text" class="form-control" name="txtMonto_precio_ad" placeholder="" value="<?php echo $txtMonto_precio_ad; ?>">
+                                                <input type="text" class="form-control" name="txtMonto_precio_ad" placeholder="" value="<?php echo $txtMonto_precio_ad; ?>" readonly>
                                             </div> 
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtFecha_ped">Fecha Pedido AD</label>
-                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>" >
+                                                    <input type="text" class="form-control"  name="txtFecha_ped" placeholder="" value="<?php echo $txtFecha_ped; ?>" readonly >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtFecha_recep">Fecha Recepción</label>
-                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>" >
+                                                    <input type="text" class="form-control" name="txtFecha_recep" placeholder=""  value="<?php echo $txtFecha_recep; ?>" readonly >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtCant_contratos_ad">Número de Contrato AD</label>
-                                                    <input type="text" class="form-control" name="txtCant_contratos_ad" value="<?php echo $txtCant_contratos_ad; ?>">
+                                                    <input type="text" class="form-control" name="txtCant_contratos_ad" value="<?php echo $txtCant_contratos_ad; ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="txtCant_litros_ad">Cantidad Litros AD</label>
-                                                    <input type="text" class="form-control" name="txtCant_litros_ad" placeholder="" value="0.00" value="<?php echo $txtCant_litros_ad ?>">
+                                                    <input type="text" class="form-control" name="txtCant_litros_ad" placeholder=""  value="<?php echo $txtCant_litros_ad ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Monto_total_usb_ad">Monto Total $ AD</label>
-                                                    <input type="text" class="form-control" name="txtMonto_total_usb_ad" placeholder="" value="0.00" value="<?php echo $txtMonto_total_usb_lc ?>">
+                                                    <input type="text" class="form-control" name="txtMonto_total_usb_ad" placeholder=""  value="<?php echo $txtMonto_total_usb_ad ?>" readonly>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="txtProducto" value="AD">
@@ -195,15 +195,14 @@ include "../controladores/enlaces.php";
                     </div>
                 <?php } ?>
 
-                <form action="subasta.php" method="post">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2">
-                            <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
+                    <div class="col-md-12">
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <a href="subasta.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
                     </div>
-                </form>
-
             <?php } ?>
         </div>
         <!-- /Fin de Contenedor de datos -->

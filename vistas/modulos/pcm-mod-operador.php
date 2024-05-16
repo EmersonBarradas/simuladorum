@@ -22,7 +22,10 @@
   $txtCant_horas_sem=0.00;
   $txtCant_horas_max_sem=0.00;
   $txtCant_total_horas_trab=0.00;
+  $listado_pcm_mod=[];
 //--------------------------------------------------------------------------------------------------  
+
+
 
 // Selecciono empresa y operadores de la empresa del usuario ------------------------------------------------
   if ($txtUsuarioTipo=="A") {

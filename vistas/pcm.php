@@ -34,6 +34,7 @@
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+    <?php if($cantsimulacion>=1){ ?>
     <!-- Inicio del contenedor de datos -->
         <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
@@ -107,7 +108,7 @@
                                         <td> <?php echo $PCM['tipo_queso']; ?></td>
                                         <td> <?php echo $PCM['monto_cto_prod_mp']; ?></td>
                                         <td>
-                                            <form action="" method="">
+                                            <form action="pcm-c.php" method="post">
                                                 <input type="hidden" name="txtNro" value="<?php echo $PCM['nro'];?>">
                                                 <input type="hidden" name="txtId" value="<?php echo $PCM['id'];?>">
                                                 <input type="hidden" name="txtNro_empresa" value="<?php echo $PCM['nro_empresa'];?>">
@@ -117,6 +118,7 @@
                                                 <input type="hidden" name="txtCant_lc" value="<?php echo $PCM['cant_lc'];?>">
                                                 <input type="hidden" name="txtCant_ad" value="<?php echo $PCM['cant_ad'];?>">
                                                 <input type="hidden" name="txtCant_queso" value="<?php echo $PCM['cant_queso'];?>">
+                                                <input type="hidden" name="txtNro_queso" value="<?php echo $PCM['nro_queso'];?>">
                                                 <input type="hidden" name="txtTipo_queso" value="<?php echo $PCM['tipo_queso'];?>">
                                                 <input type="hidden" name="txtMonto_cto_prod_mp" value="<?php echo $PCM['monto_cto_prod_mp'];?>">
                                                 <input type="hidden" name="txtEstatus" value="<?php echo $PCM['estatus'];?>">
@@ -163,14 +165,18 @@
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="row justify-content-center">
-                                            <?php if($SubastaMovimientos=="NO") { ?>
-                                                <div class="col-md-3">
-                                                    <a href="pcm-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> &nbsp; Producir</a>
+                                            <?php if($error_accion==2) { ?>
+                                                <div class="col-md-4">
+                                                    <a href="entorno.php"type="button" class="btn btn-primary btn-block">Entorno</a>
+                                                </div>
+                                            <?php }else { ?>
+                                                <div class="col-md-4">
+                                                <a href="pcm-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> &nbsp; Producir</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
                                                 </div>
                                             <?php } ?>
-                                            <div class="col-md-3">
-                                                <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -184,6 +190,22 @@
 
         </div>
     <!-- /. Fin de contenedor de datos -->
+    <?php }else{ ?>
+
+        <div class="col-md-12">
+            <h3 class="text-center text-danger">NO HAY SIMULACIÓN ACTIVA <?php if ($txtUsuarioTipo=="P") { echo "CONTACTE CON EL ADMINISTRADOR"; }?></h3>
+        </div>
+        <?php if ($txtUsuarioTipo=="A") { ?>
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } ?>
 
     </div>
     <!-- /.content-wrapper -->

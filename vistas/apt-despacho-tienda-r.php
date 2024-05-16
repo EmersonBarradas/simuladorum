@@ -164,16 +164,16 @@ include "../controladores/enlaces.php";
                         <!-- Div CTA -->
                         <div class="col-md-12">
                                 <div class="row justify-content-left" style="padding: 0px 0px 10px 0px;">
-                                    <div class="col-md-1" style="padding: 3px 5px 3px 5px;">
+                                    <div class="col-md-2" style="padding: 3px 5px 3px 5px;">
                                         <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Calcular">  
                                     </div>
                                     <?php if ($calcular=="SI"){ ?>
-                                        <div class="col-md-1" style="padding: 3px 3px 3px 3px;">
+                                        <div class="col-md-2" style="padding: 3px 3px 3px 3px;">
                                             <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Guardar">
                                         </div>
                                     <?php } ?>
-                                    <div class="col-md-1" style="padding: 3px 3px 3px 3px;">
-                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Cancelar">
+                                    <div class="col-md-2" style="padding: 3px 3px 3px 3px;">
+                                        <a href="apt-despacho-tienda.php"type="button" class="btn btn-primary btn-block">Regresar</a>
                                     </div>
                                 </div>
                             </div>

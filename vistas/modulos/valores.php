@@ -4,49 +4,45 @@
   include('../controladores/global/constantes.php');
 
 //Datos del Usuario
-  $usuariosesion=($_SESSION['usuario']);
-  $txtUsuario=$usuariosesion['nro'];
-  $txtIdUsuario=$usuariosesion['id'];
-  $txtUsuarioTipo=$usuariosesion['tipo'];
+    $usuariosesion=($_SESSION['usuario']);
+    $txtUsuario=$usuariosesion['nro'];
+    $txtIdUsuario=$usuariosesion['id'];
+    $txtUsuarioTipo=$usuariosesion['tipo'];
 
 // Variables de Acción
-  $procesar="ok"; //Muestra Vista normal
-  $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-  $mensaje_usuario=""; // Vacío en inicalización
-  $calcular="NO";
-  $btnGuardar="NO";
-  $EsNuevo="NO";
+    $procesar="ok"; //Muestra Vista normal
+    $error_accion=0; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+    $mensaje_usuario=""; // Vacío en inicalización
+    $calcular="NO";
+    $btnGuardar="NO";
+    $EsNuevo="NO";
 
 // Variables de datos ----------------------------------------------------------------
-  $Estatus="A";
+    $Estatus="A";
 // ------------------------------------------------------------------------------------
 
 // Variables de datos ---------------------------------------
-
-  $txtpub_dub_arm=1;
-  $txtpub_dub_ciu=1;
-  $txtpub_dub_sfi=1;
-  $txtpub_dub_lsa=1;
-  $monto_dub=0.00;
-  
-  $txtpub_moz_arm=1;
-  $txtpub_moz_ciu=1;
-  $txtpub_moz_sfi=1;
-  $txtpub_moz_lsa=1;
-  $monto_moz=0.00;
-  
-  $txtpub_gou_arm=1;
-  $txtpub_gou_ciu=1;
-  $txtpub_gou_sfi=1;
-  $txtpub_gou_lsa=1;
-  $monto_gou=0.00;
-  
-  $txtpub_die_arm=1;
-  $txtpub_die_ciu=1;
-  $txtpub_die_sfi=1;
-  $txtpub_die_lsa=1;
-  $monto_die=0.00;
-  
+    $contrato_lc=0.00;
+    $contrato_ad=0.00;	
+    $cap_max_lc_amp=0.00;
+    $cap_max_ad_amp=0.00; 
+    $cap_max_kg_apt=0.00;
+    $cto_trans_arm=0.000;		
+    $cto_trans_sfi=0.000;		
+    $cto_trans_ciu=0.000;		
+    $cto_trans_lsa=0.000;		
+    $cap_alm_tiendas=0.00;
+    $alquiler_arm=0.00;		
+    $alquiler_sfi=0.00;		
+    $alquiler_ciu=0.00;		
+    $alquiler_lsa=0.00;		
+    $pub_videos=0.00;
+    $pub_vallas=0.00;
+    $pub_flyers=0.00;
+    $pub_otros=0.00;
+    $alquiler_galpon=0.00;
+    $cto_amp=0.000;	
+    $cto_apt=0.000;
 // ----------------------------------------------------------
 
 // Verifica los registros activos en simulación ---------------------------------------
@@ -58,122 +54,54 @@
         //print_r($listasimulacion);
 // ------------------------------------------------------------------------------------
 
- 
-
-// inicialización de variables
-  $txtTotal_inversion=0.00;
   
 // Selección de Empresa / Entorno y operador
   if ($txtUsuarioTipo=="A") {
-      // Asigno la empresa seleccionada
-      $NroEmpresa=$_SESSION['nro_empresa'];
-      $txtNro_empresa=$NroEmpresa;
 
-      // Selecciono la empresa
-      $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
-      $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
-      $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
+      // Selecciono los datos
+      $nro=1;
+      $sentencia=$pdo->prepare("SELECT * FROM `tblvalores` WHERE nro=:nro");
+      $sentencia->bindParam("nro",$nro,PDO::PARAM_STR);
       $sentencia->execute();
-      $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-      $cant_empresa=$sentencia->rowCount(); 
+      $listado_tblvalores=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+      $cant_tblvalores=$sentencia->rowCount(); 
 
-      // Selecciono publicidad de la empresa  ---------------------------------------------------------
-      $sentencia=$pdo->prepare("SELECT * FROM `publicidad` WHERE estatus=:estatus AND nro_empresa=:nro");
-      $sentencia->bindParam("nro",$txtNro_empresa,PDO::PARAM_STR);
-      $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
-      $sentencia->execute();
-      $listado_publicidad=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-      $cant_publicidad=$sentencia->rowCount();
-      
-      if($cant_publicidad>=1){
-        //echo "<script> alert('Ya existe ...'); </script>";
+      if($cant_tblvalores>=1){
+        foreach($listado_tblvalores as $valores){
+            $contrato_lc=$valores['contrato_lc'];
+            $contrato_ad=$valores['contrato_ad'];	
+            $cap_max_lc_amp=$valores['cap_max_lc_amp'];
+            $cap_max_ad_amp=$valores['cap_max_ad_amp'];
+            $cap_max_kg_apt=$valores['cap_max_kg_apt'];
 
-        foreach($listado_publicidad as $publicidad){
-          $Nro_publicidad=$publicidad['nro'];
-          $txtpub_dub_arm=$publicidad['pub_dub_arm'];
-          $txtpub_dub_ciu=$publicidad['pub_dub_ciu'];
-          $txtpub_dub_sfi=$publicidad['pub_dub_sfi'];
-          $txtpub_dub_lsa=$publicidad['pub_dub_lsa'];
-            
-          $txtpub_moz_arm=$publicidad['pub_moz_arm'];
-          $txtpub_moz_ciu=$publicidad['pub_moz_ciu'];
-          $txtpub_moz_sfi=$publicidad['pub_moz_sfi'];
-          $txtpub_moz_lsa=$publicidad['pub_moz_lsa'];
-            
-          $txtpub_gou_arm=$publicidad['pub_gou_arm'];
-          $txtpub_gou_ciu=$publicidad['pub_gou_ciu'];
-          $txtpub_gou_sfi=$publicidad['pub_gou_sfi'];
-          $txtpub_gou_lsa=$publicidad['pub_gou_lsa'];
-            
-          $txtpub_die_arm=$publicidad['pub_die_arm'];
-          $txtpub_die_ciu=$publicidad['pub_die_ciu'];
-          $txtpub_die_sfi=$publicidad['pub_die_sfi'];
-          $txtpub_die_lsa=$publicidad['pub_die_lsa'];
+            $cto_trans_arm=$valores['cto_trans_arm'];		
+            $cto_trans_sfi=$valores['cto_trans_sfi'];		
+            $cto_trans_ciu=$valores['cto_trans_ciu'];		
+            $cto_trans_lsa=$valores['cto_trans_lsa'];
 
-          $txtTotal_inversion=$publicidad['total_inversion'];
+            $cap_alm_tiendas=$valores['cap_alm_tiendas'];
+
+            $alquiler_arm=$valores['alquiler_arm'];	
+            $alquiler_sfi=$valores['alquiler_sfi'];	
+            $alquiler_ciu=$valores['alquiler_ciu'];		
+            $alquiler_lsa=$valores['alquiler_lsa'];	
+
+            $pub_videos=$valores['pub_videos'];
+            $pub_vallas=$valores['pub_vallas'];
+            $pub_flyers=$valores['pub_flyers'];
+            $pub_otros=$valores['pub_otros'];
+
+            $alquiler_galpon=$valores['alquiler_galpon'];
+            $cto_amp=$valores['cto_amp'];
+            $cto_apt=$valores['cto_apt'];
         }
-
-        $txtNombre_publicidad="encontró publicidad";
       }
+
 
   }else{
-    // Selección de empresa del usuario -------------------------------------------------------------------------
-    $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
-    $sentencia->execute();
-    $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    $cant_empresa=$sentencia->rowCount(); 
-
-    if ($cant_empresa>=1){
-      foreach($listado_empresa as $empresa){
-          $txtNro_empresa=$empresa['nro'];
-          $txtNombre_empresa=$empresa['nombre'];
-      }
-
-      // Selecciono publicidad de la empresa  ---------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `publicidad` WHERE estatus='A' AND nro_empresa=$txtNro_empresa");
-        $sentencia->execute();
-        $listado_publicidad=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-        $cant_publicidad=$sentencia->rowCount();
-        
-        if($cant_publicidad>=1){
-          //echo "<script> alert('Ya existe ...'); </script>";
-
-          foreach($listado_publicidad as $publicidad){
-            $Nro_publicidad=$publicidad['nro'];
-            $txtpub_dub_arm=$publicidad['pub_dub_arm'];
-            $txtpub_dub_ciu=$publicidad['pub_dub_ciu'];
-            $txtpub_dub_sfi=$publicidad['pub_dub_sfi'];
-            $txtpub_dub_lsa=$publicidad['pub_dub_lsa'];
-              
-            $txtpub_moz_arm=$publicidad['pub_moz_arm'];
-            $txtpub_moz_ciu=$publicidad['pub_moz_ciu'];
-            $txtpub_moz_sfi=$publicidad['pub_moz_sfi'];
-            $txtpub_moz_lsa=$publicidad['pub_moz_lsa'];
-              
-            $txtpub_gou_arm=$publicidad['pub_gou_arm'];
-            $txtpub_gou_ciu=$publicidad['pub_gou_ciu'];
-            $txtpub_gou_sfi=$publicidad['pub_gou_sfi'];
-            $txtpub_gou_lsa=$publicidad['pub_gou_lsa'];
-              
-            $txtpub_die_arm=$publicidad['pub_die_arm'];
-            $txtpub_die_ciu=$publicidad['pub_die_ciu'];
-            $txtpub_die_sfi=$publicidad['pub_die_sfi'];
-            $txtpub_die_lsa=$publicidad['pub_die_lsa'];
-
-            $txtTotal_inversion=$publicidad['total_inversion'];
-          }
-
-          $txtNombre_publicidad="encontró publicidad";
-        }else{
-          $txtNombre_publicidad="No se encontró publicidad";
-          $EsNuevo="SI";
-        }
-      // -----------------------------------------------------------------------------------------------
-    }else{
-      $procesar="listo"; //Muestra Vista normal
-      $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
-      $mensaje_usuario="¡No hay empresa registrada!"; // Vacío en inicalización
-    }
+        $procesar="listo"; //Muestra Vista normal
+        $error_accion=1; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+        $mensaje_usuario="¡Usuario no autorizado!"; // Vacío en inicalización
   }
 //----------------------------------------------------------------------------------------------
 
@@ -181,42 +109,118 @@
 if(isset($_POST["btn_accion"])){
 
   $accion=($_POST["btn_accion"]);
-  $txtNro_empresa=($_POST["txtEmpresa"]);
-  $txtTotal_inversion=($_POST["txtTotal_inversion"]);
+
   
 
   // Variables de Datos---------------------------------------------
 
-  $txtNro_empresa=($_POST["txtEmpresa"]);
+    $contrato_lc=($_POST["contrato_lc"]);
+    $contrato_ad=($_POST["contrato_ad"]);	
+    $cap_max_lc_amp=($_POST["cap_max_lc_amp"]);
+    $cap_max_ad_amp=($_POST["cap_max_ad_amp"]);
+    $cap_max_kg_apt=($_POST["cap_max_kg_apt"]);
 
-  $txtpub_dub_arm=($_POST["txtpub_dub_arm"]);
-  $txtpub_dub_ciu=($_POST["txtpub_dub_ciu"]);
-  $txtpub_dub_sfi=($_POST["txtpub_dub_sfi"]);
-  $txtpub_dub_lsa=($_POST["txtpub_dub_lsa"]);
+    $cto_trans_arm=($_POST["cto_trans_arm"]);		
+    $cto_trans_sfi=($_POST["cto_trans_sfi"]);		
+    $cto_trans_ciu=($_POST["cto_trans_ciu"]);		
+    $cto_trans_lsa=($_POST["cto_trans_lsa"]);
 
-  
-  $txtpub_moz_arm=($_POST["txtpub_moz_arm"]);
-  $txtpub_moz_ciu=($_POST["txtpub_moz_ciu"]);
-  $txtpub_moz_sfi=($_POST["txtpub_moz_sfi"]);
-  $txtpub_moz_lsa=($_POST["txtpub_moz_lsa"]);
+    $cap_alm_tiendas=($_POST["cap_alm_tiendas"]);
 
-  
-  $txtpub_gou_arm=($_POST["txtpub_gou_arm"]);
-  $txtpub_gou_ciu=($_POST["txtpub_gou_ciu"]);
-  $txtpub_gou_sfi=($_POST["txtpub_gou_sfi"]);
-  $txtpub_gou_lsa=($_POST["txtpub_gou_lsa"]);
+    $alquiler_arm=($_POST["alquiler_arm"]);
+    $alquiler_sfi=($_POST["alquiler_sfi"]);	
+    $alquiler_ciu=($_POST["alquiler_ciu"]);		
+    $alquiler_lsa=($_POST["alquiler_lsa"]);	
 
-  
-  $txtpub_die_arm=($_POST["txtpub_die_arm"]);
-  $txtpub_die_ciu=($_POST["txtpub_die_ciu"]);
-  $txtpub_die_sfi=($_POST["txtpub_die_sfi"]);
-  $txtpub_die_lsa=($_POST["txtpub_die_lsa"]);
- 
+    $pub_videos=($_POST["pub_videos"]);
+    $pub_vallas=($_POST["pub_vallas"]);
+    $pub_flyers=($_POST["pub_flyers"]);
+    $pub_otros=($_POST["pub_otros"]);
+    
+    $alquiler_galpon=($_POST["alquiler_galpon"]);
+    $cto_amp=($_POST["cto_amp"]);
+    $cto_apt=($_POST["cto_apt"]);
 
-
-  // -----------------------------------------------------------------
+// -----------------------------------------------------------------
 
   switch($accion){
+
+    case "Actualizar";
+        // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
+        $nro=1;
+        $sentencia=$pdo->prepare("UPDATE tblvalores SET 
+        contrato_lc=:contrato_lc,
+        contrato_ad=:contrato_ad,
+        cap_max_lc_amp=:cap_max_lc_amp,
+        cap_max_ad_amp=:cap_max_ad_amp,
+        cap_max_kg_apt=:cap_max_kg_apt,
+        cto_trans_arm=:cto_trans_arm,
+        cto_trans_sfi=:cto_trans_sfi,
+        cto_trans_ciu=:cto_trans_ciu,
+        cto_trans_lsa=:cto_trans_lsa,
+        cap_alm_tiendas=:cap_alm_tiendas,
+        alquiler_arm=:alquiler_arm,
+        alquiler_sfi=:alquiler_sfi,
+        alquiler_ciu=:alquiler_ciu,
+        alquiler_lsa=:alquiler_lsa,
+        pub_videos=:pub_videos,
+        pub_vallas=:pub_vallas,
+        pub_flyers=:pub_flyers,
+        pub_otros=:pub_otros,
+        alquiler_galpon=:alquiler_galpon,
+        cto_amp=:cto_amp,
+        cto_apt=:cto_apt WHERE
+        nro=:nro");
+        
+        $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
+        $sentencia->bindParam(':contrato_lc',$contrato_lc,PDO::PARAM_STR);
+        $sentencia->bindParam(':contrato_ad',$contrato_ad,PDO::PARAM_STR);
+        $sentencia->bindParam(':cap_max_lc_amp',$cap_max_lc_amp,PDO::PARAM_STR);
+        $sentencia->bindParam(':cap_max_ad_amp',$cap_max_ad_amp,PDO::PARAM_STR);
+        $sentencia->bindParam(':cap_max_kg_apt',$cap_max_kg_apt,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_trans_arm',$cto_trans_arm,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_trans_sfi',$cto_trans_sfi,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_trans_ciu',$cto_trans_ciu,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_trans_lsa',$cto_trans_lsa,PDO::PARAM_STR);
+        $sentencia->bindParam(':cap_alm_tiendas',$cap_alm_tiendas,PDO::PARAM_STR);
+        $sentencia->bindParam(':alquiler_arm',$alquiler_arm,PDO::PARAM_STR);
+        $sentencia->bindParam(':alquiler_sfi',$alquiler_sfi,PDO::PARAM_STR);
+        $sentencia->bindParam(':alquiler_ciu',$alquiler_ciu,PDO::PARAM_STR);
+        $sentencia->bindParam(':alquiler_lsa',$alquiler_lsa,PDO::PARAM_STR);
+        $sentencia->bindParam(':pub_videos',$pub_videos,PDO::PARAM_STR);
+        $sentencia->bindParam(':pub_vallas',$pub_vallas,PDO::PARAM_STR);
+        $sentencia->bindParam(':pub_flyers',$pub_flyers,PDO::PARAM_STR);
+        $sentencia->bindParam(':pub_otros',$pub_otros,PDO::PARAM_STR);
+        $sentencia->bindParam(':alquiler_galpon',$alquiler_galpon,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_amp',$cto_amp,PDO::PARAM_STR);
+        $sentencia->bindParam(':cto_apt',$cto_apt,PDO::PARAM_STR);
+        $sentencia->execute();
+
+        $accion="C";
+        $error_accion=2; // Valor 0 si todo va normal | 1 si se procesó correctamente | 2 si hay error
+        $mensaje_usuario="Valores actualizados satisfactoriamente"; // Vacío en inicalización
+        $procesar="listo";
+
+    break;
+    
+    case "Actualizarr";
+        // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
+
+            $sentencia=$pdo->prepare("UPDATE Tblusuarios SET 
+            clave=:clave,
+            nombre=:nombre WHERE
+            nro=:nro");
+            
+            $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
+            $sentencia->bindParam(':nombre',$nombre,PDO::PARAM_STR);
+            $sentencia->bindParam(':clave',$password1,PDO::PARAM_STR);
+            $sentencia->execute();
+
+            $accion="C";
+            $mensaje_usuario="Usuario Actualizado Satisfactoriamente";
+            $procesar="listo";
+
+    break;
 
     case "Calcular";
         // echo "<script> alert('Quieres Guardar Operación...'); </script>";
@@ -589,7 +593,8 @@ if(isset($_POST["btn_accion"])){
         $btnGuardar="SI";
               
     
-      break;
+    break;
+    
     case "Guardar";
         // echo "<script> alert('Quieres Guardar Operación...'); </script>";
         // header('Location:usuarios.php');
@@ -723,25 +728,6 @@ if(isset($_POST["btn_accion"])){
         $txtTotal_inversion=0.00;
         $procesar="ok";
         // header('Location:pcm-mod-operador.php');
-    break;
-
-    case "Actualizar";
-        // echo "<script> alert('Quieres Actualizar Registro...'); </script>";
-
-            $sentencia=$pdo->prepare("UPDATE Tblusuarios SET 
-            clave=:clave,
-            nombre=:nombre WHERE
-            nro=:nro");
-            
-            $sentencia->bindParam(':nro',$nro,PDO::PARAM_STR);
-            $sentencia->bindParam(':nombre',$nombre,PDO::PARAM_STR);
-            $sentencia->bindParam(':clave',$password1,PDO::PARAM_STR);
-            $sentencia->execute();
-
-            $accion="C";
-            $mensaje_usuario="Usuario Actualizado Satisfactoriamente";
-            $procesar="listo";
-
     break;
 
     case "Eliminar";

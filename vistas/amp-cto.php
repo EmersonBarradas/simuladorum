@@ -23,7 +23,7 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">ALMACÉN | Costos AMP (AMP-CTO)</h1>
+                <h1 class="m-0 text-dark">Almacén | Costos AMP (AMP-CTO)</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -39,6 +39,8 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+    <!-- Verifica si hay simulación activa -->
+    <?php if($cantsimulacion>=1){ ?>
 
     <!-- Inicio del contenedor de datos -->
         <div class="container" style="padding: 0px 20px 50px 20px;">
@@ -139,7 +141,7 @@ include "../controladores/enlaces.php";
 
                                                 <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="C">
                                                 <!-- <input class="btn btn-primary" type="submit" name="btn_accion" value="E" readonly> -->
-                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">
+                                                <!--  <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X"> -->
                                                 <!-- <a href="#"><i class="fas fa-file"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-trash-alt"></i></a> -->
@@ -219,7 +221,7 @@ include "../controladores/enlaces.php";
 
                                                 <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="C">
                                                 <!-- <input class="btn btn-primary" type="submit" name="btn_accion" value="E" readonly> -->
-                                                <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">
+                                                <!-- <input class="btn btn-outline-primary btn-sm" type="submit" name="btn_accion" value="X">-->
                                                 <!-- <a href="#"><i class="fas fa-file"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-file-alt"></i></a>&nbsp;
                                                 <a href="#"><i class="fas fa-trash-alt"></i></a> -->
@@ -257,14 +259,21 @@ include "../controladores/enlaces.php";
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="row justify-content-center">
-                                            <?php if($movimientos=="SI"){ ?>
-                                                <div class="col-md-3">
-                                                    <a href="subasta-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Subasta</a>
+                                            <?php if($error_accion==2) { ?>
+                                                <div class="col-md-4">
+                                                    <a href="entorno.php"type="button" class="btn btn-primary btn-block">Entorno</a>
                                                 </div>
+                                            <?php }else { ?>
+                                                <?php if($error_accion==2) { ?>
+                                                    <div class="col-md-4">
+                                                        <a href="subasta.php"type="button" class="btn btn-primary btn-block">Subasta</a>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="col-md-4">
+                                                        <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                                    </div>
+                                                <?php } ?>
                                             <?php } ?>
-                                            <div class="col-md-3">
-                                                <a href="inicio.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -278,6 +287,22 @@ include "../controladores/enlaces.php";
 
         </div>
     <!-- /. Fin de contenedor de datos -->
+    <?php }else{ ?>
+
+        <div class="col-md-12">
+            <h3 class="text-center text-danger">NO HAY SIMULACIÓN ACTIVA <?php if ($txtUsuarioTipo=="P") { echo "CONTACTE CON EL ADMINISTRADOR"; }?></h3>
+        </div>
+        <?php if ($txtUsuarioTipo=="A") { ?>
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } ?>
 
     </div>
     <!-- /.content-wrapper -->

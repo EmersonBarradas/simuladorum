@@ -3,20 +3,33 @@
     include('../controladores/global/sesiones.php');
     include('../controladores/global/constantes.php');
     
-    //Datos del Usuario
-    $usuariosesion=($_SESSION['usuario']);
-    $txtUsuario=$usuariosesion['nro'];
-    $txtIdUsuario=$usuariosesion['id'];
-    $txtUsuarioTipo=$usuariosesion['tipo'];
-    // print_r($txtUsuario);
+    //Datos del Usuario -----------------------------------------------------------------
+        $usuariosesion=($_SESSION['usuario']);
+        $txtUsuario=$usuariosesion['nro'];
+        $txtIdUsuario=$usuariosesion['id'];
+        $txtUsuarioTipo=$usuariosesion['tipo'];
+        // print_r($txtUsuario);
+    // ------------------------------------------------------------------------------------
 
-    // Variables de Acción
-    $procesar="ok"; //Muestra Vista normal
-    $error_accion=0; // Valor 0 si todo va normal
-    $mensaje_usuario=""; // Vacío en inicalización
-    $Mensaje_Mov="";
-    $SubastaMovimientos="SI";
-    $movimientos="NO";
+    // Variables de Acción ---------------------------------------------------------------
+        $procesar="ok"; //Muestra Vista normal
+        $error_accion=0; // Valor 0 si todo va normal
+        $mensaje_usuario=""; // Vacío en inicalización
+        $Mensaje_Mov="";
+        $SubastaMovimientos="SI";
+        $movimientos="NO";
+    // ------------------------------------------------------------------------------------
+    
+    $Estatus="A";
+
+    // Verifica los registros activos en simulación ---------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+        $sentencia->execute();
+        $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cantsimulacion=$sentencia->rowCount();
+        //print_r($cantRegistros);
+        //print_r($listasimulacion);
+    // ------------------------------------------------------------------------------------
 
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
@@ -25,13 +38,17 @@
         $NroEmpresa=$_SESSION['nro_empresa'];
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
 
         // Selecciona los costos de almacen
-        $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `amp_cto` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_AMP_CTO=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_listado_AMP_CTO=$sentencia->rowCount();
@@ -65,7 +82,7 @@
                 }
             }else{
                 $procesar="listo"; //Muestra Vista normal
-                $error_accion=2; // Valor 0 si todo va normal
+                $error_accion=3; // Valor 0 si todo va normal
                 $mensaje_usuario="No hay movimientos de almacén"; // Vacío en inicalización
                 $movimientos="SI";
             }

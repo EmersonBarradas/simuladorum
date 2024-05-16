@@ -8,8 +8,7 @@ include "../controladores/enlaces.php";
 <div class="wrapper">
 
     <?php
-
-        include "modulos/pcm-c.php";
+        include "modulos/amp-a.php";
         include "modulos/encabezado.php";
         include "modulos/menu.php";
     
@@ -22,34 +21,23 @@ include "../controladores/enlaces.php";
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">PCM | Producción Ajuste </h1>
+                <h1 class="m-0 text-dark">AMP | Ajuste</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="pcm.php">PCM</a></li>
-                <li class="breadcrumb-item active">PCM Producir</li>
+                <li class="breadcrumb-item"><a href="amp.php">AMP</a></li>
+                <li class="breadcrumb-item active">AMP Ajuste</li>
                 </ol>
             </div><!-- /.col -->
-            <!-- Separador -->
-            <div class="col-md-12">
-                <hr style="color: #0056b2;" />
-            </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
-                <!-- Inicio del contenedor de datos -->
-                <div class="container" style="padding: 0px 20px 50px 20px;">
+        <!-- Inicio del contenedor de datos -->
+        <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
-                    <div class="col-md-2" style="padding: 0px 0px 20px 0px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Duro</span></div>
-                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Mozarella</span></div>
-                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Gouda</span></div>
-                    <div class="col-md-2" style="padding: 0px 0px 20px 5px"><span class="form-control"> <i class="fas fa-cheese"></i>&nbsp;&nbsp;Queso Dietético</span></div>
-                    <div class="col-md-4" style="padding: 0px 0px 20px 0px"></div>
                 <?php if ($procesar=="ok") {  ?>
                     <?php  if ($mensaje_usuario!=""){ ?>
-                        
                         <div class="col-12 ">
                             <?php if($error_accion==1){ ?>
                                 <h3 class="text-center text-success"><?php echo $mensaje_usuario; ?></h3>
@@ -57,44 +45,19 @@ include "../controladores/enlaces.php";
                                 <h3 class="text-center text-danger"><?php echo "ERROR 4: ".$mensaje_usuario; ?></h3>
                             <?php } ?>    
                         </div>
-                        <!-- Inicio saldos de almacén 
-                        <div class="col-md-3" style="padding-top: 20px;">
-                                <div class="form-group">
-                                    <label for="txtCant_capmax_ad">Existencia LC </label>
-                                    <input type="text" class="form-control" name="txtCant_existencia_lc" placeholder="" value="<?php echo $cant_existencia_lc_actual; ?>">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3" style="padding-top: 20px;">
-                                <div class="form-group">
-                                    <label for="txtCant_existencia_ad">Existencia AD</label>
-                                    <input type="text" class="form-control"  name="txtCant_existencia_ad" placeholder="" value="<?php echo $cant_existencia_ad_actual; ?>">
-                                </div>
-                            </div>
-                        /. Fin Inicio saldos de almacén -->
                     <?php } ?>
 
-                    <!-- DIV Empresa-->
-                    <form class="col-md-12" action="pcm-c.php" method="post" >
-                        <div class="row">
-
-                    <!-- Div ficha producción -->
+                    
+                <form class="col-md-12" action="amp-a.php" method="post" >
+                    <div class="row">
+                    <!-- Div ficha Ajuste -->
                         <div class="col-md-12">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ajuste de Producción (PCM)</h3>
+                                    <h3 class="card-title">Ajuste (AMP)</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-
-                                        <!-- DIV ID-->
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="txtId"> ID</label>
-                                                <input type="tetx" class="form-control" name="txtId" placeholder="ID" value="<?php echo $txtId;?>" readonly>
-                                            </div>
-                                        </div>
-                                        <!-- /. Fin DIV ID -->
 
                                         <!-- Inicio Div Empresa-->
                                         <div class="col-md-6">
@@ -109,8 +72,18 @@ include "../controladores/enlaces.php";
                                         </div>
                                         <!-- /. Fin inicio Div Empresa-->
 
+                                        <!-- DIV ID-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="txtId"> ID</label>
+                                                <input type="tetx" class="form-control" name="txtId" placeholder="ID" value="<?php echo $txtId;?>" required>
+                                            </div>
+                                        </div>
+                                        <!-- /. Fin DIV ID -->
+
+
                                         <!-- DIV ciclo-->
-                                        <!-- <div class="col-md-2">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="txtCiclo">Ciclo</label>
                                                 <select class="form-control" name="txtCiclo">
@@ -128,26 +101,15 @@ include "../controladores/enlaces.php";
                                                     <option value="12" <?php if($txtCiclo=="12") { echo "Selected"; } ?> >12</option>
                                                 </select>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <!-- /. Fin DIV ciclo-->
 
                                         <!-- DIV Fecha -->
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <label for="txtFecha">Ciclo</label>
-                                                    <input type="number" class="form-control" name="txtCiclo" placeholder="" value="<?php echo $txtCiclo;?>" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /. Fin DIV Fecha -->
-                                       
-                                        <!-- DIV Fecha -->
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <div class="form-group">
                                                     <label for="txtFecha">Fecha</label>
-                                                    <input type="date" class="form-control" name="txtFecha" placeholder="" value="<?php echo $txtFecha;?>" readonly>
+                                                    <input type="date" class="form-control" name="txtFecha" placeholder="" value="<?php echo $txtFecha;?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,35 +117,19 @@ include "../controladores/enlaces.php";
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="txtCant_lc">Entrada Leche Cruda (Kilos)</label>
-                                                <input type="number" class="form-control" name="txtCant_lc" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtCant_lc; ?>" readonly>
+                                                <label for="txtCant_lc">Leche Cruda (Kilos)</label>
+                                                <input type="number" class="form-control" name="txtCant_lc" min="0" step="0.01" placeholder="" value="<?php echo number_format($txtCant_lc,2,".",""); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="txtCant_ad">Entrada Aditivos (Kilos)</label>
-                                                <input type="number" class="form-control" name="txtCant_ad" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtCant_ad; ?>" readonly>
+                                                <label for="txtCant_ad">Aditivos (Kilos)</label>
+                                                <input type="number" class="form-control" name="txtCant_ad" min="0" step="0.01" placeholder="" value="<?php echo number_format($txtCant_ad,2,".",""); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="txtCant_queso">Queso Producido (Kilos)</label>
-                                                <input type="number" class="form-control" name="txtCant_queso" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtCant_queso; ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="txtTipo_queso">Producto</label>
-                                                <input type="text" class="form-control" name="txtTipo_queso"  placeholder="" value="<?php echo $txtTipo_queso; ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <!-- <label for="txtMonto_cto_prod_mp">Costo Producción MP</label> -->
-                                                <input type="hidden" class="form-control" name="txtMonto_cto_prod_mp" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtMonto_cto_prod_mp; ?>" readonly>
-                                                <input type="hidden" class="form-control" name="txtMonto_cto_prod_mp" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtMonto_cto_prod_mp; ?>" readonly>
-                                                <input type="hidden" class="form-control" name="txtNro_queso" min="0" step="0.01" placeholder="0.00" value="<?php echo $txtNro_queso; ?>" readonly>
-                                                <!-- <input type="text" class="form-control" name="nro_AMP"  placeholder="" value="<?php //echo $nro_AMP; ?>" readonly> -->
+                                                <input type="hidden" class="form-control" name="txtNro_AMP" min="0" step="0.01" placeholder="" value="<?php echo $nro_AMP; ?>">
                                             </div>
                                         </div>
                                         
@@ -191,32 +137,38 @@ include "../controladores/enlaces.php";
                                 </div>
                             </div>
                         </div>
-                    <!-- /. Div ficha producción -->
+                    <!-- /. Div ficha ajuste -->
+                    
+
 
                     <!-- Div CTA -->
                         <div class="col-md-12">
                             <div class="row justify-content-left">
-                                <?php if ($btnEliminar>0){ ?>
+                                <div class="col-md-2">
+                                    <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Guardar">
+                                    <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-database"></i> &nbsp; Guardar </button>
+                                    <a class="btn btn-primary" href="inicio.php" role="button"><i class="fas fa-window-close"></i> &nbsp; Cancelar</a> -->
+                                </div>
+                                <?php if ($calcular=="SI"){ ?>
                                     <div class="col-md-2">
-                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Eliminar">        
+                                        <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Guardar">
                                     </div>
                                 <?php } ?>
-                                    <div class="col-md-2">
-                                    <a href="pcm.php"type="button" class="btn btn-primary btn-block">Cancelar</a>       
-                                    </div>
                                 <div class="col-md-2">
-                                    <input type="hidden" name="" value="<?php //echo $nro_AMP;?>">
-                                    <input type="hidden" name="txtNro_queso" value="<?php echo $txtNro_queso;?>">
-                                    <input type="hidden" name="txtNro_empresa" value="<?php echo $txtNro_empresa;?>">
+                                    <a href="amp.php"type="button" class="btn btn-primary btn-block">Cancelar</a>
                                 </div>
                             </div>
                         </div>
+                        <!-- Inputs ocultos -->
+                        <div class="col-12">
+                            <input type="hidden" name="txtNro_AMP" value="<?php echo $nro_AMP;?>">
+                        </div>
+                        <!-- /. Fin Div CTA -->
+
                     <!-- /. Fin Div CTA -->
-
-
                     </div>
                     <!-- /. Fin row-->
-                    </form>
+                </form>
 
                     <!-- Tabla de movimientos -->
                         <div class="col-12" style="padding: 0px 0px 0px 0px;">
@@ -241,9 +193,11 @@ include "../controladores/enlaces.php";
                             </div>
                             <div class="col-md-12">
                                 <div class="row justify-content-center">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-2">
-                                        <a href="pcm.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                    <div class="col-md-6">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-2">
+                                                <a href="subasta.php"type="button" class="btn btn-primary btn-block">Aceptar</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -253,6 +207,7 @@ include "../controladores/enlaces.php";
             </div>
         </div>
         <!-- /. Fin de contenedor de datos -->
+
     </div>
     <!-- /.content-wrapper -->
     

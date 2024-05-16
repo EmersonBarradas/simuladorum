@@ -98,9 +98,12 @@ include "../controladores/enlaces.php";
                                 <div class="row">
                                     <!-- <input type="submit" class="btn btn-primary" name="btn_accion" value="Guardar"> -->
                                     <?php if($entorno=="NO") { ?>
-                                        <div class="col-md-4">
-                                            <a href="entorno-r.php" class="btn btn-primary">Nuevo Entorno</a>
-                                        </div>
+                                        <?php if ($txtUsuarioTipo=="P") { ?>
+                                            <div class="col-md-6">
+                                                <a href="entorno-r.php" class="btn btn-primary btn-block">Nuevo Entorno</a>
+                                            </div>
+                                        <?php } ?>
+
                                     <?php }else { ?>
                                         <div class="col-md-4">
                                             <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Consultar">
@@ -175,7 +178,7 @@ include "../controladores/enlaces.php";
                 <div class="col-md-12">
                     <div class="row justify-content-center">
                         <div class="col-md-2">
-                            <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                            <a href="simulacion-r.php"type="button" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
                         </div>
                     </div>
                 </div>

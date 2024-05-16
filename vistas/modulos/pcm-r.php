@@ -402,7 +402,7 @@
                   $txtCant_acum_lc=$Cant_acum_lc_actual-$txtCant_lc;
                   $txtMonto_cto_acum_lc=$Monto_cto_acum_lc_actual-$txtMonto_cto_total_lc;
                   $txtMonto_cto_promedio_lc=$txtMonto_cto_acum_lc/$txtCant_acum_lc;
-                  $txtTipo_mov_ad="C";
+                  $txtTipo_mov_ad="P";
                   $txtCant_ad=($_POST["txtCant_ad"]);
                   $txtMonto_cto_ltr_ad=$monto_precio_ad;
                   $txtMonto_cto_total_ad=$txtCant_ad*$txtMonto_cto_ltr_ad;

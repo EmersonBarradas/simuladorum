@@ -3,19 +3,36 @@
     include('../controladores/global/sesiones.php');
     include('../controladores/global/constantes.php');
     
-    //Datos del Usuario
-    $usuariosesion=($_SESSION['usuario']);
-    $txtUsuario=$usuariosesion['nro'];
-    $txtIdUsuario=$usuariosesion['id'];
-    $txtUsuarioTipo=$usuariosesion['tipo'];
-    // print_r($txtUsuario);
+    //Datos del Usuario---------------------------------------------------------------------
+        $usuariosesion=($_SESSION['usuario']);
+        $txtUsuario=$usuariosesion['nro'];
+        $txtIdUsuario=$usuariosesion['id'];
+        $txtUsuarioTipo=$usuariosesion['tipo'];
+        // print_r($txtUsuario);
+    // ------------------------------------------------------------------------------------
 
-    // Variables de Acción
-    $procesar="ok"; //Muestra Vista normal
-    $error_accion=0; // Valor 0 si todo va normal
-    $mensaje_usuario=""; // Vacío en inicalización
-    $Mensaje_Mov="";
-    $SubastaMovimientos="SI";
+
+    // Variables de Acción -----------------------------------------------------------------
+        $procesar="ok"; //Muestra Vista normal
+        $error_accion=0; // Valor 0 si todo va normal
+        $mensaje_usuario=""; // Vacío en inicalización
+        $Mensaje_Mov="";
+        $SubastaMovimientos="SI";
+    // ------------------------------------------------------------------------------------
+    
+    // Variables de Datos -----------------------------------------------------------------
+        $Estatus="A";
+    // ------------------------------------------------------------------------------------
+
+
+    // Verifica los registros activos en simulación ---------------------------------------
+        $sentencia=$pdo->prepare("SELECT * FROM `simulacion` WHERE estatus='A' ");
+        $sentencia->execute();
+        $lista_simulacion=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $cantsimulacion=$sentencia->rowCount();
+        //print_r($cantRegistros);
+        //print_r($listasimulacion);
+    // ------------------------------------------------------------------------------------
 
     // Selección de entorno
     if ($txtUsuarioTipo=="A") {
@@ -24,13 +41,17 @@
         $NroEmpresa=$_SESSION['nro_empresa'];
 
         // Selecciono la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND nro=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND nro=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount(); 
 
         // Seleccionar produccción de la empresa
-        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+        $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus=:estatus AND nro_empresa=:nro");
+        $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_PCM=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_PCM=$sentencia->rowCount();
@@ -42,7 +63,9 @@
 
     }else{
         // Selección de empresa del usuario -------------------------------------------------------------------------
-        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus='A' AND usuario=$txtUsuario");
+        $sentencia=$pdo->prepare("SELECT * FROM `empresa` WHERE estatus=:estatus AND usuario=:usuario");
+        $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
+        $sentencia->bindParam("usuario",$txtUsuario,PDO::PARAM_STR);
         $sentencia->execute();
         $listado_empresa=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         $cant_empresa=$sentencia->rowCount();
@@ -55,7 +78,9 @@
             }
 
             // Seleccionar produccción de la empresa
-            $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus='A'AND nro_empresa=$NroEmpresa");
+            $sentencia=$pdo->prepare("SELECT * FROM `pcm` WHERE estatus=:estatus AND nro_empresa=:nro");
+            $sentencia->bindParam("nro",$NroEmpresa,PDO::PARAM_STR);
+            $sentencia->bindParam("estatus",$Estatus,PDO::PARAM_STR);
             $sentencia->execute();
             $listado_PCM=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             $cant_PCM=$sentencia->rowCount();
@@ -67,7 +92,7 @@
                 $SubastaMovimientos="NO";
                 $Mensaje_Mov="¡No hay registros de esta empresa!";
                 $procesar="listo"; //Muestra Vista normal
-                $error_accion=2; // Valor 0 si todo va normal
+                $error_accion=3; // Valor 0 si todo va normal
                 $mensaje_usuario="No hay movimientos de producción"; // Vacío en inicalización
                 $Mensaje_Mov="";
             }

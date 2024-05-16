@@ -242,6 +242,19 @@
                 </li>
             <?php }; ?>
 
+            <?php if ($usuariosesion['tipo']=="A"){ ?>
+
+                <li class="nav-item">
+                    <a href="../vistas/valores.php" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Valores
+                        <span class="badge badge-info right"></span>
+                    </p>
+                    </a>
+                </li>
+            <?php }; ?>
+
             <!-- <li class="nav-item">
                 <a href="../vistas/variables.php" class="nav-link">
                 <i class="nav-icon fas fa-subscript"></i> 

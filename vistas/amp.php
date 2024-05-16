@@ -37,6 +37,8 @@ include "../controladores/enlaces.php";
         </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+    <!-- Verifica si hay simulación activa -->
+    <?php if($cantsimulacion>=1){ ?>
     <!-- Inicio del contenedor de datos -->
         <div class="container" style="padding: 0px 20px 50px 20px;">
             <div class="row justify-content-center">
@@ -57,6 +59,7 @@ include "../controladores/enlaces.php";
                         <div class="col-md-6" style="padding: 10px 0px 10px 10px;">
                             <?php if ($txtUsuarioTipo!="A") {?>
                                 <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                                <a href="amp-a.php"type="button" class="btn btn-primary"><i class="fa fa-reply" aria-hidden="true"></i> Ajuste</a>
                             <?php } ?>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
@@ -139,7 +142,7 @@ include "../controladores/enlaces.php";
                                                         <input type="hidden" name="txtvariable" value="<?php echo "";?>">
                                                         <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="C">
                                                         <!-- <input class="btn btn-primary" type="submit" name="btnaccion" value="E"> -->
-                                                        <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X">
+                                                        <!-- <input class="btn btn-outline-primary btn-sm" type="submit" name="btnaccion" value="X"> -->
                                                     </form>
                                                 </td>
                                             </tr>
@@ -168,6 +171,7 @@ include "../controladores/enlaces.php";
                         
                         <div class="col-md-12" style="padding: 10px 0px 10px 10px;">
                             <a href="subasta-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
+                            <a href="amp-a.php"type="button" class="btn btn-primary"><i class="fa fa-reply" aria-hidden="true"></i> Ajuste</a>
                             <button type="button" class="btn btn-primary"><i class="fas fa-share-alt"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fas fa-print"></i></button>
                         </div>
@@ -281,19 +285,17 @@ include "../controladores/enlaces.php";
                                 <?php } ?>    
                             </div>
                             <div class="col-md-12">
-                                <form action="pcm-mod-operador-r.php" method="post">
-                                    <div class="row justify-content-center">
-                                        <?php if($btnOperador="SI"){ ?>
-                                            <div class="col-md-2">    
-                                                <a href="pcm-mod-operador-r.php" type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo Operador</a>
-                                            </div>
-                                        <?php }else { ?>
-                                            <div class="col-md-2">
-                                                <input type="submit" class="btn btn-primary btn-block" name="btn_accion" value="Aceptar">
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </form>
+                                <div class="row justify-content-center">
+                                    <?php if($error_accion==2){ ?>
+                                        <div class="col-md-2">    
+                                            <a href="entorno.php" type="button" class="btn btn-primary btn-block">Entorno</a>
+                                        </div>
+                                    <?php }else { ?>
+                                        <div class="col-md-2">
+                                            <a href="subasta.php" type="button" class="btn btn-primary btn-block">Subasta</a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         <?php } ?>
 
@@ -303,6 +305,22 @@ include "../controladores/enlaces.php";
 
         </div>
     <!-- /. Fin de contenedor de datos -->
+    <?php }else{ ?>
+
+        <div class="col-md-12">
+            <h3 class="text-center text-danger">NO HAY SIMULACIÓN ACTIVA <?php if ($txtUsuarioTipo=="P") { echo "CONTACTE CON EL ADMINISTRADOR"; }?></h3>
+        </div>
+        <?php if ($txtUsuarioTipo=="A") { ?>
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="simulacion-r.php"type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Simulación</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } ?>
 
     </div>
     <!-- /.content-wrapper -->
