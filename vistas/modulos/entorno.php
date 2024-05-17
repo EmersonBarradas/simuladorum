@@ -65,7 +65,7 @@
             foreach ($listado_entorno as $empresa){
                 $txtNombre=$empresa['nombre'];
                 $entorno="SI";
-                print_r($entorno);
+                //print_r($entorno);
             }
 
         }else{
